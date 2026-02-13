@@ -1,0 +1,1764 @@
+IME fuzzer: 6h, 8 workers, batch size 200
+Started: Sun 15 Feb 2026 00:50:46 NZDT
+---
+=== Batch 1: seeds 0-199 ===
+  33 passed, 167 failed (cumulative: 33 passed, 167 failed)
+  ✘    1 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 0 (1.9s)
+  ✘    5 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 7 (1.9s)
+  ✘    8 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 2 (1.9s)
+  ✘    3 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 4 (2.0s)
+  ✓    6 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 3 (2.0s)
+  ✘    4 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 6 (2.0s)
+  ✘    2 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 1 (2.1s)
+  ✓    7 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 5 (2.1s)
+  ✘    9 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 12 (990ms)
+  ✘   10 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 15 (900ms)
+  ✘   11 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 8 (1.5s)
+  ✘   14 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 11 (1.5s)
+  ✘   15 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 13 (1.5s)
+  ✘   16 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 14 (1.4s)
+  ✓   12 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 10 (1.6s)
+  ✓   13 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 9 (1.7s)
+  ✘   17 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 16 (1.5s)
+  ✘   19 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 22 (1.1s)
+  ✘   18 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 17 (1.4s)
+  ✘   20 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 23 (1.1s)
+  ✘   22 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 19 (1.3s)
+  ✘   23 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 21 (1.2s)
+  ✘   21 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 18 (1.3s)
+  ✘   24 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 20 (1.5s)
+  ✓   26 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 25 (1.2s)
+  ✘   27 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 26 (1.1s)
+  ✘   25 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 24 (1.4s)
+  ✘   28 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 27 (1.2s)
+  ✓   29 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 32 (1.3s)
+  ✘   30 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 28 (1.4s)
+  ✘   31 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 29 (1.4s)
+  ✘   32 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 30 (1.4s)
+  ✘   33 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 31 (1.4s)
+  ✘   34 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 36 (1.2s)
+  ✘   37 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 35 (1.1s)
+  ✘   36 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 34 (1.2s)
+  ✓   35 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 33 (1.3s)
+  ✘   38 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 44 (1.3s)
+  ✘   39 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 37 (1.4s)
+  ✓   40 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 38 (1.5s)
+  ✘   42 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 40 (1.4s)
+  ✘   41 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 39 (1.6s)
+  ✘   43 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 41 (1.4s)
+  ✘   44 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 43 (1.2s)
+  ✘   45 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 42 (1.2s)
+  ✘   46 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 47 (1.1s)
+  ✘   47 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 45 (1.3s)
+  ✘   48 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 46 (1.3s)
+  ✘   49 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 48 (1.3s)
+  ✘   50 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 49 (1.5s)
+  ✘   51 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 50 (1.5s)
+  ✓   52 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 51 (1.4s)
+  ✘   53 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 52 (1.3s)
+  ✘   54 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 53 (1.1s)
+  ✘   55 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 59 (1.1s)
+  ✘   56 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 54 (1.2s)
+  ✘   57 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 55 (1.2s)
+  ✘   58 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 56 (1.3s)
+  ✘   59 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 57 (1.5s)
+  ✓   60 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 58 (1.2s)
+  ✘   61 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 60 (1.2s)
+  ✘   62 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 61 (1.1s)
+  ✓   63 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 67 (1.2s)
+  ✘   64 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 62 (1.3s)
+  ✘   65 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 63 (1.4s)
+  ✓   66 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 64 (1.5s)
+  ✘   67 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 65 (1.4s)
+  ✘   68 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 70 (1.3s)
+  ✘   69 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 66 (1.3s)
+  ✘   70 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 68 (1.3s)
+  ✘   72 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 73 (1.1s)
+  ✘   71 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 69 (1.4s)
+  ✓   73 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 71 (1.1s)
+  ✘   74 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 72 (1.3s)
+  ✘   75 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 74 (1.5s)
+  ✘   76 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 75 (1.5s)
+  ✓   77 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 80 (1.5s)
+  ✘   78 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 76 (1.5s)
+  ✘   79 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 77 (1.4s)
+  ✘   81 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 79 (1.3s)
+  ✘   80 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 78 (1.6s)
+  ✘   82 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 84 (1.1s)
+  ✘   83 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 81 (1.0s)
+  ✘   84 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 82 (1.2s)
+  ✘   85 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 83 (1.4s)
+  ✘   86 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 85 (1.5s)
+  ✘   87 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 86 (1.5s)
+  ✘   88 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 87 (1.3s)
+  ✓   89 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 88 (1.3s)
+  ✘   90 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 89 (1.2s)
+  ✘   91 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 90 (1.1s)
+  ✘   92 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 96 (1.3s)
+  ✘   93 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 91 (1.4s)
+  ✓   94 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 92 (1.3s)
+  ✘   95 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 93 (1.7s)
+  ✘   96 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 94 (1.5s)
+  ✓   97 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 95 (1.4s)
+  ✘   99 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 101 (1.2s)
+  ✘   98 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 97 (1.5s)
+  ✘  100 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 98 (1.3s)
+  ✓  101 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 104 (1.2s)
+  ✓  102 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 99 (1.2s)
+  ✓  103 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 100 (1.3s)
+  ✘  104 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 108 (1.4s)
+  ✘  105 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 109 (1.4s)
+  ✓  107 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 103 (1.5s)
+  ✓  106 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 102 (1.6s)
+  ✘  108 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 110 (1.4s)
+  ✘  109 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 105 (1.5s)
+  ✘  110 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 106 (1.4s)
+  ✘  111 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 107 (1.3s)
+  ✘  113 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 114 (1.0s)
+  ✘  112 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 113 (1.2s)
+  ✘  114 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 111 (1.3s)
+  ✘  115 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 112 (1.6s)
+  ✓  116 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 115 (1.4s)
+  ✓  117 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 116 (1.3s)
+  ✘  118 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 117 (1.7s)
+  ✘  119 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 118 (1.6s)
+  ✓  120 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 119 (1.4s)
+  ✘  121 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 120 (1.4s)
+  ✘  122 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 123 (1.2s)
+  ✘  123 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 124 (1.1s)
+  ✓  124 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 127 (1.0s)
+  ✘  125 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 121 (1.2s)
+  ✘  126 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 122 (1.1s)
+  ✘  127 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 131 (1.4s)
+  ✘  128 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 125 (1.3s)
+  ✘  129 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 126 (1.4s)
+  ✘  130 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 128 (1.4s)
+  ✘  131 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 129 (1.3s)
+  ✘  132 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 130 (1.2s)
+  ✘  133 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 132 (1.2s)
+  ✓  134 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 133 (1.2s)
+  ✘  135 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 134 (1.4s)
+  ✘  136 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 135 (1.7s)
+  ✘  139 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 141 (1.4s)
+  ✘  138 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 137 (1.5s)
+  ✘  140 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 138 (1.3s)
+  ✘  137 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 136 (1.7s)
+  ✘  141 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 139 (1.4s)
+  ✘  142 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 140 (950ms)
+  ✘  143 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 142 (1.4s)
+  ✘  144 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 143 (1.4s)
+  ✘  145 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 145 (1.7s)
+  ✘  146 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 144 (1.8s)
+  ✘  149 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 148 (1.4s)
+  ✘  147 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 146 (1.7s)
+  ✘  148 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 147 (1.6s)
+  ✘  150 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 149 (1.1s)
+  ✘  151 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 150 (1.4s)
+  ✘  152 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 151 (1.6s)
+  ✘  155 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 154 (1.4s)
+  ✘  154 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 153 (1.5s)
+  ✘  153 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 152 (1.6s)
+  ✘  157 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 156 (1.5s)
+  ✘  156 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 155 (1.6s)
+  ✘  158 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 157 (1.1s)
+  ✘  159 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 158 (1.5s)
+  ✘  160 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 159 (1.7s)
+  ✓  161 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 161 (1.6s)
+  ✘  163 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 162 (1.6s)
+  ✘  164 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 163 (1.5s)
+  ✘  165 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 164 (1.4s)
+  ✘  162 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 160 (1.7s)
+  ✘  166 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 165 (1.5s)
+  ✓  167 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 168 (1.0s)
+  ✘  168 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 166 (1.6s)
+  ✘  169 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 174 (1.5s)
+  ✘  170 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 167 (1.6s)
+  ✘  171 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 169 (1.5s)
+  ✘  172 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 170 (1.6s)
+  ✓  173 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 171 (1.6s)
+  ✘  175 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 173 (1.3s)
+  ✘  174 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 172 (1.6s)
+  ✘  176 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 180 (959ms)
+  ✘  178 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 176 (1.3s)
+  ✘  177 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 175 (1.4s)
+  ✘  180 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 178 (1.4s)
+  ✘  179 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 177 (1.6s)
+  ✘  181 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 179 (1.4s)
+  ✘  182 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 181 (1.4s)
+  ✓  183 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 182 (1.4s)
+  ✘  184 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 183 (1.2s)
+  ✘  185 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 190 (995ms)
+  ✓  186 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 184 (1.5s)
+  ✘  187 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 185 (1.6s)
+  ✘  189 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 188 (1.4s)
+  ✘  188 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 186 (1.6s)
+  ✘  191 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 189 (1.4s)
+  ✘  190 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 187 (1.6s)
+  ✘  192 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 193 (1.3s)
+  ✘  193 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 191 (1.3s)
+  ✘  194 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 192 (1.2s)
+  ✘  195 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 194 (1.2s)
+  ✘  196 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 195 (1.2s)
+  ✘  199 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 198 (1.2s)
+  ✘  198 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 197 (1.2s)
+  ✘  197 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 196 (1.3s)
+  ✓  200 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 199 (1.0s)
+  1) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 0 ──
+    Error: beforeinput log mismatch (seed 0):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  2) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 1 ──
+    Error: composition log mismatch (seed 1):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  3) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 2 ──
+    Error: beforeinput log mismatch (seed 2):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  4) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 4 ──
+    Error: composition log mismatch (seed 4):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  5) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 6 ──
+    Error: composition log mismatch (seed 6):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  6) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 7 ──
+    Error: composition log mismatch (seed 7):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  7) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 8 ──
+    Error: beforeinput log mismatch (seed 8):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  8) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 11 ─
+    Error: beforeinput log mismatch (seed 11):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  9) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 12 ─
+    Error: State mismatch (seed 12):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  10) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 13 
+    Error: beforeinput log mismatch (seed 13):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  11) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 14 
+    Error: beforeinput log mismatch (seed 14):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  12) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 15 
+    Error: beforeinput log mismatch (seed 15):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  13) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 16 
+    Error: State mismatch (seed 16):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  14) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 17 
+    Error: beforeinput log mismatch (seed 17):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  15) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 18 
+    Error: beforeinput log mismatch (seed 18):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  16) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 19 
+    Error: State mismatch (seed 19):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  17) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 20 
+    Error: beforeinput log mismatch (seed 20):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  18) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 21 
+    Error: composition log mismatch (seed 21):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  19) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 22 
+    Error: beforeinput log mismatch (seed 22):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  20) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 23 
+    Error: beforeinput log mismatch (seed 23):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  21) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 24 
+    Error: State mismatch (seed 24):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  22) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 26 
+    Error: beforeinput log mismatch (seed 26):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  23) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 27 
+    Error: beforeinput log mismatch (seed 27):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  24) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 28 
+    Error: beforeinput log mismatch (seed 28):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  25) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 29 
+    Error: beforeinput log mismatch (seed 29):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  26) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 30 
+    Error: beforeinput log mismatch (seed 30):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  27) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 31 
+    Error: beforeinput log mismatch (seed 31):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  28) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 34 
+    Error: beforeinput log mismatch (seed 34):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  29) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 35 
+    Error: beforeinput log mismatch (seed 35):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  30) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 36 
+    Error: beforeinput log mismatch (seed 36):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  31) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 37 
+    Error: composition log mismatch (seed 37):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  32) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 39 
+    Error: beforeinput log mismatch (seed 39):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  33) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 40 
+    Error: beforeinput log mismatch (seed 40):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  34) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 41 
+    Error: beforeinput log mismatch (seed 41):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  35) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 42 
+    Error: beforeinput log mismatch (seed 42):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  36) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 43 
+    Error: State mismatch (seed 43):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  37) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 44 
+    Error: composition log mismatch (seed 44):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  38) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 45 
+    Error: beforeinput log mismatch (seed 45):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  39) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 46 
+    Error: State mismatch (seed 46):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  40) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 47 
+    Error: beforeinput log mismatch (seed 47):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  41) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 48 
+    Error: State mismatch (seed 48):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  42) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 49 
+    Error: beforeinput log mismatch (seed 49):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  43) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 50 
+    Error: composition log mismatch (seed 50):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  44) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 52 
+    Error: composition log mismatch (seed 52):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  45) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 53 
+    Error: State mismatch (seed 53):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  46) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 54 
+    Error: State mismatch (seed 54):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  47) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 55 
+    Error: beforeinput log mismatch (seed 55):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  48) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 56 
+    Error: beforeinput log mismatch (seed 56):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  49) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 57 
+    Error: beforeinput log mismatch (seed 57):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  50) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 59 
+    Error: beforeinput log mismatch (seed 59):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  51) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 60 
+    Error: beforeinput log mismatch (seed 60):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  52) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 61 
+    Error: beforeinput log mismatch (seed 61):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  53) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 62 
+    Error: Event log mismatch (seed 62):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  54) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 63 
+    Error: beforeinput log mismatch (seed 63):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  55) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 65 
+    Error: beforeinput log mismatch (seed 65):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  56) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 66 
+    Error: beforeinput log mismatch (seed 66):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  57) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 68 
+    Error: beforeinput log mismatch (seed 68):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  58) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 69 
+    Error: beforeinput log mismatch (seed 69):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  59) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 70 
+    Error: beforeinput log mismatch (seed 70):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  60) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 72 
+    Error: beforeinput log mismatch (seed 72):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  61) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 73 
+    Error: composition log mismatch (seed 73):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  62) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 74 
+    Error: beforeinput log mismatch (seed 74):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  63) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 75 
+    Error: beforeinput log mismatch (seed 75):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  64) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 76 
+    Error: beforeinput log mismatch (seed 76):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  65) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 77 
+    Error: beforeinput log mismatch (seed 77):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  66) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 78 
+    Error: beforeinput log mismatch (seed 78):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  67) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 79 
+    Error: beforeinput log mismatch (seed 79):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  68) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 81 
+    Error: beforeinput log mismatch (seed 81):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  69) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 82 
+    Error: beforeinput log mismatch (seed 82):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  70) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 83 
+    Error: Event log mismatch (seed 83):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  71) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 84 
+    Error: beforeinput log mismatch (seed 84):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  72) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 85 
+    Error: beforeinput log mismatch (seed 85):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  73) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 86 
+    Error: beforeinput log mismatch (seed 86):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  74) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 87 
+    Error: beforeinput log mismatch (seed 87):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  75) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 89 
+    Error: beforeinput log mismatch (seed 89):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  76) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 90 
+    Error: composition log mismatch (seed 90):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  77) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 91 
+    Error: beforeinput log mismatch (seed 91):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  78) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 93 
+    Error: beforeinput log mismatch (seed 93):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  79) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 94 
+    Error: Event log mismatch (seed 94):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  80) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 96 
+    Error: beforeinput log mismatch (seed 96):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  81) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 97 
+    Error: beforeinput log mismatch (seed 97):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  82) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 98 
+    Error: Event log mismatch (seed 98):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  83) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 101 
+    Error: State mismatch (seed 101):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  84) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 105 
+    Error: beforeinput log mismatch (seed 105):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  85) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 106 
+    Error: Event log mismatch (seed 106):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  86) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 107 
+    Error: beforeinput log mismatch (seed 107):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  87) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 108 
+    Error: beforeinput log mismatch (seed 108):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  88) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 109 
+    Error: beforeinput log mismatch (seed 109):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  89) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 110 
+    Error: beforeinput log mismatch (seed 110):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  90) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 111 
+    Error: composition log mismatch (seed 111):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  91) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 112 
+    Error: beforeinput log mismatch (seed 112):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  92) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 113 
+    Error: beforeinput log mismatch (seed 113):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  93) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 114 
+    Error: beforeinput log mismatch (seed 114):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  94) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 117 
+    Error: beforeinput log mismatch (seed 117):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  95) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 118 
+    Error: State mismatch (seed 118):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  96) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 120 
+    Error: beforeinput log mismatch (seed 120):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  97) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 121 
+    Error: beforeinput log mismatch (seed 121):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  98) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 122 
+    Error: State mismatch (seed 122):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  99) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 123 
+    Error: composition log mismatch (seed 123):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  100) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 124 
+    Error: beforeinput log mismatch (seed 124):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  101) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 125 
+    Error: beforeinput log mismatch (seed 125):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  102) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 126 
+    Error: composition log mismatch (seed 126):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  103) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 128 
+    Error: beforeinput log mismatch (seed 128):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  104) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 129 
+    Error: beforeinput log mismatch (seed 129):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  105) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 130 
+    Error: beforeinput log mismatch (seed 130):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  106) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 131 
+    Error: beforeinput log mismatch (seed 131):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  107) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 132 
+    Error: beforeinput log mismatch (seed 132):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  108) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 134 
+    Error: State mismatch (seed 134):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  109) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 135 
+    Error: beforeinput log mismatch (seed 135):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  110) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 136 
+    Error: beforeinput log mismatch (seed 136):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  111) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 137 
+    Error: beforeinput log mismatch (seed 137):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  112) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 138 
+    Error: beforeinput log mismatch (seed 138):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  113) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 139 
+    Error: Event log mismatch (seed 139):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  114) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 140 
+    Error: beforeinput log mismatch (seed 140):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  115) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 141 
+    Error: beforeinput log mismatch (seed 141):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  116) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 142 
+    Error: State mismatch (seed 142):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  117) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 143 
+    Error: beforeinput log mismatch (seed 143):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  118) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 144 
+    Error: composition log mismatch (seed 144):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  119) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 145 
+    Error: beforeinput log mismatch (seed 145):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  120) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 146 
+    Error: State mismatch (seed 146):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  121) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 147 
+    Error: State mismatch (seed 147):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  122) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 148 
+    Error: beforeinput log mismatch (seed 148):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  123) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 149 
+    Error: State mismatch (seed 149):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  124) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 150 
+    Error: beforeinput log mismatch (seed 150):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  125) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 151 
+    Error: beforeinput log mismatch (seed 151):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  126) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 152 
+    Error: State mismatch (seed 152):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  127) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 153 
+    Error: composition log mismatch (seed 153):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  128) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 154 
+    Error: beforeinput log mismatch (seed 154):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  129) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 155 
+    Error: composition log mismatch (seed 155):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  130) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 156 
+    Error: beforeinput log mismatch (seed 156):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  131) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 157 
+    Error: composition log mismatch (seed 157):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  132) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 158 
+    Error: beforeinput log mismatch (seed 158):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  133) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 159 
+    Error: beforeinput log mismatch (seed 159):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  134) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 160 
+    Error: beforeinput log mismatch (seed 160):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  135) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 162 
+    Error: beforeinput log mismatch (seed 162):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  136) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 163 
+    Error: composition log mismatch (seed 163):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  137) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 164 
+    Error: beforeinput log mismatch (seed 164):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  138) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 165 
+    Error: beforeinput log mismatch (seed 165):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  139) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 166 
+    Error: beforeinput log mismatch (seed 166):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  140) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 167 
+    Error: beforeinput log mismatch (seed 167):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  141) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 169 
+    Error: beforeinput log mismatch (seed 169):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  142) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 170 
+    Error: State mismatch (seed 170):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  143) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 172 
+    Error: Event log mismatch (seed 172):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  144) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 173 
+    Error: beforeinput log mismatch (seed 173):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  145) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 174 
+    Error: beforeinput log mismatch (seed 174):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  146) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 175 
+    Error: beforeinput log mismatch (seed 175):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  147) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 176 
+    Error: beforeinput log mismatch (seed 176):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  148) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 177 
+    Error: composition log mismatch (seed 177):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  149) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 178 
+    Error: beforeinput log mismatch (seed 178):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  150) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 179 
+    Error: beforeinput log mismatch (seed 179):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  151) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 180 
+    Error: beforeinput log mismatch (seed 180):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  152) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 181 
+    Error: beforeinput log mismatch (seed 181):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  153) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 183 
+    Error: beforeinput log mismatch (seed 183):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  154) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 185 
+    Error: beforeinput log mismatch (seed 185):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  155) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 186 
+    Error: beforeinput log mismatch (seed 186):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  156) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 187 
+    Error: State mismatch (seed 187):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  157) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 188 
+    Error: beforeinput log mismatch (seed 188):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  158) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 189 
+    Error: composition log mismatch (seed 189):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  159) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 190 
+    Error: beforeinput log mismatch (seed 190):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  160) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 191 
+    Error: beforeinput log mismatch (seed 191):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  161) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 192 
+    Error: beforeinput log mismatch (seed 192):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  162) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 193 
+    Error: beforeinput log mismatch (seed 193):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  163) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 194 
+    Error: beforeinput log mismatch (seed 194):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  164) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 195 
+    Error: beforeinput log mismatch (seed 195):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  165) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 196 
+    Error: composition log mismatch (seed 196):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  166) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 197 
+    Error: beforeinput log mismatch (seed 197):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  167) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 198 
+    Error: beforeinput log mismatch (seed 198):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 0 ───
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 1 ───
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 2 ───
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 4 ───
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 6 ───
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 7 ───
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 8 ───
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 11 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 12 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 13 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 14 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 15 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 16 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 17 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 18 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 19 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 20 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 21 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 22 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 23 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 24 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 26 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 27 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 28 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 29 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 30 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 31 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 34 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 35 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 36 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 37 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 39 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 40 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 41 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 42 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 43 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 44 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 45 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 46 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 47 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 48 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 49 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 50 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 52 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 53 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 54 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 55 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 56 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 57 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 59 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 60 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 61 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 62 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 63 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 65 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 66 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 68 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 69 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 70 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 72 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 73 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 74 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 75 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 76 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 77 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 78 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 79 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 81 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 82 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 83 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 84 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 85 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 86 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 87 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 89 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 90 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 91 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 93 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 94 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 96 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 97 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 98 ──
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 101 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 105 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 106 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 107 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 108 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 109 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 110 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 111 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 112 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 113 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 114 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 117 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 118 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 120 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 121 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 122 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 123 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 124 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 125 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 126 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 128 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 129 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 130 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 131 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 132 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 134 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 135 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 136 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 137 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 138 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 139 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 140 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 141 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 142 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 143 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 144 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 145 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 146 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 147 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 148 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 149 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 150 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 151 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 152 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 153 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 154 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 155 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 156 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 157 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 158 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 159 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 160 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 162 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 163 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 164 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 165 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 166 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 167 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 169 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 170 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 172 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 173 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 174 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 175 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 176 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 177 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 178 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 179 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 180 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 181 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 183 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 185 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 186 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 187 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 188 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 189 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 190 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 191 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 192 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 193 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 194 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 195 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 196 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 197 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 198 ─
+---
+=== Batch 2: seeds 200-399 ===
+  28 passed, 172 failed (cumulative: 61 passed, 339 failed)
+  ✓    8 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 203 (1.8s)
+  ✓    7 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 207 (1.8s)
+  ✘    1 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 201 (1.9s)
+  ✘    3 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 202 (1.9s)
+  ✓    5 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 204 (1.9s)
+  ✘    2 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 200 (2.0s)
+  ✘    4 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 206 (1.9s)
+  ✓    6 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 205 (1.9s)
+  ✘   11 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 212 (1.1s)
+  ✘    9 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 208 (1.3s)
+  ✘   12 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 215 (1.2s)
+  ✘   10 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 209 (1.4s)
+  ✘   13 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 210 (1.4s)
+  ✘   15 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 211 (1.4s)
+  ✘   14 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 214 (1.4s)
+  ✘   16 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 213 (1.5s)
+  ✘   17 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 216 (1.3s)
+  ✘   18 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 217 (1.3s)
+  ✘   19 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 218 (1.4s)
+  ✘   20 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 219 (1.4s)
+  ✘   23 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 221 (1.3s)
+  ✘   22 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 222 (1.4s)
+  ✘   24 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 223 (1.4s)
+  ✘   21 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 220 (1.5s)
+  ✘   25 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 224 (1.5s)
+  ✘   26 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 225 (1.4s)
+  ✘   27 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 226 (1.2s)
+  ✘   28 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 227 (1.2s)
+  ✘   30 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 228 (1.4s)
+  ✓   29 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 229 (1.5s)
+  ✘   32 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 231 (1.4s)
+  ✘   31 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 230 (1.5s)
+  ✘   33 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 232 (1.5s)
+  ✘   35 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 234 (1.3s)
+  ✘   37 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 237 (1.2s)
+  ✘   34 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 233 (1.6s)
+  ✘   36 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 235 (1.4s)
+  ✓   38 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 236 (1.2s)
+  ✘   39 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 238 (1.2s)
+  ✘   40 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 239 (1.5s)
+  ✘   42 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 241 (1.4s)
+  ✘   45 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 242 (1.3s)
+  ✘   44 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 245 (1.4s)
+  ✘   43 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 243 (1.4s)
+  ✓   46 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 244 (1.4s)
+  ✓   41 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 240 (1.7s)
+  ✘   48 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 253 (1.1s)
+  ✘   47 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 252 (1.2s)
+  ✘   49 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 246 (1.2s)
+  ✘   50 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 247 (1.3s)
+  ✘   54 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 251 (1.2s)
+  ✘   53 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 250 (1.3s)
+  ✘   51 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 248 (1.4s)
+  ✘   52 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 249 (1.5s)
+  ✘   56 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 254 (1.2s)
+  ✘   55 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 255 (1.3s)
+  ✘   57 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 256 (1.3s)
+  ✘   58 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 257 (1.3s)
+  ✘   59 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 258 (1.3s)
+  ✘   60 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 259 (1.3s)
+  ✘   61 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 260 (1.4s)
+  ✘   62 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 261 (1.3s)
+  ✘   63 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 262 (1.3s)
+  ✘   64 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 263 (1.4s)
+  ✘   65 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 264 (1.3s)
+  ✘   66 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 265 (1.3s)
+  ✓   68 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 267 (1.3s)
+  ✘   67 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 266 (1.5s)
+  ✘   69 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 268 (1.3s)
+  ✘   70 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 269 (1.3s)
+  ✘   71 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 270 (1.3s)
+  ✘   73 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 271 (1.2s)
+  ✘   72 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 274 (1.4s)
+  ✘   74 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 272 (1.2s)
+  ✘   75 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 273 (1.3s)
+  ✘   78 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 276 (1.2s)
+  ✘   77 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 275 (1.3s)
+  ✘   76 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 277 (1.4s)
+  ✓   79 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 279 (1.4s)
+  ✘   80 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 280 (1.4s)
+  ✘   81 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 278 (1.5s)
+  ✘   82 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 281 (1.5s)
+  ✘   83 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 282 (1.3s)
+  ✓   84 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 286 (1.4s)
+  ✘   87 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 285 (1.1s)
+  ✘   86 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 284 (1.3s)
+  ✓   85 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 283 (1.4s)
+  ✘   88 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 291 (1.3s)
+  ✘   89 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 287 (1.4s)
+  ✓   91 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 294 (1.4s)
+  ✘   92 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 289 (1.1s)
+  ✘   93 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 290 (1.1s)
+  ✘   94 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 297 (1.0s)
+  ✓   95 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 292 (1.1s)
+  ✘   96 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 293 (1.3s)
+  ✘   97 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 295 (1.2s)
+  ✘   98 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 301 (1.2s)
+  ✘   99 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 296 (1.2s)
+  ✘  100 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 298 (1.4s)
+  ✓  101 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 299 (1.1s)
+  ✓  102 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 300 (1.1s)
+  ✘  103 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 302 (1.1s)
+  ✘  104 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 307 (1.1s)
+  ✘  105 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 308 (1.1s)
+  ✓  106 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 303 (1.4s)
+  ✘  107 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 304 (1.3s)
+  ✘  108 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 305 (1.2s)
+  ✓  109 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 306 (1.1s)
+  ✘  110 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 312 (1.0s)
+  ✘  113 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 315 (1.1s)
+  ✓  111 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 310 (1.3s)
+  ✘  112 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 309 (1.4s)
+  ✓  114 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 311 (1.3s)
+  ✘  115 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 313 (1.4s)
+  ✘  117 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 318 (1.2s)
+  ✓  116 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 314 (1.4s)
+  ✘  118 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 320 (1.1s)
+  ✘  119 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 316 (1.2s)
+  ✘  120 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 323 (1.1s)
+  ✘  121 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 317 (1.1s)
+  ✘  122 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 319 (1.1s)
+  ✘  123 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 321 (1.1s)
+  ✘  124 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 322 (1.1s)
+  ✘  125 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 324 (1.2s)
+  ✘  126 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 325 (1.1s)
+  ✓  127 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 326 (1.2s)
+  ✘  128 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 327 (1.4s)
+  ✘  129 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 328 (1.1s)
+  ✓  130 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 333 (1.3s)
+  ✘  131 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 329 (1.1s)
+  ✘  132 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 330 (1.4s)
+  ✘  133 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 331 (1.3s)
+  ✘  134 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 332 (1.2s)
+  ✓  135 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 336 (1.1s)
+  ✘  136 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 334 (1.2s)
+  ✘  137 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 335 (1.2s)
+  ✘  138 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 341 (971ms)
+  ✘  139 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 337 (1.1s)
+  ✘  140 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 338 (1.2s)
+  ✘  141 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 339 (1.1s)
+  ✘  142 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 340 (1.1s)
+  ✘  143 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 342 (1.1s)
+  ✘  144 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 343 (1.2s)
+  ✘  145 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 344 (1.1s)
+  ✘  146 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 345 (1.2s)
+  ✘  147 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 346 (1.1s)
+  ✓  148 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 347 (1.1s)
+  ✓  149 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 348 (1.0s)
+  ✘  151 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 354 (1.2s)
+  ✘  150 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 349 (1.3s)
+  ✘  152 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 350 (1.3s)
+  ✘  153 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 351 (1.4s)
+  ✘  154 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 355 (1.4s)
+  ✘  156 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 353 (1.1s)
+  ✘  155 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 352 (1.2s)
+  ✘  157 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 356 (1.2s)
+  ✘  158 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 357 (1.2s)
+  ✘  160 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 359 (1.2s)
+  ✓  159 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 358 (1.4s)
+  ✘  161 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 360 (1.4s)
+  ✘  162 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 362 (1.2s)
+  ✘  163 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 361 (1.1s)
+  ✘  164 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 366 (890ms)
+  ✘  165 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 363 (1.2s)
+  ✘  166 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 364 (1.2s)
+  ✘  168 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 367 (1.2s)
+  ✘  167 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 365 (1.5s)
+  ✘  170 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 369 (1.1s)
+  ✘  169 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 368 (1.2s)
+  ✘  171 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 370 (1.2s)
+  ✘  172 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 371 (1.1s)
+  ✘  173 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 372 (1.3s)
+  ✘  175 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 374 (1.3s)
+  ✘  174 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 373 (1.4s)
+  ✘  177 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 376 (1.1s)
+  ✘  176 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 375 (1.2s)
+  ✘  178 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 377 (1.0s)
+  ✘  179 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 378 (1.4s)
+  ✘  180 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 379 (1.3s)
+  ✘  181 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 380 (1.3s)
+  ✘  182 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 381 (1.4s)
+  ✘  183 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 382 (1.3s)
+  ✘  184 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 383 (1.3s)
+  ✘  185 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 384 (1.0s)
+  ✘   90 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 288 (30.0s)
+  ✘  187 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 386 (1.4s)
+  ✘  186 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 385 (1.6s)
+  ✘  188 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 387 (1.3s)
+  ✘  189 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 388 (1.3s)
+  ✘  191 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 390 (1.2s)
+  ✘  192 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 391 (1.2s)
+  ✘  190 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 389 (1.4s)
+  ✘  193 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 392 (935ms)
+  ✘  195 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 394 (1.3s)
+  ✘  194 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 393 (1.4s)
+  ✘  196 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 395 (1.4s)
+  ✓  197 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 396 (1.4s)
+  ✘  198 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 397 (1.1s)
+  ✘  199 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 398 (1.0s)
+  ✘  200 [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 399 (1.1s)
+  1) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 200 
+    Error: beforeinput log mismatch (seed 200):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  2) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 201 
+    Error: beforeinput log mismatch (seed 201):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  3) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 202 
+    Error: beforeinput log mismatch (seed 202):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  4) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 206 
+    Error: beforeinput log mismatch (seed 206):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  5) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 208 
+    Error: beforeinput log mismatch (seed 208):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  6) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 209 
+    Error: beforeinput log mismatch (seed 209):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  7) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 210 
+    Error: beforeinput log mismatch (seed 210):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  8) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 211 
+    Error: beforeinput log mismatch (seed 211):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  9) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 212 
+    Error: beforeinput log mismatch (seed 212):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  10) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 213 
+    Error: beforeinput log mismatch (seed 213):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  11) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 214 
+    Error: beforeinput log mismatch (seed 214):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  12) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 215 
+    Error: beforeinput log mismatch (seed 215):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  13) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 216 
+    Error: beforeinput log mismatch (seed 216):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  14) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 217 
+    Error: beforeinput log mismatch (seed 217):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  15) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 218 
+    Error: State mismatch (seed 218):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  16) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 219 
+    Error: composition log mismatch (seed 219):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  17) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 220 
+    Error: beforeinput log mismatch (seed 220):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  18) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 221 
+    Error: beforeinput log mismatch (seed 221):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  19) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 222 
+    Error: beforeinput log mismatch (seed 222):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  20) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 223 
+    Error: beforeinput log mismatch (seed 223):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  21) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 224 
+    Error: beforeinput log mismatch (seed 224):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  22) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 225 
+    Error: composition log mismatch (seed 225):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  23) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 226 
+    Error: beforeinput log mismatch (seed 226):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  24) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 227 
+    Error: beforeinput log mismatch (seed 227):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  25) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 228 
+    Error: beforeinput log mismatch (seed 228):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  26) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 230 
+    Error: beforeinput log mismatch (seed 230):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  27) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 231 
+    Error: beforeinput log mismatch (seed 231):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  28) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 232 
+    Error: beforeinput log mismatch (seed 232):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  29) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 233 
+    Error: beforeinput log mismatch (seed 233):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  30) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 234 
+    Error: composition log mismatch (seed 234):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  31) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 235 
+    Error: composition log mismatch (seed 235):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  32) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 237 
+    Error: beforeinput log mismatch (seed 237):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  33) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 238 
+    Error: beforeinput log mismatch (seed 238):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  34) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 239 
+    Error: composition log mismatch (seed 239):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  35) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 241 
+    Error: State mismatch (seed 241):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  36) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 242 
+    Error: beforeinput log mismatch (seed 242):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  37) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 243 
+    Error: beforeinput log mismatch (seed 243):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  38) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 245 
+    Error: beforeinput log mismatch (seed 245):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  39) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 246 
+    Error: beforeinput log mismatch (seed 246):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  40) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 247 
+    Error: beforeinput log mismatch (seed 247):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  41) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 248 
+    Error: beforeinput log mismatch (seed 248):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  42) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 249 
+    Error: beforeinput log mismatch (seed 249):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  43) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 250 
+    Error: beforeinput log mismatch (seed 250):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  44) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 251 
+    Error: beforeinput log mismatch (seed 251):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  45) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 252 
+    Error: beforeinput log mismatch (seed 252):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  46) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 253 
+    Error: beforeinput log mismatch (seed 253):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  47) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 254 
+    Error: beforeinput log mismatch (seed 254):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  48) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 255 
+    Error: beforeinput log mismatch (seed 255):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  49) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 256 
+    Error: State mismatch (seed 256):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  50) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 257 
+    Error: beforeinput log mismatch (seed 257):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  51) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 258 
+    Error: composition log mismatch (seed 258):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  52) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 259 
+    Error: composition log mismatch (seed 259):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  53) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 260 
+    Error: State mismatch (seed 260):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  54) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 261 
+    Error: beforeinput log mismatch (seed 261):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  55) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 262 
+    Error: beforeinput log mismatch (seed 262):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  56) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 263 
+    Error: composition log mismatch (seed 263):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  57) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 264 
+    Error: beforeinput log mismatch (seed 264):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  58) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 265 
+    Error: composition log mismatch (seed 265):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  59) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 266 
+    Error: beforeinput log mismatch (seed 266):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  60) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 268 
+    Error: composition log mismatch (seed 268):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  61) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 269 
+    Error: beforeinput log mismatch (seed 269):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  62) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 270 
+    Error: beforeinput log mismatch (seed 270):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  63) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 271 
+    Error: beforeinput log mismatch (seed 271):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  64) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 272 
+    Error: composition log mismatch (seed 272):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  65) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 273 
+    Error: beforeinput log mismatch (seed 273):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  66) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 274 
+    Error: beforeinput log mismatch (seed 274):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  67) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 275 
+    Error: State mismatch (seed 275):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  68) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 276 
+    Error: beforeinput log mismatch (seed 276):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  69) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 277 
+    Error: beforeinput log mismatch (seed 277):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  70) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 278 
+    Error: beforeinput log mismatch (seed 278):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  71) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 280 
+    Error: beforeinput log mismatch (seed 280):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  72) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 281 
+    Error: composition log mismatch (seed 281):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  73) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 282 
+    Error: beforeinput log mismatch (seed 282):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  74) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 284 
+    Error: beforeinput log mismatch (seed 284):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  75) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 285 
+    Error: beforeinput log mismatch (seed 285):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  76) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 287 
+    Error: beforeinput log mismatch (seed 287):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  77) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 288 
+  78) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 289 
+    Error: State mismatch (seed 289):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  79) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 290 
+    Error: beforeinput log mismatch (seed 290):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  80) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 291 
+    Error: beforeinput log mismatch (seed 291):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  81) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 293 
+    Error: beforeinput log mismatch (seed 293):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  82) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 295 
+    Error: Event log mismatch (seed 295):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  83) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 296 
+    Error: beforeinput log mismatch (seed 296):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  84) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 297 
+    Error: composition log mismatch (seed 297):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  85) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 298 
+    Error: beforeinput log mismatch (seed 298):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  86) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 301 
+    Error: beforeinput log mismatch (seed 301):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  87) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 302 
+    Error: State mismatch (seed 302):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  88) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 304 
+    Error: beforeinput log mismatch (seed 304):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  89) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 305 
+    Error: State mismatch (seed 305):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  90) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 307 
+    Error: composition log mismatch (seed 307):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  91) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 308 
+    Error: composition log mismatch (seed 308):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  92) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 309 
+    Error: beforeinput log mismatch (seed 309):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  93) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 312 
+    Error: beforeinput log mismatch (seed 312):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  94) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 313 
+    Error: composition log mismatch (seed 313):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  95) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 315 
+    Error: composition log mismatch (seed 315):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  96) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 316 
+    Error: beforeinput log mismatch (seed 316):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  97) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 317 
+    Error: composition log mismatch (seed 317):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  98) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 318 
+    Error: beforeinput log mismatch (seed 318):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  99) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 319 
+    Error: composition log mismatch (seed 319):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  100) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 320 
+    Error: State mismatch (seed 320):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  101) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 321 
+    Error: beforeinput log mismatch (seed 321):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  102) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 322 
+    Error: beforeinput log mismatch (seed 322):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  103) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 323 
+    Error: beforeinput log mismatch (seed 323):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  104) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 324 
+    Error: composition log mismatch (seed 324):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  105) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 325 
+    Error: beforeinput log mismatch (seed 325):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  106) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 327 
+    Error: beforeinput log mismatch (seed 327):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  107) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 328 
+    Error: beforeinput log mismatch (seed 328):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  108) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 329 
+    Error: beforeinput log mismatch (seed 329):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  109) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 330 
+    Error: composition log mismatch (seed 330):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  110) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 331 
+    Error: Event log mismatch (seed 331):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  111) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 332 
+    Error: beforeinput log mismatch (seed 332):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  112) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 334 
+    Error: beforeinput log mismatch (seed 334):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  113) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 335 
+    Error: beforeinput log mismatch (seed 335):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  114) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 337 
+    Error: beforeinput log mismatch (seed 337):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  115) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 338 
+    Error: beforeinput log mismatch (seed 338):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  116) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 339 
+    Error: composition log mismatch (seed 339):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  117) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 340 
+    Error: beforeinput log mismatch (seed 340):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  118) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 341 
+    Error: composition log mismatch (seed 341):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  119) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 342 
+    Error: beforeinput log mismatch (seed 342):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  120) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 343 
+    Error: beforeinput log mismatch (seed 343):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  121) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 344 
+    Error: composition log mismatch (seed 344):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  122) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 345 
+    Error: beforeinput log mismatch (seed 345):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  123) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 346 
+    Error: composition log mismatch (seed 346):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  124) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 349 
+    Error: beforeinput log mismatch (seed 349):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  125) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 350 
+    Error: Event log mismatch (seed 350):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  126) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 351 
+    Error: beforeinput log mismatch (seed 351):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  127) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 352 
+    Error: State mismatch (seed 352):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  128) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 353 
+    Error: beforeinput log mismatch (seed 353):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  129) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 354 
+    Error: beforeinput log mismatch (seed 354):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  130) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 355 
+    Error: beforeinput log mismatch (seed 355):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  131) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 356 
+    Error: State mismatch (seed 356):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  132) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 357 
+    Error: beforeinput log mismatch (seed 357):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  133) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 359 
+    Error: composition log mismatch (seed 359):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  134) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 360 
+    Error: beforeinput log mismatch (seed 360):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  135) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 361 
+    Error: State mismatch (seed 361):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  136) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 362 
+    Error: beforeinput log mismatch (seed 362):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  137) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 363 
+    Error: beforeinput log mismatch (seed 363):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  138) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 364 
+    Error: State mismatch (seed 364):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  139) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 365 
+    Error: beforeinput log mismatch (seed 365):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  140) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 366 
+    Error: beforeinput log mismatch (seed 366):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  141) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 367 
+    Error: composition log mismatch (seed 367):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  142) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 368 
+    Error: beforeinput log mismatch (seed 368):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  143) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 369 
+    Error: beforeinput log mismatch (seed 369):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  144) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 370 
+    Error: beforeinput log mismatch (seed 370):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  145) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 371 
+    Error: beforeinput log mismatch (seed 371):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  146) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 372 
+    Error: beforeinput log mismatch (seed 372):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  147) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 373 
+    Error: beforeinput log mismatch (seed 373):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  148) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 374 
+    Error: beforeinput log mismatch (seed 374):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  149) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 375 
+    Error: beforeinput log mismatch (seed 375):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  150) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 376 
+    Error: beforeinput log mismatch (seed 376):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  151) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 377 
+    Error: State mismatch (seed 377):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  152) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 378 
+    Error: Event log mismatch (seed 378):
+    > 101 |         expect(polyfillEvents, `Event log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  153) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 379 
+    Error: beforeinput log mismatch (seed 379):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  154) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 380 
+    Error: beforeinput log mismatch (seed 380):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  155) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 381 
+    Error: composition log mismatch (seed 381):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  156) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 382 
+    Error: beforeinput log mismatch (seed 382):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  157) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 383 
+    Error: beforeinput log mismatch (seed 383):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  158) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 384 
+    Error: beforeinput log mismatch (seed 384):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  159) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 385 
+    Error: beforeinput log mismatch (seed 385):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  160) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 386 
+    Error: beforeinput log mismatch (seed 386):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  161) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 387 
+    Error: State mismatch (seed 387):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  162) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 388 
+    Error: composition log mismatch (seed 388):
+    > 115 |         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  163) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 389 
+    Error: beforeinput log mismatch (seed 389):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  164) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 390 
+    Error: beforeinput log mismatch (seed 390):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  165) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 391 
+    Error: State mismatch (seed 391):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+  166) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 392 
+    Error: beforeinput log mismatch (seed 392):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  167) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 393 
+    Error: beforeinput log mismatch (seed 393):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  168) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 394 
+    Error: beforeinput log mismatch (seed 394):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  169) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 395 
+    Error: beforeinput log mismatch (seed 395):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  170) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 397 
+    Error: beforeinput log mismatch (seed 397):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  171) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 398 
+    Error: beforeinput log mismatch (seed 398):
+    > 108 |         expect(polyfillBeforeInput, `beforeinput log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
+  172) [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 399 
+    Error: State mismatch (seed 399):
+    > 96 |         expect(polyfillState, `State mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeState);
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 200 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 201 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 202 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 206 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 208 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 209 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 210 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 211 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 212 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 213 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 214 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 215 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 216 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 217 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 218 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 219 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 220 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 221 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 222 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 223 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 224 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 225 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 226 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 227 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 228 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 230 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 231 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 232 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 233 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 234 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 235 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 237 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 238 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 239 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 241 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 242 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 243 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 245 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 246 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 247 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 248 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 249 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 250 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 251 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 252 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 253 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 254 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 255 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 256 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 257 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 258 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 259 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 260 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 261 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 262 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 263 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 264 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 265 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 266 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 268 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 269 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 270 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 271 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 272 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 273 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 274 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 275 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 276 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 277 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 278 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 280 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 281 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 282 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 284 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 285 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 287 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 288 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 289 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 290 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 291 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 293 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 295 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 296 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 297 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 298 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 301 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 302 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 304 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 305 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 307 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 308 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 309 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 312 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 313 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 315 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 316 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 317 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 318 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 319 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 320 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 321 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 322 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 323 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 324 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 325 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 327 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 328 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 329 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 330 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 331 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 332 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 334 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 335 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 337 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 338 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 339 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 340 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 341 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 342 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 343 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 344 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 345 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 346 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 349 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 350 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 351 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 352 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 353 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 354 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 355 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 356 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 357 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 359 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 360 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 361 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 362 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 363 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 364 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 365 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 366 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 367 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 368 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 369 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 370 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 371 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 372 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 373 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 374 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 375 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 376 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 377 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 378 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 379 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 380 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 381 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 382 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 383 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 384 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 385 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 386 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 387 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 388 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 389 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 390 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 391 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 392 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 393 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 394 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 395 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 397 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 398 ─
+    [chromium-native] › tests/fuzz/fuzz-ime.spec.ts:58:5 › Fuzz IME: native vs polyfill › seed 399 ─
+---
+=== Batch 3: seeds 400-599 ===
