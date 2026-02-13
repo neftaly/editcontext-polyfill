@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EditContext API Demo</title>
+
+  <style>
+    body {
+      font-family: system-ui;
+      font-size: 1rem;
+      margin: 2rem;
+    }
+
+    #div-editor {
+      font-family: consolas, monospace;
+      background: #e0e0e0;
+      border-radius: .5rem;
+      padding: 1rem;
+      position: relative;
+      margin: 2rem 0;
+      line-height: 2;
+    }
+
+    #div-editor.is-composing {
+      background: lightblue;
+    }
+
+    #div-editor.is-composing::before {
+      content: "Composing";
+      font-size: .6rem;
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      padding: .2rem;
+      background: #0003;
+      border-radius: 0 .5rem;
+    }
+
+    #div-editor .space {
+      white-space: pre;
+      background: radial-gradient(circle, #0004 2px, transparent 0);
+    }
+
+    .word.rainbow {
+      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .word.yell {
+      background: yellow;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+
+    .word.pink {
+      background: pink;
+      font-style: italic;
+    }
+
+    .word.flower {
+      background-image: url(ms-demo/flower.png);
+      padding: 0 0 0.8rem 0;
+      background-size: 1ch;
+      background-repeat: repeat-x;
+      background-position: bottom;
+      position: relative;
+      top: -.8rem;
+    }
+
+    .word.rotate {
+      transform: rotate(180deg);
+      display: inline-block;
+      font-weight: bold;
+    }
+
+    .word.shadow {
+      text-shadow: 1px 1px 0 red,
+        2px 2px 0 violet,
+        3px 3px 0 blue,
+        4px 4px 0 green,
+        5px 5px 0 yellow,
+        6px 6px 0 orange,
+        7px 7px 0 red;
+    }
+
+    .word.brick {
+      padding: 0.2rem;
+      background: #999;
+      border: solid 5px;
+      border-color: #444 #111 #555 #777;
+      text-shadow: 1px 1px 0px #ccc;
+    }
+
+    .word.fire {
+      background-image: url(ms-demo/fire.gif);
+      padding: 0 0 0.8rem 0;
+      background-size: 15px;
+      background-repeat: repeat-x;
+      background-position: bottom;
+      position: relative;
+      top: -0.8rem;
+      background-color: black;
+      color: gold;
+    }
+
+    ::highlight(ime-format-solid-thin) { text-decoration: underline 1px; }
+    ::highlight(ime-format-solid-thick) { text-decoration: underline 2px; }
+    ::highlight(ime-format-dotted-thin) { text-decoration: underline dotted 1px; }
+    ::highlight(ime-format-dotted-thick) { text-decoration: underline dotted 2px; }
+    ::highlight(ime-format-dashed-thin) { text-decoration: underline dashed 1px; }
+    ::highlight(ime-format-dashed-thick) { text-decoration: underline dashed 2px; }
+    ::highlight(ime-format-wavy-thin) { text-decoration: underline wavy 1px; }
+    ::highlight(ime-format-wavy-thick) { text-decoration: underline wavy 2px; }
+    ::highlight(ime-format-squiggle-thin) { text-decoration: underline wavy 1px; }
+    ::highlight(ime-format-squiggle-thick) { text-decoration: underline wavy 2px; }
+    ::highlight(ime-format-double-thin) { text-decoration: underline double 1px; }
+    ::highlight(ime-format-double-thick) { text-decoration: underline double 2px; }
+  </style>
+</head>
+
+<body>
+  <p>Focus the editor below and start typing. Each word gets a unique visual effect.<br>
+  Based on <a href="https://microsoftedge.github.io/Demos/edit-context/html-demo.html">Microsoft's EditContext demo</a>.</p>
+
+  <div id="div-editor" spellcheck="false"></div>
+
+  <script>
+    // Conditionally load polyfill if ?polyfill is in query string
+    if (new URLSearchParams(location.search).has("polyfill")) {
+      const s = document.createElement("script");
+      s.src = "editcontext-polyfill.iife.js";
+      s.dataset.force = "";  // Force polyfill even when native EditContext exists
+      s.onload = () => init();
+      s.onerror = () => init();
+      document.head.appendChild(s);
+    } else {
+      init();
+    }
+
+    function init() {
+      const IS_EDIT_CONTEXT_SUPPORTED = 'EditContext' in window;
+      const IS_CUSTOM_HIGHLIGHT_SUPPORTED = 'Highlight' in window;
+
+      const INIT_TEXT = "Welcome to the EditContext demo! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo elit augue, non malesuada ante facilisis vel.";
+      const INIT_SELECTION_START = INIT_TEXT.length;
+      const INIT_SELECTION_END = INIT_TEXT.length;
+
+      const WORD_EFFECTS = [
+        "rainbow", "yell", "pink", "flower",
+        "rotate", "shadow", "brick", "fire",
+      ];
+
+      const editor = document.querySelector("#div-editor");
+
+      if (!IS_EDIT_CONTEXT_SUPPORTED) {
+        editor.textContent = "Sorry, your browser doesn't support the EditContext API. This demo will not work.";
+        return;
+      }
+
+      const editContext = new EditContext({ text: INIT_TEXT, selectionStart: INIT_SELECTION_START, selectionEnd: INIT_SELECTION_END });
+      editor.editContext = editContext;
+
+      function render() {
+        editor.innerHTML = "";
+
+        const words = editContext.text.split(" ").filter(w => !!w);
+        for (let i = 0; i < words.length; i++) {
+          const word = words[i];
+
+          const wSpan = document.createElement("span");
+          wSpan.classList.add("word");
+          wSpan.classList.add(WORD_EFFECTS[i % WORD_EFFECTS.length]);
+          wSpan.textContent = word;
+          editor.appendChild(wSpan);
+
+          const sSpan = document.createElement("span");
+          sSpan.classList.add("space");
+          sSpan.textContent = " ";
+          editor.appendChild(sSpan);
+        }
+
+        document.getSelection().removeAllRanges();
+        if (editor.firstChild) {
+          const range = getRangeFromStartEnd(editContext.selectionStart, editContext.selectionEnd);
+          document.getSelection().addRange(range);
+        }
+      }
+
+      editContext.addEventListener("textupdate", e => {
+        editContext.updateSelection(e.selectionStart, e.selectionEnd);
+        render();
+      });
+
+      editContext.addEventListener("characterboundsupdate", e => {
+        const computedStyle = getComputedStyle(editor);
+        const padding = parseInt(computedStyle.paddingLeft);
+        const charBounds = [];
+        for (let offset = e.rangeStart; offset < e.rangeEnd; offset++) {
+          const charRange = getRangeFromStartEnd(offset, offset + 1);
+          charBounds.push(charRange.getBoundingClientRect());
+        }
+        editContext.updateCharacterBounds(e.rangeStart, charBounds);
+      });
+
+      const imeHighlights = {
+        "solid-thin": null, "solid-thick": null,
+        "double-thin": null, "double-thick": null,
+        "dotted-thin": null, "dotted-thick": null,
+        "dashed-thin": null, "dashed-thick": null,
+        "wavy-thin": null, "wavy-thick": null,
+        "squiggle-thin": null, "squiggle-thick": null,
+      };
+      if (IS_CUSTOM_HIGHLIGHT_SUPPORTED) {
+        for (const [key, value] of Object.entries(imeHighlights)) {
+          imeHighlights[key] = new Highlight();
+          CSS.highlights.set(`ime-format-${key}`, imeHighlights[key]);
+        }
+      }
+
+      editContext.addEventListener("textformatupdate", e => {
+        const formats = e.getTextFormats();
+        for (const format of formats) {
+          const range = getRangeFromStartEnd(format.rangeStart, format.rangeEnd);
+          const formatKey = `${format.underlineStyle.toLowerCase()}-${format.underlineThickness.toLowerCase()}`;
+          const highlight = imeHighlights[formatKey];
+          if (highlight) highlight.add(range);
+        }
+      });
+
+      editContext.addEventListener("compositionstart", () => {
+        editor.classList.add("is-composing");
+      });
+      editContext.addEventListener("compositionend", () => {
+        editor.classList.remove("is-composing");
+        for (const [key, value] of Object.entries(imeHighlights)) {
+          value && value.clear();
+        }
+      });
+
+      document.addEventListener("selectionchange", () => {
+        const selection = document.getSelection();
+        const startNode = selection.anchorNode;
+        const startOffset = selection.anchorOffset;
+        const endNode = selection.focusNode;
+        const endOffset = selection.focusOffset;
+
+        let start = startOffset;
+        let foundStart = false;
+        let end = endOffset;
+        let foundEnd = false;
+
+        for (const span of editor.childNodes) {
+          if (span.firstChild === startNode) foundStart = true;
+          if (!foundStart) start += span.textContent.length;
+          if (span.firstChild === endNode) foundEnd = true;
+          if (!foundEnd) end += span.textContent.length;
+        }
+
+        editContext.updateSelection(...[start, end].sort());
+      });
+
+      function getRangeFromStartEnd(start, end) {
+        let startSpan = null;
+        let startSpanOffset = 0;
+        let endSpan = null;
+        let endSpanOffset = 0;
+        let currentPos = 0;
+
+        for (const span of editor.childNodes) {
+          const spanLength = span.textContent.length;
+          if (editContext.selectionStart >= currentPos && editContext.selectionStart <= currentPos + spanLength) {
+            startSpan = span;
+            startSpanOffset = editContext.selectionStart - currentPos;
+          }
+          if (editContext.selectionEnd >= currentPos && editContext.selectionEnd <= currentPos + spanLength) {
+            endSpan = span;
+            endSpanOffset = editContext.selectionEnd - currentPos;
+          }
+          currentPos += spanLength;
+        }
+
+        if (!startSpan || !endSpan) {
+          startSpan = editor.lastChild;
+          endSpan = startSpan;
+        }
+
+        const range = document.createRange();
+        range.setStart(startSpan.firstChild || startSpan, startSpanOffset);
+        range.setEnd(endSpan.firstChild || endSpan, endSpanOffset);
+        return range;
+      }
+
+      render();
+    }
+  </script>
+</body>
+
+</html>

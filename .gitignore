@@ -1,0 +1,7 @@
+node_modules/
+dist/
+example/editcontext-polyfill.iife.js
+example/editcontext-polyfill.iife.js.map
+docs/
+test-results/
+.claude/
