@@ -19,6 +19,17 @@
   ],
   "sideEffects": true,
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neftaly/editcontext-polyfill.git"
+  },
+  "homepage": "https://neftaly.github.io/editcontext-polyfill/",
+  "keywords": [
+    "polyfill",
+    "contenteditable",
+    "ponyfill",
+    "editcontext"
+  ],
   "scripts": {
     "dev": "node dev.mjs",
     "build": "node build.mjs && tsc --emitDeclarationOnly",
