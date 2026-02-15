@@ -99,12 +99,13 @@ export function createInputTranslator(
     const editContext = getEditContext();
     if (!editContext) return;
 
-    // Don't sync textarea.value during composition — setting value
+    // Don't sync textarea during composition — setting value or selection
     // programmatically disrupts the browser's native IME tracking,
-    // causing subsequent imeSetComposition calls to be swallowed.
-    if (!editContext.isComposing) {
-      textarea.value = editContext.text;
-    }
+    // causing composition to end prematurely or subsequent
+    // imeSetComposition calls to be swallowed.
+    if (editContext.isComposing) return;
+
+    textarea.value = editContext.text;
     const start = Math.min(editContext.selectionStart, editContext.selectionEnd);
     const end = Math.max(editContext.selectionStart, editContext.selectionEnd);
     textarea.setSelectionRange(
@@ -225,7 +226,7 @@ export function createInputTranslator(
     // _setComposition when the first non-empty text arrives.
   }
 
-  function handleCompositionEnd(_event: CompositionEvent): void {
+  function handleCompositionEnd(event: CompositionEvent): void {
     if (!textareaComposing) return;
     textareaComposing = false;
 
@@ -233,11 +234,11 @@ export function createInputTranslator(
     if (!editContext) return;
 
     // The composition ended. If the EditContext is still composing,
-    // finish it. The committed text is in event.data.
+    // finish it. Pass the browser's compositionend data directly — the
+    // composition range in state can be stale when updateText shrunk the
+    // text without adjusting selection (leaving the range out of bounds).
     if (editContext.isComposing) {
-      // Use _finishComposingText (keeps text as-is, just fires compositionend)
-      // because the last _setComposition already placed the correct text.
-      editContext._finishComposingText(true);
+      editContext._finishComposingText(true, event.data);
     }
 
     syncFromEditContext();

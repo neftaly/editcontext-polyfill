@@ -245,8 +245,13 @@
       document.addEventListener("selectionchange", () => {
         const selection = document.getSelection();
         const startNode = selection.anchorNode;
-        const startOffset = selection.anchorOffset;
         const endNode = selection.focusNode;
+
+        // Ignore selections outside the editor (e.g. during blur)
+        if (!startNode || !editor.contains(startNode)) return;
+        if (!endNode || !editor.contains(endNode)) return;
+
+        const startOffset = selection.anchorOffset;
         const endOffset = selection.focusOffset;
 
         let start = startOffset;

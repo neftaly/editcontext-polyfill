@@ -12,6 +12,7 @@ let originalRemoveAllRanges: typeof Selection.prototype.removeAllRanges | null =
 let caretElement: HTMLElement | null = null;
 let selectionOverlays: HTMLElement[] = [];
 let blinkTimer: ReturnType<typeof setInterval> | null = null;
+let suppressionStyle: HTMLStyleElement | null = null;
 
 /** Walk up from a DOM node to find the active EditContext host element. */
 function findActiveHost(node: Node): HTMLElement | null {
@@ -24,7 +25,7 @@ function findActiveHost(node: Node): HTMLElement | null {
 }
 
 /** Remove all CSS-rendered caret/selection overlays. */
-function clearRendering(): void {
+export function clearRendering(): void {
   if (blinkTimer !== null) {
     clearInterval(blinkTimer);
     blinkTimer = null;
@@ -130,6 +131,14 @@ export function installSelectionRenderer(): void {
   Selection.prototype.addRange = patchedAddRange;
   Selection.prototype.removeAllRanges = patchedRemoveAllRanges;
 
+  // Suppress native selection highlight on active EditContext hosts.
+  // The DOM selection is kept for selectionchange events and API access,
+  // but its visual rendering is hidden — the CSS overlay handles display.
+  suppressionStyle = document.createElement("style");
+  suppressionStyle.textContent =
+    "[data-editcontext-active] ::selection, [data-editcontext-active]::selection { background: transparent; color: inherit; }";
+  document.head.appendChild(suppressionStyle);
+
   installed = true;
 }
 
@@ -143,5 +152,11 @@ export function uninstallSelectionRenderer(): void {
 
   originalAddRange = null;
   originalRemoveAllRanges = null;
+
+  if (suppressionStyle) {
+    suppressionStyle.remove();
+    suppressionStyle = null;
+  }
+
   installed = false;
 }
