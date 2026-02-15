@@ -11,18 +11,24 @@ const projects = [
       ...devices["Desktop Chrome"],
     },
   },
-];
-
-// Firefox/WebKit are a separate compat concern, not part of core testing.
-// Run with ALL_BROWSERS=1 (e.g. inside `docker run`) to include them.
-if (process.env.ALL_BROWSERS) {
-  projects.push({
+  {
+    name: "chromium-polyfill-frozen-focus",
+    use: {
+      ...devices["Desktop Chrome"],
+    },
+  },
+  {
     name: "firefox-polyfill",
     use: {
       ...devices["Desktop Firefox"],
       serviceWorkers: "block" as const,
     },
-  });
+  },
+];
+
+// WebKit is a separate compat concern, not part of core testing.
+// Run with ALL_BROWSERS=1 (e.g. inside `docker run`) to include it.
+if (process.env.ALL_BROWSERS) {
   projects.push({
     name: "webkit-polyfill",
     use: {
