@@ -1,7 +1,7 @@
 import { test as base, type Page } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
-import { DELETE_NATIVE_EDIT_CONTEXT } from "../fuzz/helpers.js";
+import { DELETE_NATIVE_EDIT_CONTEXT, FREEZE_FOCUS_BLUR } from "../fuzz/helpers.js";
 
 const polyfillSource = fs.readFileSync(path.resolve("dist/editcontext-polyfill.iife.js"), "utf-8");
 
@@ -29,6 +29,9 @@ export const test = base.extend<{
   page: async ({ page }, use, testInfo) => {
     if (isPolyfillProject(testInfo.project.name)) {
       await page.addInitScript(DELETE_NATIVE_EDIT_CONTEXT);
+      if (testInfo.project.name.includes("frozen-focus")) {
+        await page.addInitScript(FREEZE_FOCUS_BLUR);
+      }
       await page.addInitScript(polyfillSource);
     }
     await use(page);

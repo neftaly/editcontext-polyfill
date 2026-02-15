@@ -9,6 +9,18 @@ export const DELETE_NATIVE_EDIT_CONTEXT = `
   delete window.TextFormat;
 `;
 
+// Make focus/blur getter-only on HTMLElement.prototype, simulating environments
+// (e.g. Firefox) where these are non-writable inherited properties.
+export const FREEZE_FOCUS_BLUR = `
+  for (const method of ['focus', 'blur']) {
+    const original = HTMLElement.prototype[method];
+    Object.defineProperty(HTMLElement.prototype, method, {
+      get() { return original; },
+      configurable: true,
+    });
+  }
+`;
+
 // Seeded PRNG (mulberry32)
 export function mulberry32(seed: number): () => number {
   return () => {

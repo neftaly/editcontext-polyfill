@@ -1,6 +1,6 @@
 {
   "name": "@neftaly/editcontext-polyfill",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Polyfill for the EditContext API",
 
   "packageManager": "pnpm@10.24.0",

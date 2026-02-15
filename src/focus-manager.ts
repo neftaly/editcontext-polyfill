@@ -151,10 +151,14 @@ export function manageElement(element: HTMLElement): void {
   // even when the host is already document.activeElement (which makes
   // the native focus() a no-op that doesn't fire focusin).
   originalFocusMethods.set(element, element.focus.bind(element));
-  element.focus = (options?: FocusOptions) => {
-    originalFocusMethods.get(element)!(options);
-    activate(element);
-  };
+  Object.defineProperty(element, "focus", {
+    configurable: true,
+    writable: true,
+    value: (options?: FocusOptions) => {
+      originalFocusMethods.get(element)!(options);
+      activate(element);
+    },
+  });
 
   // Create mouse handler for click-to-position, drag selection, etc.
   // The sync callback re-syncs the hidden textarea after Chrome asynchronously
@@ -193,14 +197,18 @@ export function manageElement(element: HTMLElement): void {
 
   // Override blur() so calling element.blur() deactivates the EditContext
   originalBlurMethods.set(element, element.blur.bind(element));
-  element.blur = () => {
-    if (activeBinding?.element === element) {
-      const textarea = activeBinding.hiddenTextarea.element;
-      deactivate();
-      textarea.blur();
-    }
-    originalBlurMethods.get(element)!();
-  };
+  Object.defineProperty(element, "blur", {
+    configurable: true,
+    writable: true,
+    value: () => {
+      if (activeBinding?.element === element) {
+        const textarea = activeBinding.hiddenTextarea.element;
+        deactivate();
+        textarea.blur();
+      }
+      originalBlurMethods.get(element)!();
+    },
+  });
 
   installListener();
 }
@@ -212,12 +220,20 @@ export function unmanageElement(element: HTMLElement): void {
   // Restore original methods
   const originalBlur = originalBlurMethods.get(element);
   if (originalBlur) {
-    element.blur = originalBlur;
+    Object.defineProperty(element, "blur", {
+      configurable: true,
+      writable: true,
+      value: originalBlur,
+    });
     originalBlurMethods.delete(element);
   }
   const originalFocus = originalFocusMethods.get(element);
   if (originalFocus) {
-    element.focus = originalFocus;
+    Object.defineProperty(element, "focus", {
+      configurable: true,
+      writable: true,
+      value: originalFocus,
+    });
     originalFocusMethods.delete(element);
   }
   const handler = mousedownHandlers.get(element);
