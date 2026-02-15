@@ -39,6 +39,22 @@ export type FuzzAction =
   | { type: "focusOther" }
   | { type: "focusTarget1" }
   | { type: "focusTarget2" }
+  | { type: "pressArrow"; key: "ArrowLeft" | "ArrowRight" | "ArrowUp" | "ArrowDown" }
+  | { type: "pressNav"; key: "Home" | "End" | "PageUp" | "PageDown" }
+  | { type: "pressShiftArrow"; key: "ArrowLeft" | "ArrowRight" | "ArrowUp" | "ArrowDown" }
+  | { type: "selectAll" }
+  | { type: "pressEnter" }
+  | { type: "cut" }
+  | { type: "undo" }
+  | { type: "redo" }
+  | { type: "rapidType"; text: string }
+  | {
+      type: "updateBounds";
+      method: "updateSelectionBounds" | "updateControlBounds" | "updateCharacterBounds";
+      rect: { x: number; y: number; width: number; height: number };
+      rangeStart?: number;
+      characterBounds?: Array<{ x: number; y: number; width: number; height: number }>;
+    }
   | { type: "imeSetComposition"; text: string; selectionStart: number; selectionEnd: number }
   | { type: "imeCommitText"; text: string }
   | { type: "imeCancelComposition" };
@@ -103,6 +119,26 @@ export function formatAction(action: FuzzAction): string {
       return "clickEmpty()";
     case "tabAway":
       return "tabAway()";
+    case "pressArrow":
+      return `pressArrow(${action.key})`;
+    case "pressNav":
+      return `pressNav(${action.key})`;
+    case "pressShiftArrow":
+      return `pressShiftArrow(${action.key})`;
+    case "selectAll":
+      return "selectAll()";
+    case "pressEnter":
+      return "pressEnter()";
+    case "cut":
+      return "cut()";
+    case "undo":
+      return "undo()";
+    case "redo":
+      return "redo()";
+    case "rapidType":
+      return `rapidType(${JSON.stringify(action.text)})`;
+    case "updateBounds":
+      return `updateBounds(${action.method})`;
     case "imeSetComposition":
       return `imeSetComposition(${JSON.stringify(action.text)}, ${action.selectionStart}, ${action.selectionEnd})`;
     case "imeCommitText":
@@ -308,6 +344,57 @@ export async function executeAction(page: Page, action: FuzzAction): Promise<voi
       break;
     case "focusTarget2":
       await page.evaluate(() => document.getElementById("target2")!.focus());
+      break;
+    case "pressArrow":
+      await page.keyboard.press(action.key);
+      break;
+    case "pressNav":
+      await page.keyboard.press(action.key);
+      break;
+    case "pressShiftArrow":
+      await page.keyboard.press(`Shift+${action.key}`);
+      break;
+    case "selectAll":
+      await page.keyboard.press("Control+a");
+      break;
+    case "pressEnter":
+      await page.keyboard.press("Enter");
+      break;
+    case "cut":
+      await page.keyboard.press("Control+x");
+      break;
+    case "undo":
+      await page.keyboard.press("Control+z");
+      break;
+    case "redo":
+      await page.keyboard.press("Control+y");
+      break;
+    case "rapidType":
+      await page.keyboard.type(action.text);
+      break;
+    case "updateBounds":
+      await page.evaluate(
+        ([method, rect, rangeStart, characterBounds]) => {
+          const ec = (window as any).__ec;
+          if (!ec) return;
+          if (method === "updateSelectionBounds") {
+            ec.updateSelectionBounds(new DOMRect(rect.x, rect.y, rect.width, rect.height));
+          } else if (method === "updateControlBounds") {
+            ec.updateControlBounds(new DOMRect(rect.x, rect.y, rect.width, rect.height));
+          } else if (method === "updateCharacterBounds") {
+            const bounds = (characterBounds as typeof action.characterBounds)!.map(
+              (b) => new DOMRect(b.x, b.y, b.width, b.height),
+            );
+            ec.updateCharacterBounds(rangeStart as number, bounds);
+          }
+        },
+        [
+          action.method,
+          action.rect,
+          action.rangeStart ?? 0,
+          action.characterBounds ?? [action.rect],
+        ] as const,
+      );
       break;
   }
 }

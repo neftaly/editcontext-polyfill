@@ -63,6 +63,23 @@ function randomInt(rng: () => number, max: number): number {
   return Math.floor(rng() * (max + 1));
 }
 
+const ARROW_KEYS = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"] as const;
+const NAV_KEYS = ["Home", "End", "PageUp", "PageDown"] as const;
+const BOUNDS_METHODS = [
+  "updateSelectionBounds",
+  "updateControlBounds",
+  "updateCharacterBounds",
+] as const;
+
+function randomRect(rng: () => number): { x: number; y: number; width: number; height: number } {
+  return {
+    x: Math.floor(rng() * 500),
+    y: Math.floor(rng() * 500),
+    width: Math.floor(rng() * 200) + 10,
+    height: Math.floor(rng() * 50) + 10,
+  };
+}
+
 function pickAction(rng: () => number, state: TrackedState): FuzzAction {
   // Detached: only reattach
   if (!state.attached) {
@@ -95,14 +112,15 @@ function pickAction(rng: () => number, state: TrackedState): FuzzAction {
   // Attached and focused: full vocabulary
   const r = rng();
 
-  if (r < 0.28) {
+  // --- Typing & editing (reduced from ~42% to ~35%) ---
+  if (r < 0.22) {
     return { type: "type", text: randomString(rng, 4) };
   }
-  if (r < 0.42) {
-    const keys = ["Backspace", "Delete", "Enter"];
+  if (r < 0.35) {
+    const keys = ["Backspace", "Delete"];
     return { type: "press", key: keys[Math.floor(rng() * keys.length)] };
   }
-  if (r < 0.52) {
+  if (r < 0.43) {
     const combos: Array<{ key: string; modifier: string }> = [
       { key: "Backspace", modifier: "Control" },
       { key: "Delete", modifier: "Control" },
@@ -110,7 +128,9 @@ function pickAction(rng: () => number, state: TrackedState): FuzzAction {
     ];
     return { type: "pressCombo", ...combos[Math.floor(rng() * combos.length)] };
   }
-  if (r < 0.57) {
+
+  // --- Programmatic state updates (~10%) ---
+  if (r < 0.48) {
     return {
       type: "updateText",
       start: randomInt(rng, state.textLength),
@@ -118,34 +138,83 @@ function pickAction(rng: () => number, state: TrackedState): FuzzAction {
       text: randomString(rng, 4),
     };
   }
-  if (r < 0.62) {
+  if (r < 0.53) {
     return {
       type: "updateSelection",
       start: randomInt(rng, state.textLength),
       end: randomInt(rng, state.textLength),
     };
   }
-  if (r < 0.67) {
+
+  // --- Clipboard & execCommand (~8%) ---
+  if (r < 0.57) {
     return { type: "paste", text: randomString(rng, 6) };
   }
-  if (r < 0.71) {
+  if (r < 0.61) {
     const cmd = EXEC_COMMANDS[Math.floor(rng() * EXEC_COMMANDS.length)];
     const value = cmd === "insertText" ? randomString(rng, 4) : undefined;
     return { type: "execCommand", command: cmd, value };
   }
-  if (r < 0.72) {
-    return { type: "click" };
+
+  // --- Cursor/navigation keys (~10% combined) ---
+  if (r < 0.65) {
+    const key = ARROW_KEYS[Math.floor(rng() * ARROW_KEYS.length)];
+    return { type: "pressArrow", key };
   }
-  if (r < 0.76) return { type: "blur" };
-  if (r < 0.80) return { type: "focusOther" };
-  if (r < 0.84) return { type: "clickEmpty" }; // blur via non-focusable content
-  if (r < 0.87) return { type: "tabAway" }; // blur via Tab key
-  if (r < 0.90) {
-    // Real mouse click on editor (single, double, or triple)
+  if (r < 0.68) {
+    const key = NAV_KEYS[Math.floor(rng() * NAV_KEYS.length)];
+    return { type: "pressNav", key };
+  }
+  if (r < 0.71) {
+    const key = ARROW_KEYS[Math.floor(rng() * ARROW_KEYS.length)];
+    return { type: "pressShiftArrow", key };
+  }
+
+  // --- selectAll, cut, undo, redo (~3% each = 12%) ---
+  if (r < 0.74) return { type: "selectAll" };
+  if (r < 0.77) return { type: "cut" };
+  if (r < 0.8) return { type: "undo" };
+  if (r < 0.83) return { type: "redo" };
+
+  // --- pressEnter, rapidType, updateBounds (~3% + 3% + 2% = 8%) ---
+  if (r < 0.86) return { type: "pressEnter" };
+  if (r < 0.89) {
+    // Rapid type: 8-16 characters in one go
+    const len = Math.floor(rng() * 9) + 8;
+    let s = "";
+    for (let i = 0; i < len; i++) {
+      s += CHARS[Math.floor(rng() * CHARS.length)];
+    }
+    return { type: "rapidType", text: s };
+  }
+  if (r < 0.91) {
+    const method = BOUNDS_METHODS[Math.floor(rng() * BOUNDS_METHODS.length)];
+    const rect = randomRect(rng);
+    if (method === "updateCharacterBounds") {
+      const count = Math.floor(rng() * 4) + 1;
+      const characterBounds = Array.from({ length: count }, () => randomRect(rng));
+      return {
+        type: "updateBounds",
+        method,
+        rect,
+        rangeStart: randomInt(rng, state.textLength),
+        characterBounds,
+      };
+    }
+    return { type: "updateBounds", method, rect };
+  }
+
+  // --- Focus/blur/detach (~9%) ---
+  if (r < 0.92) return { type: "click" };
+  if (r < 0.94) return { type: "blur" };
+  if (r < 0.95) return { type: "focusOther" };
+  if (r < 0.96) return { type: "clickEmpty" };
+  if (r < 0.97) return { type: "tabAway" };
+  if (r < 0.98) {
     const detail = rng() < 0.7 ? 1 : rng() < 0.7 ? 2 : 3;
     return { type: "mouseClick", detail };
   }
-  if (r < 0.97) return { type: "detach" };
+  if (r < 0.99) return { type: "detach" };
   return { type: "focus" }; // re-focus (sometimes a no-op)
 }
 
@@ -195,6 +264,9 @@ function applyToTrackedState(state: TrackedState, action: FuzzAction): void {
     case "type":
       state.textLength += action.text.length;
       break;
+    case "rapidType":
+      state.textLength += action.text.length;
+      break;
     case "press":
       if (state.textLength > 0) state.textLength = Math.max(0, state.textLength - 1);
       break;
@@ -229,6 +301,19 @@ function applyToTrackedState(state: TrackedState, action: FuzzAction): void {
     case "clickEmpty":
     case "tabAway":
       state.focused = false;
+      break;
+    // Navigation keys, selection, clipboard, undo/redo, enter, and bounds
+    // updates are all no-ops on tracked state — they fire events but don't
+    // change EditContext's text/selection from the fuzzer's perspective.
+    case "pressArrow":
+    case "pressNav":
+    case "pressShiftArrow":
+    case "selectAll":
+    case "pressEnter":
+    case "cut":
+    case "undo":
+    case "redo":
+    case "updateBounds":
       break;
     // paste and execCommand don't change tracked state — EditContext doesn't
     // handle them directly (app must), so textLength stays approximate.
@@ -380,6 +465,10 @@ function applyToImeTrackedState(state: ImeTrackedState, action: FuzzAction): voi
       state.composing = false;
       state.textLength += action.text.length;
       break;
+    case "rapidType":
+      state.composing = false;
+      state.textLength += action.text.length;
+      break;
     case "press":
       state.composing = false;
       if (state.textLength > 0) state.textLength = Math.max(0, state.textLength - 1);
@@ -395,12 +484,28 @@ function applyToImeTrackedState(state: ImeTrackedState, action: FuzzAction): voi
       state.textLength = Math.max(0, state.textLength + action.text.length - removed);
       break;
     }
+    // Navigation keys, selection, clipboard, undo/redo, enter, and bounds
+    // updates are no-ops on tracked state.
+    case "pressArrow":
+    case "pressNav":
+    case "pressShiftArrow":
+    case "selectAll":
+    case "pressEnter":
+    case "cut":
+    case "undo":
+    case "redo":
+    case "updateBounds":
+      break;
   }
 }
 
 function applyToMultiTrackedState(state: MultiTrackedState, action: FuzzAction): void {
   switch (action.type) {
     case "type":
+      if (state.focusedTarget === 1) state.textLength1 += action.text.length;
+      if (state.focusedTarget === 2) state.textLength2 += action.text.length;
+      break;
+    case "rapidType":
       if (state.focusedTarget === 1) state.textLength1 += action.text.length;
       if (state.focusedTarget === 2) state.textLength2 += action.text.length;
       break;
@@ -432,6 +537,18 @@ function applyToMultiTrackedState(state: MultiTrackedState, action: FuzzAction):
     case "clickEmpty":
     case "tabAway":
       state.focusedTarget = 0;
+      break;
+    // Navigation keys, selection, clipboard, undo/redo, enter, and bounds
+    // updates are no-ops on tracked state.
+    case "pressArrow":
+    case "pressNav":
+    case "pressShiftArrow":
+    case "selectAll":
+    case "pressEnter":
+    case "cut":
+    case "undo":
+    case "redo":
+    case "updateBounds":
       break;
   }
 }
