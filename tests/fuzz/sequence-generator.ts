@@ -72,8 +72,9 @@ function pickAction(rng: () => number, state: TrackedState): FuzzAction {
   // Attached but not focused: limited actions
   if (!state.focused) {
     const r = rng();
-    if (r < 0.6) return { type: "focus" };
-    if (r < 0.75) {
+    if (r < 0.4) return { type: "focus" };
+    if (r < 0.55) return { type: "mouseClick", detail: 1 }; // real click to refocus
+    if (r < 0.7) {
       return {
         type: "updateText",
         start: randomInt(rng, state.textLength),
@@ -81,7 +82,7 @@ function pickAction(rng: () => number, state: TrackedState): FuzzAction {
         text: randomString(rng, 4),
       };
     }
-    if (r < 0.9) {
+    if (r < 0.85) {
       return {
         type: "updateSelection",
         start: randomInt(rng, state.textLength),
@@ -132,11 +133,18 @@ function pickAction(rng: () => number, state: TrackedState): FuzzAction {
     const value = cmd === "insertText" ? randomString(rng, 4) : undefined;
     return { type: "execCommand", command: cmd, value };
   }
-  if (r < 0.74) {
+  if (r < 0.72) {
     return { type: "click" };
   }
-  if (r < 0.82) return { type: "blur" };
-  if (r < 0.9) return { type: "focusOther" };
+  if (r < 0.76) return { type: "blur" };
+  if (r < 0.80) return { type: "focusOther" };
+  if (r < 0.84) return { type: "clickEmpty" }; // blur via non-focusable content
+  if (r < 0.87) return { type: "tabAway" }; // blur via Tab key
+  if (r < 0.90) {
+    // Real mouse click on editor (single, double, or triple)
+    const detail = rng() < 0.7 ? 1 : rng() < 0.7 ? 2 : 3;
+    return { type: "mouseClick", detail };
+  }
   if (r < 0.97) return { type: "detach" };
   return { type: "focus" }; // re-focus (sometimes a no-op)
 }
@@ -213,10 +221,13 @@ function applyToTrackedState(state: TrackedState, action: FuzzAction): void {
       break;
     case "focus":
     case "click":
+    case "mouseClick":
       state.focused = true;
       break;
     case "blur":
     case "focusOther":
+    case "clickEmpty":
+    case "tabAway":
       state.focused = false;
       break;
     // paste and execCommand don't change tracked state — EditContext doesn't
@@ -343,11 +354,14 @@ function applyToImeTrackedState(state: ImeTrackedState, action: FuzzAction): voi
       break;
     case "blur":
     case "focusOther":
+    case "clickEmpty":
+    case "tabAway":
       state.composing = false;
       state.focused = false;
       break;
     case "focus":
     case "click":
+    case "mouseClick":
       state.focused = true;
       break;
     case "detach":
@@ -415,6 +429,8 @@ function applyToMultiTrackedState(state: MultiTrackedState, action: FuzzAction):
       break;
     case "blur":
     case "focusOther":
+    case "clickEmpty":
+    case "tabAway":
       state.focusedTarget = 0;
       break;
   }

@@ -29,6 +29,9 @@ export type FuzzAction =
   | { type: "paste"; text: string }
   | { type: "execCommand"; command: string; value?: string }
   | { type: "click" }
+  | { type: "mouseClick"; detail: number } // real mouse click on editor (detail: 1=single, 2=double, 3=triple)
+  | { type: "clickEmpty" } // real mouse click on empty page space
+  | { type: "tabAway" } // press Tab to move focus to next element
   | { type: "detach" }
   | { type: "reattach" }
   | { type: "focus" }
@@ -64,6 +67,20 @@ export interface CompositionEntry {
   data: string;
 }
 
+export interface TextFormatEntry {
+  textFormats: Array<{
+    rangeStart: number;
+    rangeEnd: number;
+    underlineStyle: string;
+    underlineThickness: string;
+  }>;
+}
+
+export interface CharacterBoundsUpdateEntry {
+  rangeStart: number;
+  rangeEnd: number;
+}
+
 export function formatAction(action: FuzzAction): string {
   switch (action.type) {
     case "type":
@@ -80,6 +97,12 @@ export function formatAction(action: FuzzAction): string {
       return `paste(${JSON.stringify(action.text)})`;
     case "execCommand":
       return `execCommand(${action.command}${action.value ? `, ${JSON.stringify(action.value)}` : ""})`;
+    case "mouseClick":
+      return `mouseClick(detail=${action.detail})`;
+    case "clickEmpty":
+      return "clickEmpty()";
+    case "tabAway":
+      return "tabAway()";
     case "imeSetComposition":
       return `imeSetComposition(${JSON.stringify(action.text)}, ${action.selectionStart}, ${action.selectionEnd})`;
     case "imeCommitText":
@@ -226,6 +249,37 @@ export async function executeAction(page: Page, action: FuzzAction): Promise<voi
       // Playwright's CSS selector engine may fail to resolve it).
       await page.evaluate(() => (window as any).__el.click());
       break;
+    case "mouseClick": {
+      // Real mouse click on the editor element — exercises the mousedown handler,
+      // preventDefault, activate(), and mouseHandler.onMouseDown() code paths.
+      const box = await page.evaluate(() => {
+        const el = (window as any).__el as HTMLElement;
+        const r = el.getBoundingClientRect();
+        return { x: r.x, y: r.y, width: r.width, height: r.height };
+      });
+      const x = box.x + box.width / 2;
+      const y = box.y + box.height / 2;
+      if (action.detail === 1) {
+        await page.mouse.click(x, y);
+      } else if (action.detail === 2) {
+        await page.mouse.dblclick(x, y);
+      } else {
+        // Triple click: 3 rapid clicks
+        await page.mouse.click(x, y, { clickCount: 3 });
+      }
+      break;
+    }
+    case "clickEmpty":
+      // Real mouse click on empty page space — blur without focusin firing.
+      // Exercises the refocus path where activeBinding persists but textarea
+      // has lost focus. Click well below all fuzz test content.
+      await page.mouse.click(5, 400);
+      break;
+    case "tabAway":
+      // Tab to move focus to the next focusable element.
+      // Exercises the tabbing flag logic in focus-manager.
+      await page.keyboard.press("Tab");
+      break;
     case "detach":
       await page.evaluate(() => {
         (window as any).__el.editContext = null;
@@ -286,13 +340,27 @@ export async function getInnerHTML(page: Page): Promise<string> {
 
 function initCompositionListeners(): void {
   const ec = (window as any).__ec;
-  const el = (window as any).__el;
 
   ec.addEventListener("compositionstart", ((e: CompositionEvent) => {
     (window as any).__compositionEvents.push({ type: "compositionstart", data: e.data });
   }) as EventListener);
   ec.addEventListener("compositionend", ((e: CompositionEvent) => {
     (window as any).__compositionEvents.push({ type: "compositionend", data: e.data });
+  }) as EventListener);
+  ec.addEventListener("textformatupdate", ((e: any) => {
+    const formats = e.getTextFormats().map((f: any) => ({
+      rangeStart: f.rangeStart,
+      rangeEnd: f.rangeEnd,
+      underlineStyle: f.underlineStyle,
+      underlineThickness: f.underlineThickness,
+    }));
+    (window as any).__textFormatEvents.push({ textFormats: formats });
+  }) as EventListener);
+  ec.addEventListener("characterboundsupdate", ((e: any) => {
+    (window as any).__characterBoundsUpdateEvents.push({
+      rangeStart: e.rangeStart,
+      rangeEnd: e.rangeEnd,
+    });
   }) as EventListener);
 }
 
@@ -307,6 +375,8 @@ export async function setupEditContextWithComposition(page: Page): Promise<void>
     (window as any).__events = [];
     (window as any).__beforeInputEvents = [];
     (window as any).__compositionEvents = [];
+    (window as any).__textFormatEvents = [];
+    (window as any).__characterBoundsUpdateEvents = [];
   });
   await page.evaluate(initListeners);
   await page.evaluate(initCompositionListeners);
@@ -314,6 +384,16 @@ export async function setupEditContextWithComposition(page: Page): Promise<void>
 
 export async function getCompositionLog(page: Page): Promise<CompositionEntry[]> {
   return page.evaluate(() => (window as any).__compositionEvents ?? []);
+}
+
+export async function getTextFormatLog(page: Page): Promise<TextFormatEntry[]> {
+  return page.evaluate(() => (window as any).__textFormatEvents ?? []);
+}
+
+export async function getCharacterBoundsUpdateLog(
+  page: Page,
+): Promise<CharacterBoundsUpdateEntry[]> {
+  return page.evaluate(() => (window as any).__characterBoundsUpdateEvents ?? []);
 }
 
 export async function executeImeAction(
