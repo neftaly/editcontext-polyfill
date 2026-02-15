@@ -163,35 +163,33 @@ Each test runs on both `chromium-native` and `chromium-polyfill`. Tests assert i
 
 Keep existing WPT ports. These are the official test suite.
 
-## Layer 3: Single Fuzzer (tests/fuzz/)
+## Layer 3: Fuzzers (tests/fuzz/)
 
-**One fuzzer.** Runs same random input sequence on `chromium-native` and `chromium-polyfill`. Compares:
-1. Final state (text, selectionStart, selectionEnd) — the primary check
-2. textupdate event log — secondary check (same sequence of mutations)
+Multiple fuzzers run the same random input sequence on `chromium-native` and `chromium-polyfill`, comparing final state, textupdate events, beforeinput events, and innerHTML.
+
+### Fuzzer variants:
+- `fuzz.spec.ts` — basic keyboard, programmatic API, focus/blur, mouse clicks, clipboard
+- `fuzz-shadow.spec.ts` — shadow DOM variant (custom element host)
+- `fuzz-multi.spec.ts` — multiple EditContext instances with focus switching
+- `fuzz-ime.spec.ts` — IME composition via CDP `Input.imeSetComposition`
 
 ### Fuzzer action vocabulary:
-- `type(text)` — keyboard typing via Playwright
-- `press(key)` — single key press
-- `pressCombo(key, modifiers)` — modifier combos
-- `updateText(start, end, text)` — API call
-- `updateSelection(start, end)` — API call
-- `imeCompose(steps, commit)` — CDP `Input.imeSetComposition` + `Input.insertText`
-- `imeComposeThenDetach(steps)` — composition interrupted by detach
-- `detach` — set editContext = null
-- `reattach(init?)` — set editContext = new EditContext(init)
-- `focus` / `blur` / `focusOther`
+- `type(text)` / `rapidType(text)` — keyboard typing
+- `press(key)` / `pressCombo(key, modifiers)` — single keys and combos
+- `pressArrow` / `pressNav` / `pressShiftArrow` — navigation keys
+- `updateText(start, end, text)` / `updateSelection(start, end)` — API calls
+- `paste(text)` / `cut` — clipboard operations
+- `selectAll` / `undo` / `redo` — keyboard shortcuts
+- `mouseClick(detail)` / `clickEmpty` / `tabAway` — real mouse and focus
+- `detach` / `reattach` / `focus` / `blur` / `focusOther`
+- `imeSetComposition` / `imeCommitText` / `imeCancelComposition` — CDP IME
 - `execCommand(command)` — document.execCommand
-
-### Key advantage of Chrome-only fuzzing:
-- IME composition uses CDP for both targets — same code path, clean comparison
-- No need for synthetic composition events (which were the source of all previous divergences)
-- No Firefox input pipeline quirks to work around
+- `updateBounds` — updateSelectionBounds/updateCharacterBounds
 
 ### Fuzzer configuration:
-- `FUZZ_ITERATIONS` (default 50)
+- `FUZZ_ITERATIONS` (default 30)
 - `FUZZ_SEED_OFFSET` (for parallel runs)
-- `FUZZ_TIMEOUT` (default 180s)
-- Runs in container via docker (browsers need system deps)
+- Runs locally or in container
 
 ## Test Execution
 
@@ -208,13 +206,10 @@ pnpm test:chrome
 
 ## What NOT to Test
 
-- `textformatupdate` / `characterboundsupdate` events (polyfill can't implement these)
 - `updateControlBounds` effect (no OS IME integration)
 - Pixel-perfect IME popup positioning
 - `isTrusted` on events (always false in polyfill, by definition)
-- Multiple EditContexts on different elements simultaneously (future spec, not implemented)
 - iframe-hosted EditContexts (different browsing context)
-- Firefox/Safari-specific input event quirks (separate compat layer, later)
 
 ## Test Doubles / Utilities
 
@@ -238,10 +233,6 @@ async function imeCompose(cdp: CDPSession, steps: string[], commit: string) {
 
 These utilities are shared between the deterministic tests and the fuzzer.
 
-## Future: Firefox/Safari Compat Layer
+## Firefox/Safari Compat
 
-Once the polyfill passes all Chrome-vs-Chrome tests:
-1. Add `firefox-polyfill` and `webkit-polyfill` Playwright projects
-2. Run deterministic API tests on those browsers
-3. Fix input event normalization issues (insertLineBreak, doubled Unicode, etc.)
-4. These fixes go in a browser-compat normalization layer, separate from core logic
+Firefox and WebKit projects are available via `ALL_BROWSERS=1` (set in Containerfile for Docker runs). Firefox-specific tests (Enter key normalization, workflow tests) are in `tests/api/workflow.spec.ts`.

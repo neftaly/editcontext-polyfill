@@ -6,4 +6,4 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 RUN node build.mjs
 ENV ALL_BROWSERS=1
-CMD ["bash", "-c", "pnpm exec playwright test --workers=4 --grep-invert fuzz-ime"]
+CMD ["bash", "-c", "pnpm exec playwright test --workers=4"]

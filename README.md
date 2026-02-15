@@ -87,10 +87,4 @@ The hidden textarea architecture means some behaviors cannot match Chrome native
 - **`tests/unit/`** — pure unit tests for `EditContextState` transitions, runnable without a browser.
 - **`tests/api/`** — deterministic tests for each EditContext method and event, run on both `chromium-native` and `chromium-polyfill`.
 - **`tests/wpt/`** — ports of the [Web Platform Tests](https://github.com/web-platform-tests/wpt/tree/master/editing/edit-context) for EditContext.
-- **`tests/fuzz/`** — seeded fuzzers (`pnpm test:fuzz`) that run the same random action sequence on Chrome native and the polyfill, then compare final state and event logs. Includes an IME composition fuzzer (`pnpm test:fuzz:ime`) that uses CDP `Input.imeSetComposition` via headed Chrome in Xvfb.
-
-## TODO
-
-- [x] Run IME fuzzer to verify `textformatupdate`/`characterboundsupdate` comparison against Chrome native — found and fixed `syncFromEditContext` disrupting composition state
-- [x] Regression test: `updateSelection()` followed immediately by real IME input (CDP `imeSetComposition`) — `tests/api/ime-regression.spec.ts`
-- [x] Firefox-specific workflow testing (select, type, blur, refocus, edit) — `tests/api/workflow.spec.ts` Firefox-specific tests + `pnpm test:workflow:firefox`
+- **`tests/fuzz/`** — seeded fuzzers (`pnpm test:fuzz`) that run the same random action sequence on Chrome native and the polyfill, then compare final state and event logs. Includes an IME composition fuzzer (`pnpm test:fuzz:ime`) that uses CDP `Input.imeSetComposition`.

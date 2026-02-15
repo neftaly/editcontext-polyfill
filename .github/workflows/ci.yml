@@ -25,6 +25,6 @@ jobs:
 
       - run: pnpm exec playwright install --with-deps chromium firefox webkit
 
-      - run: pnpm exec playwright test --grep-invert "fuzz"
+      - run: pnpm exec playwright test tests/api tests/unit tests/wpt
         env:
           ALL_BROWSERS: 1
