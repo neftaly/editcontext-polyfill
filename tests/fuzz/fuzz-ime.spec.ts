@@ -2,7 +2,7 @@
 // chromium-native and chromium-polyfill using CDP Input.imeSetComposition,
 // then compares final state, textupdate events, beforeinput events, and
 // composition events.
-// Requires headed Chrome (Xvfb in Docker) — CDP IME crashes in headless mode.
+// Uses CDP Input.imeSetComposition via a separately launched Chromium instance.
 
 import { test, expect, chromium, type Page, type CDPSession } from "@playwright/test";
 import fs from "node:fs";
@@ -17,6 +17,8 @@ import {
   getEventLog,
   getBeforeInputLog,
   getCompositionLog,
+  getTextFormatLog,
+  getCharacterBoundsUpdateLog,
 } from "./helpers.js";
 
 const ITERATIONS = Number(process.env.FUZZ_ITERATIONS ?? 30);
@@ -52,7 +54,7 @@ test.describe("Fuzz IME: native vs polyfill", () => {
       const sequence = generateImeSequence(seed, SEQUENCE_LENGTH);
 
       // Launch headed browser (requires Xvfb in Docker)
-      const browser = await chromium.launch({ headless: false });
+      const browser = await chromium.launch();
 
       try {
         // Native context
@@ -109,6 +111,32 @@ test.describe("Fuzz IME: native vs polyfill", () => {
         expect(polyfillComposition, `composition log mismatch (seed ${seed}):\n${seqDump}`).toEqual(
           nativeComposition,
         );
+
+        // Compare textformatupdate presence (not exact counts or contents).
+        // The polyfill always sends a default format (solid thin underline)
+        // because it can't access OS-level IME format data, while Chrome
+        // native via CDP sends empty textFormats arrays. The exact number of
+        // events also differs (e.g. on imeCancelComposition). This is a
+        // documented known difference — we only verify both agree on whether
+        // any events were fired.
+        const nativeTextFormat = await getTextFormatLog(nativePage);
+        const polyfillTextFormat = await getTextFormatLog(polyfillPage);
+        expect(
+          polyfillTextFormat.length > 0,
+          `textformatupdate presence mismatch (seed ${seed}): polyfill=${polyfillTextFormat.length}, native=${nativeTextFormat.length}\n${seqDump}`,
+        ).toEqual(nativeTextFormat.length > 0);
+
+        // Compare characterboundsupdate presence (not exact counts or contents).
+        // The polyfill dispatches characterboundsupdate during composition but
+        // the exact number of events differs from native Chrome because the
+        // polyfill fires on every composition update while native batches
+        // differently. We verify both agree on whether events were fired at all.
+        const nativeBoundsUpdate = await getCharacterBoundsUpdateLog(nativePage);
+        const polyfillBoundsUpdate = await getCharacterBoundsUpdateLog(polyfillPage);
+        expect(
+          polyfillBoundsUpdate.length > 0,
+          `characterboundsupdate presence mismatch (seed ${seed}): polyfill=${polyfillBoundsUpdate.length}, native=${nativeBoundsUpdate.length}\n${seqDump}`,
+        ).toEqual(nativeBoundsUpdate.length > 0);
 
         await nativeCtx.close();
         await polyfillCtx.close();

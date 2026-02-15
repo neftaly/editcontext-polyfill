@@ -133,6 +133,9 @@ test.describe("Fuzz shadow DOM: native vs polyfill", () => {
         `beforeinput log mismatch (shadow seed ${seed}):\n${seqDump}`,
       ).toEqual(nativeBeforeInput);
 
+      // Clear selections so the polyfill's CSS caret overlay doesn't affect comparison
+      await nativePage.evaluate(() => document.getSelection()?.removeAllRanges());
+      await polyfillPage.evaluate(() => document.getSelection()?.removeAllRanges());
       const nativeHtml = await getInnerHTML(nativePage);
       const polyfillHtml = await getInnerHTML(polyfillPage);
       expect(polyfillHtml, `innerHTML mismatch (shadow seed ${seed}):\n${seqDump}`).toEqual(

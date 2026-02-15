@@ -99,7 +99,11 @@ test.describe("Fuzz: native vs polyfill", () => {
         nativeBeforeInput,
       );
 
-      // Verify execCommand didn't mutate the DOM (innerHTML should match native)
+      // Verify execCommand didn't mutate the DOM (innerHTML should match native).
+      // Clear selections first so the polyfill's CSS caret overlay (which has no
+      // native equivalent) doesn't appear in the innerHTML comparison.
+      await nativePage.evaluate(() => document.getSelection()?.removeAllRanges());
+      await polyfillPage.evaluate(() => document.getSelection()?.removeAllRanges());
       const nativeHtml = await getInnerHTML(nativePage);
       const polyfillHtml = await getInnerHTML(polyfillPage);
       expect(polyfillHtml, `innerHTML mismatch (seed ${seed}):\n${seqDump}`).toEqual(nativeHtml);
