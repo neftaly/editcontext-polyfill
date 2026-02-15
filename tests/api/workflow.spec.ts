@@ -517,3 +517,61 @@ test.describe("Firefox-specific: Enter key normalization", () => {
     expect(inputTypes).not.toContain("insertLineBreak");
   });
 });
+
+test.describe("Navigation key forwarding", () => {
+  test("arrow key keydown fires on host element", async ({ page, setContent }) => {
+    await setContent(HTML);
+    await page.evaluate(setupEditor);
+
+    // Record keydown events on the host element
+    await page.evaluate(() => {
+      (window as any).__keydowns = [] as string[];
+      (window as any).__el.addEventListener("keydown", (e: KeyboardEvent) => {
+        (window as any).__keydowns.push(e.key);
+      });
+    });
+
+    await page.keyboard.type("hello");
+    await page.keyboard.press("ArrowLeft");
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("ArrowUp");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Home");
+    await page.keyboard.press("End");
+
+    const keydowns: string[] = await page.evaluate(() => (window as any).__keydowns);
+    expect(keydowns).toContain("ArrowLeft");
+    expect(keydowns).toContain("ArrowRight");
+    expect(keydowns).toContain("ArrowUp");
+    expect(keydowns).toContain("ArrowDown");
+    expect(keydowns).toContain("Home");
+    expect(keydowns).toContain("End");
+  });
+
+  test("arrow key after typing fires on host and does not mutate text", async ({
+    page,
+    setContent,
+  }) => {
+    await setContent(HTML);
+    await page.evaluate(setupEditor);
+
+    await page.evaluate(() => {
+      (window as any).__keydowns = [] as string[];
+      (window as any).__el.addEventListener("keydown", (e: KeyboardEvent) => {
+        (window as any).__keydowns.push(e.key);
+      });
+    });
+
+    await page.keyboard.type("abc");
+    await page.keyboard.press("ArrowLeft");
+    await page.keyboard.type("X");
+
+    const result = await page.evaluate(getState);
+    // Text should be "abcX" since navigation doesn't move cursor in EditContext
+    // (the app didn't handle ArrowLeft to move the cursor)
+    expect(result.text).toBe("abcX");
+
+    const keydowns: string[] = await page.evaluate(() => (window as any).__keydowns);
+    expect(keydowns).toContain("ArrowLeft");
+  });
+});

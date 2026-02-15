@@ -133,24 +133,37 @@ export function createInputTranslator(
     const attachedElement = getAttachedElement();
     if (!attachedElement) return;
 
+    // Check if this key needs preventDefault to stop textarea default behavior.
+    // Navigation keys move the textarea cursor; Ctrl+A/Z/Y mutate state outside
+    // the EditContext flow.
+    const needsPreventDefault =
+      event.type === "keydown" &&
+      (NAVIGATION_KEYS.has(event.key) ||
+        ((event.ctrlKey || event.metaKey) &&
+          !event.altKey &&
+          (event.key.toLowerCase() === "a" ||
+            event.key.toLowerCase() === "z" ||
+            event.key.toLowerCase() === "y")));
+
     if (!inShadow) {
+      if (!attachedElement.dispatchEvent(createForwardedKeyboardEvent(event))) {
+        event.preventDefault();
+        return;
+      }
+    } else if (needsPreventDefault) {
+      // Firefox doesn't retarget keyboard events through the shadow boundary
+      // when preventDefault() is called on the original event. Dispatch a
+      // synthetic copy on the host and stop the original from also bubbling
+      // through (which would cause duplicates on Chrome).
+      event.stopPropagation();
       if (!attachedElement.dispatchEvent(createForwardedKeyboardEvent(event))) {
         event.preventDefault();
         return;
       }
     }
 
-    // Prevent navigation keys from moving the textarea cursor.
-    // Also prevent Ctrl+A/Z/Y which would mutate textarea outside EditContext flow.
-    if (event.type === "keydown") {
-      if (NAVIGATION_KEYS.has(event.key)) {
-        event.preventDefault();
-      } else if ((event.ctrlKey || event.metaKey) && !event.altKey) {
-        const k = event.key.toLowerCase();
-        if (k === "a" || k === "z" || k === "y") {
-          event.preventDefault();
-        }
-      }
+    if (needsPreventDefault) {
+      event.preventDefault();
     }
   }
 
