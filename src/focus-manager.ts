@@ -7,6 +7,7 @@ import { createHiddenTextarea, ensureShadowRoot, type HiddenTextarea } from "./h
 import { createInputTranslator, type InputTranslator } from "./input-translator.js";
 import { findEditContextHost, FORM_CONTROL_TAGS } from "./editability.js";
 import { createMouseHandler, type MouseHandler } from "./mouse-handler.js";
+import { clearRendering } from "./selection-renderer.js";
 
 interface FocusBinding {
   element: HTMLElement;
@@ -56,10 +57,30 @@ function handleMutations(mutations: MutationRecord[]): void {
   }
 }
 
+// When the document/window loses focus (e.g. user clicks into another iframe
+// or switches windows), hide the caret overlay.  Chrome native hides the caret
+// when the document loses focus; reactivation on refocus re-renders it.
+function handleWindowBlur(): void {
+  clearRendering();
+}
+
+// When focus returns, re-render the caret/selection by cycling the DOM selection.
+// The patched addRange re-creates the CSS overlay.
+function handleWindowFocus(): void {
+  if (!activeBinding) return;
+  const sel = document.getSelection();
+  if (!sel || sel.rangeCount === 0) return;
+  const range = sel.getRangeAt(0).cloneRange();
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
 function installListener(): void {
   if (listening) return;
   document.addEventListener("focusin", handleFocusIn, true);
   document.addEventListener("keydown", handleGlobalKeydown, true);
+  window.addEventListener("blur", handleWindowBlur);
+  window.addEventListener("focus", handleWindowFocus);
   removalObserver = new MutationObserver(handleMutations);
   removalObserver.observe(document, { childList: true, subtree: true });
 
@@ -160,9 +181,11 @@ export function manageElement(element: HTMLElement): void {
       return;
     }
     e.preventDefault();
-    if (!activeBinding || activeBinding.element !== element) {
-      activate(element);
-    }
+    // Always call activate — if already active for this element, activate()
+    // just re-focuses the hidden textarea (needed when focus was lost by
+    // clicking on non-focusable elements like body margins, where focusin
+    // never fires and deactivate() was never called).
+    activate(element);
     mouseHandler.onMouseDown(e);
   };
   mousedownHandlers.set(element, onMousedown);
@@ -244,6 +267,7 @@ function activate(element: HTMLElement): void {
   };
 
   activeBinding = { element, hiddenTextarea, inputTranslator };
+  element.setAttribute("data-editcontext-active", "");
 
   refocusing = true;
   hiddenTextarea.element.focus();
@@ -263,7 +287,13 @@ function activate(element: HTMLElement): void {
 function deactivate(): void {
   if (!activeBinding) return;
 
-  const element = activeBinding.element;
+  const binding = activeBinding;
+  const element = binding.element;
+
+  // Set null early to prevent re-entrant deactivation (removing the focused
+  // textarea causes focusin on body → handleFocusIn → deactivate again).
+  activeBinding = null;
+  element.removeAttribute("data-editcontext-active");
 
   // If mid-composition, finish it before tearing down (fires compositionend)
   const editContext = getEditContext(element);
@@ -273,9 +303,13 @@ function deactivate(): void {
     editContext._onSelectionBoundsChange = null;
   }
 
-  activeBinding.inputTranslator.destroy();
-  activeBinding.hiddenTextarea.destroy();
-  activeBinding = null;
+  // Clear CSS caret/selection overlays so they don't persist after blur.
+  // Chrome native hides the selection rendering when focus leaves; the polyfill
+  // must explicitly remove its overlay divs.
+  clearRendering();
+
+  binding.inputTranslator.destroy();
+  binding.hiddenTextarea.destroy();
 
   // Without shadow DOM (canvas fallback), dispatch synthetic blur/focusout.
   // With shadow DOM, removing the textarea naturally fires focusout on the host.
@@ -311,6 +345,8 @@ export function destroyAllBindings(): void {
   if (listening) {
     document.removeEventListener("focusin", handleFocusIn, true);
     document.removeEventListener("keydown", handleGlobalKeydown, true);
+    window.removeEventListener("blur", handleWindowBlur);
+    window.removeEventListener("focus", handleWindowFocus);
     removalObserver?.disconnect();
     removalObserver = null;
 
