@@ -383,13 +383,20 @@ export function suspendComposition(state: EditContextState): EditContextState {
 }
 
 // Chrome's FinishComposingText — commit in-place (blur/focus change).
+// When called from a compositionend event handler, pass the event's data as
+// explicitData so it uses the browser's authoritative text. When called on
+// blur (no event), explicitData is omitted and the text is read from the
+// composition range. The range can be stale when updateText shrank the text
+// without adjusting selection, leaving the composition range out of bounds.
 export function finishComposingText(
   state: EditContextState,
   keepSelection: boolean,
+  explicitData?: string,
 ): EditContextTransition {
   if (!state.composing) return { state: clearComposition(state), effects: [] };
 
-  const composedText = state.text.substring(state.compositionRangeStart, state.compositionRangeEnd);
+  const composedText =
+    explicitData ?? state.text.substring(state.compositionRangeStart, state.compositionRangeEnd);
   const effects: EditContextEffect[] = [{ type: "compositionend", data: composedText }];
 
   let current = state;

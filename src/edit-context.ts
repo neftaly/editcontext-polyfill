@@ -18,7 +18,12 @@ import {
   deleteWordBackward,
   deleteWordForward,
 } from "./edit-context-state.js";
-import { TextUpdateEventPolyfill } from "./event-types.js";
+import {
+  TextUpdateEventPolyfill,
+  TextFormatUpdateEventPolyfill,
+  TextFormatPolyfill,
+  CharacterBoundsUpdateEventPolyfill,
+} from "./event-types.js";
 
 export interface EditContextInit {
   text?: string;
@@ -27,11 +32,6 @@ export interface EditContextInit {
 }
 
 type EditContextEventHandler = ((event: Event) => void) | null;
-
-const UNSUPPORTED_EVENTS: ReadonlySet<string> = new Set([
-  "textformatupdate",
-  "characterboundsupdate",
-]);
 
 const warned = new Set<string>();
 function warnOnce(key: string, message: string): void {
@@ -160,6 +160,35 @@ export class EditContextPolyfill extends EventTarget {
       this.#deferredCompositionEnd = null;
     }
     this.#apply(setComposition(this.#state, text, selectionStart, selectionEnd));
+
+    // Dispatch textformatupdate and characterboundsupdate during active
+    // composition.  The polyfill cannot access OS-level IME format data, so
+    // it provides a default format (solid thin underline over the entire
+    // composition range) matching the default Chrome/CDP behavior.
+    if (this.#state.composing && !this.#state.compositionSuspended) {
+      const rangeStart = this.#state.compositionRangeStart;
+      const rangeEnd = this.#state.compositionRangeEnd;
+      if (rangeEnd > rangeStart) {
+        this.dispatchEvent(
+          new TextFormatUpdateEventPolyfill("textformatupdate", {
+            textFormats: [
+              new TextFormatPolyfill({
+                rangeStart,
+                rangeEnd,
+                underlineStyle: "solid",
+                underlineThickness: "thin",
+              }),
+            ],
+          }),
+        );
+        this.dispatchEvent(
+          new CharacterBoundsUpdateEventPolyfill("characterboundsupdate", {
+            rangeStart,
+            rangeEnd,
+          }),
+        );
+      }
+    }
   }
 
   /** @internal — Chrome's CommitText */
@@ -178,8 +207,8 @@ export class EditContextPolyfill extends EventTarget {
   }
 
   /** @internal — Chrome's FinishComposingText (called on blur/focus change) */
-  _finishComposingText(keepSelection: boolean): void {
-    this.#apply(finishComposingText(this.#state, keepSelection));
+  _finishComposingText(keepSelection: boolean, explicitData?: string): void {
+    this.#apply(finishComposingText(this.#state, keepSelection, explicitData));
   }
 
   /** @internal — Suspend the active composition without dispatching events.
@@ -266,17 +295,6 @@ export class EditContextPolyfill extends EventTarget {
   /** @internal */
   _getAttachedElement(): HTMLElement | null {
     return this.#attachedElement;
-  }
-
-  addEventListener(
-    type: string,
-    callback: EventListenerOrEventListenerObject | null,
-    options?: boolean | AddEventListenerOptions,
-  ): void {
-    if (UNSUPPORTED_EVENTS.has(type)) {
-      warnOnce(type, `"${type}" event is never dispatched by the polyfill.`);
-    }
-    super.addEventListener(type, callback, options);
   }
 
   #getHandler(name: string): EditContextEventHandler {
