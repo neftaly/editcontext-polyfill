@@ -261,6 +261,127 @@ test.describe("EditContext composition", () => {
     expect(result).toEqual([false, true, false]);
   });
 
+  test("updateSelection then immediate composition uses correct position", async ({
+    page,
+    setContent,
+  }) => {
+    await setContent(HTML);
+    const result = await page.evaluate(() => {
+      const ec = new EditContext({ text: "hello world", selectionStart: 11, selectionEnd: 11 });
+
+      // Move cursor to position 5 (between "hello" and " world")
+      ec.updateSelection(5, 5);
+
+      // Immediately start composing
+      ec._setComposition("x", 1, 1);
+      ec._commitText("X");
+
+      return { text: ec.text, selStart: ec.selectionStart };
+    });
+    // "X" should be inserted at position 5, not at the end
+    expect(result.text).toBe("helloX world");
+    expect(result.selStart).toBe(6);
+  });
+
+  test("textformatupdate fires during composition with default format", async ({
+    page,
+    setContent,
+  }) => {
+    await setContent(HTML);
+    const result = await page.evaluate(() => {
+      const ec = new EditContext({ text: "hello", selectionStart: 5, selectionEnd: 5 });
+      const formats: Array<{
+        rangeStart: number;
+        rangeEnd: number;
+        underlineStyle: string;
+        underlineThickness: string;
+      }> = [];
+
+      ec.addEventListener("textformatupdate", ((e: any) => {
+        for (const f of e.getTextFormats()) {
+          formats.push({
+            rangeStart: f.rangeStart,
+            rangeEnd: f.rangeEnd,
+            underlineStyle: f.underlineStyle,
+            underlineThickness: f.underlineThickness,
+          });
+        }
+      }) as EventListener);
+
+      ec._setComposition("ka", 2, 2);
+      ec._setComposition("kan", 3, 3);
+
+      return { formats, text: ec.text };
+    });
+    expect(result.text).toBe("hellokan");
+    // Two textformatupdate events (one per setComposition)
+    expect(result.formats.length).toBe(2);
+    // First: composition range [5, 7] for "ka"
+    expect(result.formats[0]).toEqual({
+      rangeStart: 5,
+      rangeEnd: 7,
+      underlineStyle: "solid",
+      underlineThickness: "thin",
+    });
+    // Second: composition range [5, 8] for "kan"
+    expect(result.formats[1]).toEqual({
+      rangeStart: 5,
+      rangeEnd: 8,
+      underlineStyle: "solid",
+      underlineThickness: "thin",
+    });
+  });
+
+  test("characterboundsupdate fires during composition", async ({ page, setContent }) => {
+    await setContent(HTML);
+    const result = await page.evaluate(() => {
+      const ec = new EditContext({ text: "hello", selectionStart: 5, selectionEnd: 5 });
+      const updates: Array<{ rangeStart: number; rangeEnd: number }> = [];
+
+      ec.addEventListener("characterboundsupdate", ((e: any) => {
+        updates.push({ rangeStart: e.rangeStart, rangeEnd: e.rangeEnd });
+      }) as EventListener);
+
+      ec._setComposition("ka", 2, 2);
+      ec._commitText("か");
+
+      return { updates };
+    });
+    // characterboundsupdate fires during setComposition, not commitText
+    expect(result.updates.length).toBe(1);
+    expect(result.updates[0]).toEqual({ rangeStart: 5, rangeEnd: 7 });
+  });
+
+  test("textformatupdate does not fire after commitText or cancelComposition", async ({
+    page,
+    setContent,
+  }) => {
+    await setContent(HTML);
+    const result = await page.evaluate(() => {
+      const ec = new EditContext();
+      let formatCount = 0;
+      ec.addEventListener("textformatupdate", () => formatCount++);
+
+      // Compose and commit
+      ec._setComposition("k", 1, 1);
+      const afterCompose = formatCount;
+      ec._commitText("か");
+      const afterCommit = formatCount;
+
+      // Compose and cancel
+      ec._setComposition("n", 1, 1);
+      const afterCompose2 = formatCount;
+      ec._cancelComposition();
+      const afterCancel = formatCount;
+
+      return { afterCompose, afterCommit, afterCompose2, afterCancel };
+    });
+    expect(result.afterCompose).toBe(1);
+    expect(result.afterCommit).toBe(1); // no extra after commit
+    expect(result.afterCompose2).toBe(2);
+    expect(result.afterCancel).toBe(2); // no extra after cancel
+  });
+
   test("compositionstart/end fire on EditContext, NOT on element", async ({ page, setContent }) => {
     await setContent(HTML);
     const result = await page.evaluate(() => {

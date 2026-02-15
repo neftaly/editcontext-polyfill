@@ -10,10 +10,8 @@ The test suite includes ports of the [Web Platform Tests](https://github.com/web
 | Browser        | Support                        |
 | -------------- | ------------------------------ |
 | Chrome / Edge  | 121+ native (no polyfill)      |
-| Firefox        | 90+ via polyfill               |
-| Safari         | 14.1+ via polyfill             |
-
-The polyfill requires ES2022 (private class fields).
+| Firefox        | 125+ via polyfill              |
+| Safari         | 15.4+ via polyfill             |
 
 ## Install
 
@@ -63,14 +61,14 @@ This polyfill uses a hidden textarea for input capture. Most of the EditContext 
 
 ### Unsupported features
 
-Scripts cannot style individual IME composition characters, position IME popups per-character, or inform the OS of the editor's bounding box.       
-Calling these unsupported features log a one-time warning in development builds (`process.env.NODE_ENV !== "production"`).
-
-- **`textformatupdate`** is never dispatched. Underline the full composition range as a fallback for IME styling.
-- **`characterboundsupdate`** is never dispatched. IME popups use `updateSelectionBounds()` position instead of per-character bounds.
-- **`updateControlBounds()`** is a no-op.
-- **CSS `:focus` on `<canvas>`** doesn't work. Use `:focus-within` instead. All other elements support `:focus`.
+- **`updateControlBounds()`** is a no-op. Logs a one-time warning in the IIFE build (warnings are removed from the ESM build at compile time).
+- **CSS `:focus` on `<canvas>`** doesn't work (the hidden textarea is appended to `document.body`, not the canvas). Toggle a CSS class in your `focus`/`blur` handlers instead. All other elements support `:focus` via shadow DOM.
 - **`isTrusted`** on re-dispatched events (keyboard, clipboard, composition) is `false`.
+
+### Approximate features
+
+- **`textformatupdate`** is dispatched during composition with a default format (solid thin underline over the full composition range). The polyfill cannot access OS-level IME format data, so individual clause styling is not available.
+- **`characterboundsupdate`** is dispatched during composition for the full composition range. IME popups use `updateSelectionBounds()` position instead of per-character bounds.
 
 ### Architectural limitations
 
@@ -81,12 +79,18 @@ The hidden textarea architecture means some behaviors cannot match Chrome native
 - **`compositionend.data` on blur**: When blur interrupts an active IME composition, Chrome's native `compositionend.data` behavior is inconsistent (sometimes empty string, sometimes the composed text). The polyfill may not match in all cases.
 
 ### Notes
-- **IME popup positioning**: `updateSelectionBounds()` is not positioned pixel-perfect (~1px precision).
 - **Firefox insertLineBreak**: On `Enter` key, Firefox's normal `insertLineBreak` event is blocked. Instead, an `insertParagraph` event is fired, to match Chrome. `Shift+Enter` behaves the same (`insertLineBreak`).
 - **Detach+reattach focus**: Setting `el.editContext = null` then `el.editContext = new EditContext()` across separate calls does not restore focus. Chrome retains element focus natively, but the polyfill loses it when the hidden textarea is destroyed on detach. Swapping contexts in a single call (`el.editContext = newCtx`) works correctly.
 
 ## Testing
 
+- **`tests/unit/`** — pure unit tests for `EditContextState` transitions, runnable without a browser.
 - **`tests/api/`** — deterministic tests for each EditContext method and event, run on both `chromium-native` and `chromium-polyfill`.
 - **`tests/wpt/`** — ports of the [Web Platform Tests](https://github.com/web-platform-tests/wpt/tree/master/editing/edit-context) for EditContext.
 - **`tests/fuzz/`** — seeded fuzzers (`pnpm test:fuzz`) that run the same random action sequence on Chrome native and the polyfill, then compare final state and event logs. Includes an IME composition fuzzer (`pnpm test:fuzz:ime`) that uses CDP `Input.imeSetComposition` via headed Chrome in Xvfb.
+
+## TODO
+
+- [x] Run IME fuzzer to verify `textformatupdate`/`characterboundsupdate` comparison against Chrome native — found and fixed `syncFromEditContext` disrupting composition state
+- [x] Regression test: `updateSelection()` followed immediately by real IME input (CDP `imeSetComposition`) — `tests/api/ime-regression.spec.ts`
+- [x] Firefox-specific workflow testing (select, type, blur, refocus, edit) — `tests/api/workflow.spec.ts` Firefox-specific tests + `pnpm test:workflow:firefox`

@@ -2,7 +2,7 @@
   "name": "@neftaly/editcontext-polyfill",
   "version": "0.1.0",
   "description": "Polyfill for the EditContext API",
-  "private": true,
+
   "packageManager": "pnpm@10.24.0",
   "type": "module",
   "main": "./dist/index.mjs",
@@ -28,6 +28,7 @@
     "test": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test",
     "test:fuzz": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test pnpm exec playwright test tests/fuzz/fuzz.spec.ts tests/fuzz/fuzz-shadow.spec.ts tests/fuzz/fuzz-multi.spec.ts --project=chromium-native",
     "test:fuzz:ime": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test bash -c 'xvfb-run --auto-servernum --server-args=\"-screen 0 1920x1080x24\" bash -c \"pnpm exec playwright test tests/fuzz/fuzz-ime.spec.ts --project=chromium-native --workers=1\"'",
+    "test:workflow:firefox": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test pnpm exec playwright test tests/api/workflow.spec.ts --project=firefox-polyfill",
     "test:local": "pnpm build && pnpm exec playwright test"
   },
   "devDependencies": {
