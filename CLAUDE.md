@@ -1,14 +1,5 @@
-# editcontext-polyfill
+Functional core (`src/edit-context-state.ts`) / imperative shell (`src/focus-manager.ts`, `src/input-translator.ts`, `src/selection-renderer.ts`). Tests: `unit/` (pure state), `api/` (browser), `wpt/`, `fuzz/` (native vs polyfill).
 
-## Architecture
-Functional core / imperative shell. Pure state transitions in `src/edit-context-state.ts`, imperative DOM wiring in `src/focus-manager.ts`, `src/input-translator.ts`, `src/selection-renderer.ts`.
+Commands: `pnpm build`, `pnpm test:local`, `pnpm test:fuzz`, `pnpm test:fuzz:ime`, `pnpm test:perf`, `pnpm lint`, `pnpm lint:fix`.
 
-## Commands
-- `pnpm build` — ESM + IIFE bundles
-- `pnpm test:local` — build + run all Playwright tests
-- `pnpm test:perf` — performance benchmark (native vs polyfill)
-- `pnpm lint` — Biome check
-- `pnpm lint:fix` — Biome auto-fix
-
-## Allowed actions
-- Always allowed: run `pnpm build`, `pnpm test:local`, `pnpm test:perf`, `pnpm lint`, `pnpm lint:fix`, and any `pnpm exec playwright test` commands without asking for permission.
+Always allowed: any `pnpm build`, `pnpm test*`, `pnpm lint*`, `pnpm exec playwright test` commands.
