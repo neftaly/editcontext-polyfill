@@ -20,5 +20,8 @@ await Promise.all([
     target: "es2022",
     sourcemap: true,
     define: { "process.env.NODE_ENV": '"development"' },
+    // Ensure the IIFE global is on globalThis even when the script runs
+    // in a scoped context (e.g. Playwright addInitScript, CSP eval).
+    footer: { js: "try{globalThis.EditContextPolyfill=EditContextPolyfill}catch(e){}" },
   }),
 ]);
