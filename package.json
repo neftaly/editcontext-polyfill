@@ -40,7 +40,8 @@
     "test:fuzz": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test pnpm exec playwright test tests/fuzz/fuzz.spec.ts tests/fuzz/fuzz-shadow.spec.ts tests/fuzz/fuzz-multi.spec.ts --project=chromium-native",
     "test:fuzz:ime": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test pnpm exec playwright test tests/fuzz/fuzz-ime.spec.ts --project=chromium-native --workers=1",
     "test:workflow:firefox": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test pnpm exec playwright test tests/api/workflow.spec.ts --project=firefox-polyfill",
-    "test:local": "pnpm build && pnpm exec playwright test"
+    "test:local": "pnpm build && pnpm exec playwright test",
+    "test:perf": "pnpm build && pnpm exec playwright test tests/perf/ --project=chromium-native --project=chromium-polyfill"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.15",
