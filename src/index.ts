@@ -1,5 +1,7 @@
 export { install, uninstall } from "./install.js";
 export type { InstallOptions } from "./install.js";
+export { createEditContext } from "./create-edit-context.js";
+export type { CreateEditContextOptions } from "./create-edit-context.js";
 
 import { install } from "./install.js";
 
