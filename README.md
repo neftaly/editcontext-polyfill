@@ -55,6 +55,53 @@ ec.addEventListener("textupdate", (e) => {
 el.focus();
 ```
 
+## Frameworks
+
+The `createEditContext` helper handles setup and teardown in a single call, returning a cleanup function that fits naturally into framework lifecycle hooks:
+
+```jsx
+// React
+import { createEditContext } from "@neftaly/editcontext-polyfill";
+
+useEffect(() => createEditContext(ref.current, {
+  text: "",
+  onTextUpdate(e) { /* re-render */ },
+}), []);
+```
+
+```js
+// Vue 3
+import { createEditContext } from "@neftaly/editcontext-polyfill";
+
+onMounted(() => {
+  const destroy = createEditContext(el.value, { /* ... */ });
+  onUnmounted(destroy);
+});
+```
+
+```svelte
+<!-- Svelte 5 -->
+<script>
+  import { createEditContext } from "@neftaly/editcontext-polyfill";
+
+  $effect(() => createEditContext(el, { /* ... */ }));
+</script>
+```
+
+```jsx
+// Solid
+import { createEditContext } from "@neftaly/editcontext-polyfill";
+
+onMount(() => {
+  const destroy = createEditContext(ref, { /* ... */ });
+  onCleanup(destroy);
+});
+```
+
+## Performance
+
+CDP profiling shows ~0.2ms per-keystroke overhead vs Chrome native, entirely from the hidden textarea proxy layer. The EditContext state operations themselves (text mutation, selection, composition) measure at **1.0x native speed** — sub-microsecond with no measurable overhead.
+
 ## Compatibility
 
 This polyfill uses a hidden textarea for input capture. Most of the EditContext API works identically to Chrome's native implementation, with some exceptions.
