@@ -1,5 +1,4 @@
 import { EditContextPolyfill } from "./edit-context.js";
-import { EDIT_CONTEXT_ALLOWED_ELEMENTS } from "./constants.js";
 import {
   manageElement,
   unmanageElement,
@@ -8,16 +7,36 @@ import {
 } from "./focus-manager.js";
 import { getEditContext, setEditContext } from "./context-registry.js";
 
+// EditContext can be set on valid shadow host elements plus canvas.
+const ALLOWED_ELEMENTS: ReadonlySet<string> = new Set([
+  "article",
+  "aside",
+  "blockquote",
+  "body",
+  "div",
+  "footer",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "header",
+  "main",
+  "nav",
+  "p",
+  "section",
+  "span",
+  "canvas",
+]);
+
 let originalDescriptor: PropertyDescriptor | undefined;
 let installed = false;
 
 function canAttachEditContext(element: HTMLElement): boolean {
   const tagName = element.tagName.toLowerCase();
-
-  // Custom elements (contain a hyphen) are always valid shadow hosts
-  if (tagName.includes("-")) return true;
-
-  return EDIT_CONTEXT_ALLOWED_ELEMENTS.has(tagName);
+  if (tagName.includes("-")) return true; // custom elements
+  return ALLOWED_ELEMENTS.has(tagName);
 }
 
 export function installEditContextProperty(): void {
