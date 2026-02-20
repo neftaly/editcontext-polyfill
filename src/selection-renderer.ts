@@ -8,6 +8,7 @@ import { isElementActive } from "./focus-manager.js";
 let installed = false;
 let originalAddRange: typeof Selection.prototype.addRange | null = null;
 let originalRemoveAllRanges: typeof Selection.prototype.removeAllRanges | null = null;
+const positionedHosts = new WeakSet<HTMLElement>();
 
 let caretElement: HTMLElement | null = null;
 let selectionOverlays: HTMLElement[] = [];
@@ -41,9 +42,12 @@ export function clearRendering(): void {
 }
 
 /** Convert a viewport-relative DOMRect to element-relative coordinates. */
-function relativePosition(rect: DOMRect, host: HTMLElement): { left: number; top: number } {
+function relativePosition(
+  rect: DOMRect,
+  host: HTMLElement,
+  cs: CSSStyleDeclaration,
+): { left: number; top: number } {
   const hostRect = host.getBoundingClientRect();
-  const cs = getComputedStyle(host);
   const borderLeft = parseFloat(cs.borderLeftWidth) || 0;
   const borderTop = parseFloat(cs.borderTopWidth) || 0;
   return {
@@ -53,25 +57,27 @@ function relativePosition(rect: DOMRect, host: HTMLElement): { left: number; top
 }
 
 /** Ensure the host has a positioned context for absolute children. */
-function ensurePositioned(host: HTMLElement): void {
-  if (getComputedStyle(host).position === "static") {
+function ensurePositioned(host: HTMLElement, cs: CSSStyleDeclaration): void {
+  if (positionedHosts.has(host)) return;
+  if (cs.position === "static") {
     host.style.position = "relative";
   }
+  positionedHosts.add(host);
 }
 
 function renderCaret(range: Range, host: HTMLElement): void {
-  ensurePositioned(host);
+  const cs = getComputedStyle(host);
+  ensurePositioned(host, cs);
 
   const rect = range.getBoundingClientRect();
   let height = rect.height;
   if (height === 0) {
     // Collapsed range at end of line — estimate height from font size
-    const cs = getComputedStyle(host);
     height = parseFloat(cs.fontSize) * 1.2;
   }
   if (height === 0) return;
 
-  const pos = relativePosition(rect, host);
+  const pos = relativePosition(rect, host, cs);
 
   caretElement = host.ownerDocument.createElement("div");
   caretElement.style.cssText = `position:absolute;left:${pos.left}px;top:${pos.top}px;width:2px;height:${height}px;background:#000;pointer-events:none;z-index:2147483647`;
@@ -87,12 +93,13 @@ function renderCaret(range: Range, host: HTMLElement): void {
 }
 
 function renderSelection(range: Range, host: HTMLElement): void {
-  ensurePositioned(host);
+  const cs = getComputedStyle(host);
+  ensurePositioned(host, cs);
 
   const rects = range.getClientRects();
   for (let i = 0; i < rects.length; i++) {
     const r = rects[i];
-    const pos = relativePosition(r, host);
+    const pos = relativePosition(r, host, cs);
     const overlay = host.ownerDocument.createElement("div");
     overlay.style.cssText = `position:absolute;left:${pos.left}px;top:${pos.top}px;width:${r.width}px;height:${r.height}px;background:rgba(74,158,255,0.3);pointer-events:none;z-index:2147483646`;
     host.appendChild(overlay);
@@ -137,7 +144,19 @@ export function installSelectionRenderer(): void {
   suppressionStyle = document.createElement("style");
   suppressionStyle.textContent =
     "[data-editcontext-active] ::selection, [data-editcontext-active]::selection { background: transparent; color: inherit; }";
-  document.head.appendChild(suppressionStyle);
+  // document.head may not exist if install() runs before DOM is ready
+  // (e.g. via addInitScript or early <script> in <head>). Defer to DOMContentLoaded.
+  if (document.head) {
+    document.head.appendChild(suppressionStyle);
+  } else {
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+        if (suppressionStyle) document.head.appendChild(suppressionStyle);
+      },
+      { once: true },
+    );
+  }
 
   installed = true;
 }

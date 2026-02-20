@@ -50,13 +50,17 @@ export function generateMultiSequence(seed: number, length: number): FuzzAction[
   return actions;
 }
 
-function randomString(rng: () => number, maxLen: number): string {
+function randomFromCharset(rng: () => number, charset: string, maxLen: number): string {
   const len = Math.floor(rng() * maxLen) + 1;
   let s = "";
   for (let i = 0; i < len; i++) {
-    s += CHARS[Math.floor(rng() * CHARS.length)];
+    s += charset[Math.floor(rng() * charset.length)];
   }
   return s;
+}
+
+function randomString(rng: () => number, maxLen: number): string {
+  return randomFromCharset(rng, CHARS, maxLen);
 }
 
 function randomInt(rng: () => number, max: number): number {
@@ -262,8 +266,6 @@ function pickMultiAction(rng: () => number, state: MultiTrackedState): FuzzActio
 function applyToTrackedState(state: TrackedState, action: FuzzAction): void {
   switch (action.type) {
     case "type":
-      state.textLength += action.text.length;
-      break;
     case "rapidType":
       state.textLength += action.text.length;
       break;
@@ -325,11 +327,8 @@ function applyToTrackedState(state: TrackedState, action: FuzzAction): void {
 const KANA_CHARS =
   "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん";
 
-interface ImeTrackedState {
-  attached: boolean;
-  focused: boolean;
+interface ImeTrackedState extends TrackedState {
   composing: boolean;
-  textLength: number;
 }
 
 export function generateImeSequence(seed: number, length: number): FuzzAction[] {
@@ -347,12 +346,7 @@ export function generateImeSequence(seed: number, length: number): FuzzAction[] 
 }
 
 function randomKana(rng: () => number, maxLen: number): string {
-  const len = Math.floor(rng() * maxLen) + 1;
-  let s = "";
-  for (let i = 0; i < len; i++) {
-    s += KANA_CHARS[Math.floor(rng() * KANA_CHARS.length)];
-  }
-  return s;
+  return randomFromCharset(rng, KANA_CHARS, maxLen);
 }
 
 function pickImeAction(rng: () => number, state: ImeTrackedState): FuzzAction {
@@ -425,86 +419,43 @@ function pickImeAction(rng: () => number, state: ImeTrackedState): FuzzAction {
   return pickAction(rng, trackedState);
 }
 
+// Actions that interrupt an active IME composition.
+const COMPOSITION_BREAKING: ReadonlySet<string> = new Set([
+  "type",
+  "rapidType",
+  "press",
+  "pressCombo",
+  "blur",
+  "focusOther",
+  "clickEmpty",
+  "tabAway",
+  "detach",
+  "reattach",
+]);
+
 function applyToImeTrackedState(state: ImeTrackedState, action: FuzzAction): void {
   switch (action.type) {
     case "imeSetComposition":
       state.composing = true;
-      break;
+      return;
     case "imeCommitText":
       state.composing = false;
       state.textLength += action.text.length;
-      break;
+      return;
     case "imeCancelComposition":
       state.composing = false;
-      break;
-    case "blur":
-    case "focusOther":
-    case "clickEmpty":
-    case "tabAway":
-      state.composing = false;
-      state.focused = false;
-      break;
-    case "focus":
-    case "click":
-    case "mouseClick":
-      state.focused = true;
-      break;
-    case "detach":
-      state.attached = false;
-      state.focused = false;
-      state.composing = false;
-      state.textLength = 0;
-      break;
-    case "reattach":
-      state.attached = true;
-      state.focused = false;
-      state.composing = false;
-      state.textLength = 0;
-      break;
-    case "type":
-      state.composing = false;
-      state.textLength += action.text.length;
-      break;
-    case "rapidType":
-      state.composing = false;
-      state.textLength += action.text.length;
-      break;
-    case "press":
-      state.composing = false;
-      if (state.textLength > 0) state.textLength = Math.max(0, state.textLength - 1);
-      break;
-    case "pressCombo":
-      state.composing = false;
-      state.textLength = Math.max(0, state.textLength - 4);
-      break;
-    case "updateText": {
-      const s = Math.min(action.start, action.end);
-      const e = Math.max(action.start, action.end);
-      const removed = Math.min(e, state.textLength) - Math.min(s, state.textLength);
-      state.textLength = Math.max(0, state.textLength + action.text.length - removed);
-      break;
-    }
-    // Navigation keys, selection, clipboard, undo/redo, enter, and bounds
-    // updates are no-ops on tracked state.
-    case "pressArrow":
-    case "pressNav":
-    case "pressShiftArrow":
-    case "selectAll":
-    case "pressEnter":
-    case "cut":
-    case "undo":
-    case "redo":
-    case "updateBounds":
-      break;
+      return;
+    default:
+      if (COMPOSITION_BREAKING.has(action.type)) {
+        state.composing = false;
+      }
+      applyToTrackedState(state, action);
   }
 }
 
 function applyToMultiTrackedState(state: MultiTrackedState, action: FuzzAction): void {
   switch (action.type) {
     case "type":
-      if (state.focusedTarget === 1) state.textLength1 += action.text.length;
-      if (state.focusedTarget === 2) state.textLength2 += action.text.length;
-      break;
     case "rapidType":
       if (state.focusedTarget === 1) state.textLength1 += action.text.length;
       if (state.focusedTarget === 2) state.textLength2 += action.text.length;

@@ -4,7 +4,20 @@
 // delete*) call _insertText/_deleteBackward/etc. directly.
 
 import type { EditContextPolyfill } from "./edit-context.js";
-import { HANDLED_INPUT_TYPES, SUPPRESSED_INPUT_TYPES } from "./constants.js";
+
+// inputType values that EditContext handles — these produce textupdate events.
+const HANDLED_INPUT_TYPES: ReadonlySet<string> = new Set([
+  "insertText",
+  "insertTranspose",
+  "deleteWordBackward",
+  "deleteWordForward",
+  "deleteContent",
+  "deleteContentBackward",
+  "deleteContentForward",
+]);
+
+// inputType values where Chrome does NOT fire beforeinput on the element.
+const SUPPRESSED_INPUT_TYPES: ReadonlySet<string> = new Set(["deleteByCut", "deleteByDrag"]);
 
 export interface InputTranslator {
   destroy: () => void;
@@ -30,6 +43,15 @@ const KEYBOARD_EVENT_PROPS = [
   "repeat",
   "isComposing",
 ] as const;
+
+// Pure modifier keys that can't change text or selection.
+const MODIFIER_ONLY_KEYS: ReadonlySet<string> = new Set([
+  "Shift",
+  "Control",
+  "Alt",
+  "Meta",
+  "CapsLock",
+]);
 
 // Keys whose default textarea behavior moves the cursor/selection.
 // Chrome native EditContext does NOT update selection for these.
@@ -127,7 +149,10 @@ export function createInputTranslator(
       // Ensure textarea is in sync before processing key events. Chrome may
       // asynchronously reset the textarea's selection after addRange() on
       // light DOM conflicts with shadow-hosted textarea focus.
-      syncFromEditContext();
+      // Skip for modifier-only keys — they can't change text or selection.
+      if (!MODIFIER_ONLY_KEYS.has(event.key)) {
+        syncFromEditContext();
+      }
     }
 
     const attachedElement = getAttachedElement();
@@ -185,13 +210,18 @@ export function createInputTranslator(
     // compositionstart). On blur/detach, compositionend data reflects the
     // CURRENT text at the composition range.
     if (!isComposition && editContext.isComposing) {
-      textareaComposing = false;
       editContext._suspendComposition();
       syncFromEditContext();
     }
 
     // Chrome doesn't fire beforeinput for composition or suppressed types on the element.
-    if (!isSuppressed && !isComposition) {
+    if (isSuppressed) {
+      if (inShadow) event.stopPropagation();
+      event.preventDefault();
+      return;
+    }
+
+    if (!isComposition) {
       // Stop the natural event from also reaching the host via shadow DOM
       if (inShadow) event.stopPropagation();
 
@@ -246,13 +276,10 @@ export function createInputTranslator(
     const editContext = getEditContext();
     if (!editContext) return;
 
-    // The composition ended. If the EditContext is still composing,
-    // finish it. Pass the browser's compositionend data directly — the
-    // composition range in state can be stale when updateText shrunk the
-    // text without adjusting selection (leaving the range out of bounds).
-    if (editContext.isComposing) {
-      editContext._finishComposingText(true, event.data);
-    }
+    // Finish any active or suspended composition. Pass the browser's
+    // compositionend data directly — the composition range in state can
+    // be stale when updateText shrunk the text without adjusting selection.
+    editContext._finishComposingText(true, event.data);
 
     syncFromEditContext();
   }
@@ -278,7 +305,6 @@ export function createInputTranslator(
 
     // Suspend composition if a non-composition input slipped through.
     if (editContext.isComposing) {
-      textareaComposing = false;
       editContext._suspendComposition();
     }
 

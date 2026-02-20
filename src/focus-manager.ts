@@ -2,10 +2,9 @@
 // textarea. A document-level focusin listener intercepts focus anywhere in an
 // EditContext's editable subtree and redirects to the hidden textarea.
 
-import { getEditContext } from "./context-registry.js";
+import { getEditContext, findEditContextHost, FORM_CONTROL_TAGS } from "./context-registry.js";
 import { createHiddenTextarea, ensureShadowRoot, type HiddenTextarea } from "./hidden-textarea.js";
 import { createInputTranslator, type InputTranslator } from "./input-translator.js";
-import { findEditContextHost, FORM_CONTROL_TAGS } from "./editability.js";
 import { createMouseHandler, type MouseHandler } from "./mouse-handler.js";
 import { clearRendering } from "./selection-renderer.js";
 
@@ -13,6 +12,7 @@ interface FocusBinding {
   element: HTMLElement;
   hiddenTextarea: HiddenTextarea;
   inputTranslator: InputTranslator;
+  onTextareaBlur: () => void;
 }
 
 let activeBinding: FocusBinding | null = null;
@@ -75,14 +75,21 @@ function handleWindowFocus(): void {
   sel.addRange(range);
 }
 
+function connectRemovalObserver(): void {
+  if (!removalObserver) removalObserver = new MutationObserver(handleMutations);
+  removalObserver.observe(document, { childList: true, subtree: true });
+}
+
+function disconnectRemovalObserver(): void {
+  removalObserver?.disconnect();
+}
+
 function installListener(): void {
   if (listening) return;
   document.addEventListener("focusin", handleFocusIn, true);
   document.addEventListener("keydown", handleGlobalKeydown, true);
   window.addEventListener("blur", handleWindowBlur);
   window.addEventListener("focus", handleWindowFocus);
-  removalObserver = new MutationObserver(handleMutations);
-  removalObserver.observe(document, { childList: true, subtree: true });
 
   // Patch document.activeElement to return the EditContext host element
   // instead of the hidden textarea, matching Chrome native behavior.
@@ -129,7 +136,7 @@ function handleFocusIn(event: FocusEvent): void {
   const host = findEditContextHost(target);
 
   if (host) {
-    activate(host);
+    activateElement(host);
   } else {
     deactivate();
   }
@@ -156,7 +163,7 @@ export function manageElement(element: HTMLElement): void {
     writable: true,
     value: (options?: FocusOptions) => {
       originalFocusMethods.get(element)!(options);
-      activate(element);
+      activateElement(element);
     },
   });
 
@@ -185,11 +192,11 @@ export function manageElement(element: HTMLElement): void {
       return;
     }
     e.preventDefault();
-    // Always call activate — if already active for this element, activate()
+    // Always call activateElement — if already active for this element, it
     // just re-focuses the hidden textarea (needed when focus was lost by
     // clicking on non-focusable elements like body margins, where focusin
     // never fires and deactivate() was never called).
-    activate(element);
+    activateElement(element);
     mouseHandler.onMouseDown(e);
   };
   mousedownHandlers.set(element, onMousedown);
@@ -248,7 +255,7 @@ export function unmanageElement(element: HTMLElement): void {
   }
 }
 
-function activate(element: HTMLElement): void {
+export function activateElement(element: HTMLElement): void {
   const editContext = getEditContext(element);
   if (!editContext) return;
 
@@ -282,7 +289,16 @@ function activate(element: HTMLElement): void {
     hiddenTextarea.element.style.top = `${bounds.y}px`;
   };
 
-  activeBinding = { element, hiddenTextarea, inputTranslator };
+  // When the textarea loses focus (e.g. clicking empty space on the page),
+  // deactivate the EditContext. This handles cases where focusin doesn't fire
+  // on the new target (non-focusable elements like body).
+  const onTextareaBlur = () => {
+    if (!refocusing) deactivate();
+  };
+  hiddenTextarea.element.addEventListener("blur", onTextareaBlur);
+
+  activeBinding = { element, hiddenTextarea, inputTranslator, onTextareaBlur };
+  connectRemovalObserver();
   element.setAttribute("data-editcontext-active", "");
 
   refocusing = true;
@@ -309,6 +325,7 @@ function deactivate(): void {
   // Set null early to prevent re-entrant deactivation (removing the focused
   // textarea causes focusin on body → handleFocusIn → deactivate again).
   activeBinding = null;
+  disconnectRemovalObserver();
   element.removeAttribute("data-editcontext-active");
 
   // If mid-composition, finish it before tearing down (fires compositionend)
@@ -324,6 +341,7 @@ function deactivate(): void {
   // must explicitly remove its overlay divs.
   clearRendering();
 
+  binding.hiddenTextarea.element.removeEventListener("blur", binding.onTextareaBlur);
   binding.inputTranslator.destroy();
   binding.hiddenTextarea.destroy();
 
@@ -345,15 +363,6 @@ export function isElementActive(element: HTMLElement): boolean {
   return activeBinding?.element === element;
 }
 
-export function getActiveEditContext(): import("./edit-context.js").EditContextPolyfill | null {
-  if (!activeBinding) return null;
-  return getEditContext(activeBinding.element);
-}
-
-export function activateElement(element: HTMLElement): void {
-  activate(element);
-}
-
 export function destroyAllBindings(): void {
   deactivate();
   managedElements.clear();
@@ -363,7 +372,7 @@ export function destroyAllBindings(): void {
     document.removeEventListener("keydown", handleGlobalKeydown, true);
     window.removeEventListener("blur", handleWindowBlur);
     window.removeEventListener("focus", handleWindowFocus);
-    removalObserver?.disconnect();
+    disconnectRemovalObserver();
     removalObserver = null;
 
     // Restore original document.activeElement

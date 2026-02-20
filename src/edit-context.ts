@@ -33,20 +33,18 @@ export interface EditContextInit {
 
 type EditContextEventHandler = ((event: Event) => void) | null;
 
-const warned = new Set<string>();
-function warnOnce(key: string, message: string): void {
-  if (process.env.NODE_ENV === "production") return;
-  if (warned.has(key)) return;
-  warned.add(key);
-  console.warn(`[editcontext-polyfill] ${message}`);
-}
+let controlBoundsWarned = false;
 
+// WeakMap for on* handler storage (keeps data private while allowing
+// dynamic property definitions on the prototype after the class).
+const handlerMaps = new WeakMap<EditContextPolyfill, Map<string, (event: Event) => void>>();
+
+// biome-ignore lint/suspicious/noUnsafeDeclarationMerging: interface merge is intentional for dynamic on* properties
 export class EditContextPolyfill extends EventTarget {
   #state: EditContextState;
   #characterBoundsRangeStart = 0;
   #characterBounds: DOMRect[] = [];
   #attachedElement: HTMLElement | null = null;
-  #handlers = new Map<string, (event: Event) => void>();
   #deferredCompositionEnd: string | null = null;
 
   /** @internal — called when text/selection changes so the hidden textarea can sync */
@@ -57,6 +55,7 @@ export class EditContextPolyfill extends EventTarget {
   constructor(init: EditContextInit = {}) {
     super();
     this.#state = createState(init);
+    handlerMaps.set(this, new Map());
   }
 
   get text(): string {
@@ -138,7 +137,10 @@ export class EditContextPolyfill extends EventTarget {
   }
 
   updateControlBounds(_controlBounds: DOMRect): void {
-    warnOnce("updateControlBounds", "updateControlBounds() has no effect in the polyfill.");
+    if (process.env.NODE_ENV !== "production" && !controlBoundsWarned) {
+      controlBoundsWarned = true;
+      console.warn("[editcontext-polyfill] updateControlBounds() has no effect in the polyfill.");
+    }
   }
 
   updateSelectionBounds(selectionBounds: DOMRect): void {
@@ -152,7 +154,6 @@ export class EditContextPolyfill extends EventTarget {
 
   // --- Internal methods (called by input-translator and focus-manager) ---
 
-  /** @internal — Chrome's SetComposition */
   _setComposition(text: string, selectionStart: number, selectionEnd: number): void {
     // If resuming a suspended composition, clear the deferred compositionend
     // — the composition is active again and will end normally later.
@@ -191,34 +192,23 @@ export class EditContextPolyfill extends EventTarget {
     }
   }
 
-  /** @internal — Chrome's CommitText */
   _commitText(text: string): void {
     this.#apply(commitText(this.#state, text));
   }
 
-  /** @internal — Chrome's InsertText (non-IME) */
   _insertText(text: string): void {
     this.#apply(insertText(this.#state, text));
   }
 
-  /** @internal — Chrome's OnCancelComposition */
   _cancelComposition(): void {
     this.#apply(cancelComposition(this.#state));
   }
 
-  /** @internal — Chrome's FinishComposingText (called on blur/focus change) */
   _finishComposingText(keepSelection: boolean, explicitData?: string): void {
     this.#apply(finishComposingText(this.#state, keepSelection, explicitData));
   }
 
-  /** @internal — Suspend the active composition without dispatching events.
-   *  Chrome's native EditContext keeps the composition range intact when non-IME
-   *  input (e.g. insertText) arrives during active composition — no
-   *  compositionend event is fired immediately. The composition is "suspended":
-   *  updateSelection won't cancel it, and a subsequent imeSetComposition
-   *  resumes it (no extra compositionstart). On blur/detach,
-   *  _flushDeferredCompositionEnd reads the CURRENT text at the composition
-   *  range for the deferred compositionend data. */
+  // Suspend composition without events — non-IME input during active composition.
   _suspendComposition(): void {
     if (this.#state.composing && !this.#state.compositionSuspended) {
       this.#state = suspendComposition(this.#state);
@@ -228,30 +218,19 @@ export class EditContextPolyfill extends EventTarget {
     }
   }
 
-  /** @internal — Chrome's DeleteBackward */
   _deleteBackward(): void {
     this.#apply(deleteBackward(this.#state));
   }
-
-  /** @internal — Chrome's DeleteForward */
   _deleteForward(): void {
     this.#apply(deleteForward(this.#state));
   }
-
-  /** @internal — Chrome's DeleteWordBackward */
   _deleteWordBackward(): void {
     this.#apply(deleteWordBackward(this.#state));
   }
-
-  /** @internal — Chrome's DeleteWordForward */
   _deleteWordForward(): void {
     this.#apply(deleteWordForward(this.#state));
   }
 
-  /** @internal — Chrome's Focus */
-  _focus(): void {}
-
-  /** @internal — Chrome's Blur */
   _blur(): void {
     if (this.#state.compositionSuspended) {
       // Suspended composition: flush the deferred compositionend (which reads
@@ -264,7 +243,6 @@ export class EditContextPolyfill extends EventTarget {
     }
   }
 
-  /** @internal — Flush a deferred compositionend from a prior composition suspension. */
   _flushDeferredCompositionEnd(): void {
     if (this.#deferredCompositionEnd !== null) {
       // Read the CURRENT text at the composition range — Chrome's compositionend
@@ -287,67 +265,51 @@ export class EditContextPolyfill extends EventTarget {
     }
   }
 
-  /** @internal */
   _attachToElement(element: HTMLElement | null): void {
     this.#attachedElement = element;
   }
-
-  /** @internal */
   _getAttachedElement(): HTMLElement | null {
     return this.#attachedElement;
-  }
-
-  #getHandler(name: string): EditContextEventHandler {
-    return this.#handlers.get(name) ?? null;
-  }
-
-  #setHandler(name: string, handler: EditContextEventHandler): void {
-    const current = this.#handlers.get(name);
-    if (current) this.removeEventListener(name, current);
-    if (handler) {
-      this.#handlers.set(name, handler);
-      this.addEventListener(name, handler);
-    } else {
-      this.#handlers.delete(name);
-    }
-  }
-
-  get ontextupdate(): EditContextEventHandler {
-    return this.#getHandler("textupdate");
-  }
-  set ontextupdate(handler: EditContextEventHandler) {
-    this.#setHandler("textupdate", handler);
-  }
-
-  get ontextformatupdate(): EditContextEventHandler {
-    return this.#getHandler("textformatupdate");
-  }
-  set ontextformatupdate(handler: EditContextEventHandler) {
-    this.#setHandler("textformatupdate", handler);
-  }
-
-  get oncharacterboundsupdate(): EditContextEventHandler {
-    return this.#getHandler("characterboundsupdate");
-  }
-  set oncharacterboundsupdate(handler: EditContextEventHandler) {
-    this.#setHandler("characterboundsupdate", handler);
-  }
-
-  get oncompositionstart(): EditContextEventHandler {
-    return this.#getHandler("compositionstart");
-  }
-  set oncompositionstart(handler: EditContextEventHandler) {
-    this.#setHandler("compositionstart", handler);
-  }
-
-  get oncompositionend(): EditContextEventHandler {
-    return this.#getHandler("compositionend");
-  }
-  set oncompositionend(handler: EditContextEventHandler) {
-    this.#setHandler("compositionend", handler);
   }
 
   get [Symbol.toStringTag](): string {
     return "EditContext";
   }
+}
+
+// Declare dynamic on* handler properties for TypeScript.
+export interface EditContextPolyfill {
+  ontextupdate: EditContextEventHandler;
+  ontextformatupdate: EditContextEventHandler;
+  oncharacterboundsupdate: EditContextEventHandler;
+  oncompositionstart: EditContextEventHandler;
+  oncompositionend: EditContextEventHandler;
+}
+
+// Generate on* handler properties dynamically instead of 5 handwritten pairs.
+for (const name of [
+  "textupdate",
+  "textformatupdate",
+  "characterboundsupdate",
+  "compositionstart",
+  "compositionend",
+]) {
+  Object.defineProperty(EditContextPolyfill.prototype, `on${name}`, {
+    get(this: EditContextPolyfill): EditContextEventHandler {
+      return handlerMaps.get(this)?.get(name) ?? null;
+    },
+    set(this: EditContextPolyfill, handler: EditContextEventHandler) {
+      const handlers = handlerMaps.get(this)!;
+      const current = handlers.get(name);
+      if (current) this.removeEventListener(name, current);
+      if (handler) {
+        handlers.set(name, handler);
+        this.addEventListener(name, handler);
+      } else {
+        handlers.delete(name);
+      }
+    },
+    enumerable: true,
+    configurable: true,
+  });
 }
