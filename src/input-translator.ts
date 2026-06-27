@@ -3,21 +3,18 @@
 // _setComposition/_commitText. Non-composition handled types (insertText,
 // delete*) call _insertText/_deleteBackward/etc. directly.
 
+import {
+  dispatchForwardedClipboardEvent,
+  dispatchForwardedKeyboardEvent,
+} from "./dom/event-forwarding.js";
+import { isInShadowTree } from "./dom/shadow-host.js";
 import type { EditContextPolyfill } from "./edit-context.js";
-
-// inputType values that EditContext handles — these produce textupdate events.
-const HANDLED_INPUT_TYPES: ReadonlySet<string> = new Set([
-  "insertText",
-  "insertTranspose",
-  "deleteWordBackward",
-  "deleteWordForward",
-  "deleteContent",
-  "deleteContentBackward",
-  "deleteContentForward",
-]);
-
-// inputType values where Chrome does NOT fire beforeinput on the element.
-const SUPPRESSED_INPUT_TYPES: ReadonlySet<string> = new Set(["deleteByCut", "deleteByDrag"]);
+import {
+  createSyntheticBeforeInput,
+  HANDLED_INPUT_TYPES,
+  normalizeInputType,
+  SUPPRESSED_INPUT_TYPES,
+} from "./input/input-events.js";
 
 export interface InputTranslator {
   destroy: () => void;
@@ -31,18 +28,6 @@ const DELETE_DISPATCH: Readonly<Record<string, (ec: EditContextPolyfill) => void
   deleteWordForward: (ec) => ec._deleteWordForward(),
   deleteContent: (ec) => ec._deleteBackward(),
 };
-
-const KEYBOARD_EVENT_PROPS = [
-  "key",
-  "code",
-  "location",
-  "ctrlKey",
-  "shiftKey",
-  "altKey",
-  "metaKey",
-  "repeat",
-  "isComposing",
-] as const;
 
 // Pure modifier keys that can't change text or selection.
 const MODIFIER_ONLY_KEYS: ReadonlySet<string> = new Set([
@@ -65,46 +50,6 @@ const NAVIGATION_KEYS: ReadonlySet<string> = new Set([
   "PageUp",
   "PageDown",
 ]);
-
-function createForwardedKeyboardEvent(event: KeyboardEvent): KeyboardEvent {
-  const init: KeyboardEventInit = {};
-  for (const prop of KEYBOARD_EVENT_PROPS) {
-    (init as Record<string, unknown>)[prop] = event[prop];
-  }
-  init.bubbles = true;
-  init.cancelable = true;
-  init.composed = true;
-  return new KeyboardEvent(event.type, init);
-}
-
-// Normalize Firefox's insertLineBreak to Chrome's insertParagraph for plain Enter.
-// Also remap Ctrl+Backspace/Delete with a selection: the textarea fires
-// deleteContentBackward/Forward (selection deletion), but Chrome's native
-// EditContext always fires deleteWord* to reflect the keypress intent.
-function normalizeInputType(inputType: string, shiftHeld: boolean, ctrlHeld: boolean): string {
-  if (inputType === "insertLineBreak" && !shiftHeld) return "insertParagraph";
-  if (ctrlHeld) {
-    if (inputType === "deleteContentBackward") return "deleteWordBackward";
-    if (inputType === "deleteContentForward") return "deleteWordForward";
-  }
-  return inputType;
-}
-
-// inputTypes where Chrome native EditContext sets beforeinput.data to null
-// (paste/drop data is available via event.dataTransfer, not event.data).
-const DATA_NULL_INPUT_TYPES: ReadonlySet<string> = new Set(["insertFromPaste", "insertFromDrop"]);
-
-function createSyntheticBeforeInput(inputType: string, event: InputEvent): InputEvent {
-  const init: InputEventInit = {
-    inputType,
-    data: DATA_NULL_INPUT_TYPES.has(inputType) ? null : event.data,
-    cancelable: true,
-    bubbles: true,
-    composed: true,
-  };
-  if (event.dataTransfer) init.dataTransfer = event.dataTransfer;
-  return new InputEvent("beforeinput", init);
-}
 
 export function createInputTranslator(
   textarea: HTMLTextAreaElement,
@@ -140,7 +85,7 @@ export function createInputTranslator(
   // Whether the textarea is inside a shadow root. When true, keyboard,
   // clipboard, and composition events naturally bubble to the host element
   // via shadow DOM retargeting, so we must NOT dispatch synthetic copies.
-  const inShadow = textarea.getRootNode() instanceof ShadowRoot;
+  const inShadow = isInShadowTree(textarea);
 
   function forwardKeyboardEvent(event: KeyboardEvent): void {
     if (event.type === "keydown") {
@@ -171,7 +116,7 @@ export function createInputTranslator(
             event.key.toLowerCase() === "y")));
 
     if (!inShadow) {
-      if (!attachedElement.dispatchEvent(createForwardedKeyboardEvent(event))) {
+      if (!dispatchForwardedKeyboardEvent(attachedElement, event)) {
         event.preventDefault();
         return;
       }
@@ -181,7 +126,7 @@ export function createInputTranslator(
       // synthetic copy on the host and stop the original from also bubbling
       // through (which would cause duplicates on Chrome).
       event.stopPropagation();
-      if (!attachedElement.dispatchEvent(createForwardedKeyboardEvent(event))) {
+      if (!dispatchForwardedKeyboardEvent(attachedElement, event)) {
         event.preventDefault();
         return;
       }
@@ -333,14 +278,7 @@ export function createInputTranslator(
     const attachedElement = getAttachedElement();
     if (!attachedElement) return;
 
-    const forwarded = new ClipboardEvent(event.type, {
-      bubbles: true,
-      cancelable: event.cancelable,
-      composed: true,
-      clipboardData: event.clipboardData,
-    });
-
-    if (!attachedElement.dispatchEvent(forwarded)) {
+    if (!dispatchForwardedClipboardEvent(attachedElement, event)) {
       event.preventDefault();
     }
   }

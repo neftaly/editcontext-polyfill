@@ -58,4 +58,28 @@ test.describe("EditContext bounds", () => {
     expect(result.length).toBe(1);
     expect(result.x).toBe(99);
   });
+
+  test("updateCharacterBounds returns Blink-style enclosing integer rects", async ({
+    page,
+    setContent,
+  }) => {
+    await setContent(HTML);
+    const result = await page.evaluate(() => {
+      const ec = new EditContext({ text: "hello" });
+      ec.updateCharacterBounds(0, [
+        new DOMRect(0.2, 1.2, 10.2, 20.2),
+        new DOMRect(Number.NaN, Number.NaN, Number.NaN, Number.NaN),
+      ]);
+      return ec.characterBounds().map((rect) => ({
+        x: rect.x,
+        y: rect.y,
+        width: rect.width,
+        height: rect.height,
+      }));
+    });
+    expect(result).toEqual([
+      { x: 0, y: 1, width: 11, height: 21 },
+      { x: 0, y: 0, width: 0, height: 0 },
+    ]);
+  });
 });

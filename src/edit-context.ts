@@ -1,29 +1,10 @@
-// EditContext polyfill — thin imperative shell over pure state transitions.
-// Holds EditContextState, delegates to pure functions, dispatches DOM events from effects.
+// EditContext polyfill facade — public EventTarget surface over runtime modules.
 
 import {
-  type EditContextState,
-  type EditContextTransition,
-  createState,
-  updateText,
-  updateSelection,
-  setComposition,
-  commitText,
-  insertText,
-  cancelComposition,
-  finishComposingText,
-  suspendComposition,
-  deleteBackward,
-  deleteForward,
-  deleteWordBackward,
-  deleteWordForward,
-} from "./edit-context-state.js";
-import {
-  TextUpdateEventPolyfill,
-  TextFormatUpdateEventPolyfill,
-  TextFormatPolyfill,
-  CharacterBoundsUpdateEventPolyfill,
-} from "./event-types.js";
+  EditContextBrowserBookkeeping,
+  type SelectionBoundsChangeHandler,
+} from "./runtime/browser-bookkeeping.js";
+import { EditContextRuntime, type StateChangeHandler } from "./runtime/edit-context-runtime.js";
 
 export interface EditContextInit {
   text?: string;
@@ -33,243 +14,143 @@ export interface EditContextInit {
 
 type EditContextEventHandler = ((event: Event) => void) | null;
 
-let controlBoundsWarned = false;
-
 // WeakMap for on* handler storage (keeps data private while allowing
 // dynamic property definitions on the prototype after the class).
 const handlerMaps = new WeakMap<EditContextPolyfill, Map<string, (event: Event) => void>>();
 
 // biome-ignore lint/suspicious/noUnsafeDeclarationMerging: interface merge is intentional for dynamic on* properties
 export class EditContextPolyfill extends EventTarget {
-  #state: EditContextState;
-  #characterBoundsRangeStart = 0;
-  #characterBounds: DOMRect[] = [];
-  #attachedElement: HTMLElement | null = null;
-  #deferredCompositionEnd: string | null = null;
-
-  /** @internal — called when text/selection changes so the hidden textarea can sync */
-  _onStateChange: (() => void) | null = null;
-  /** @internal — called when selection bounds change for IME positioning */
-  _onSelectionBoundsChange: ((bounds: DOMRect) => void) | null = null;
+  #runtime: EditContextRuntime;
+  #browser: EditContextBrowserBookkeeping;
 
   constructor(init: EditContextInit = {}) {
     super();
-    this.#state = createState(init);
+    this.#runtime = new EditContextRuntime(init, this);
+    this.#browser = new EditContextBrowserBookkeeping();
     handlerMaps.set(this, new Map());
   }
 
   get text(): string {
-    return this.#state.text;
+    return this.#runtime.text;
   }
 
   get selectionStart(): number {
-    return this.#state.selectionStart;
+    return this.#runtime.selectionStart;
   }
 
   get selectionEnd(): number {
-    return this.#state.selectionEnd;
+    return this.#runtime.selectionEnd;
   }
 
   get characterBoundsRangeStart(): number {
-    return this.#characterBoundsRangeStart;
+    return this.#browser.characterBoundsRangeStart;
   }
 
   get isComposing(): boolean {
-    // A suspended composition is internally tracked (composing=true) for range
-    // persistence, but externally it behaves as if composing ended — the IME
-    // pipeline is no longer active, the textarea should sync, etc.
-    return this.#state.composing && !this.#state.compositionSuspended;
+    return this.#runtime.isComposing;
   }
 
-  #apply({ state, effects }: EditContextTransition): void {
-    const prev = this.#state;
-    this.#state = state;
+  /** @internal — called when text/selection changes so the hidden textarea can sync */
+  get _onStateChange(): StateChangeHandler {
+    return this.#runtime.onStateChange;
+  }
 
-    for (const effect of effects) {
-      switch (effect.type) {
-        case "textupdate":
-          this.dispatchEvent(
-            new TextUpdateEventPolyfill("textupdate", {
-              text: effect.text,
-              updateRangeStart: effect.updateRangeStart,
-              updateRangeEnd: effect.updateRangeEnd,
-              selectionStart: effect.selectionStart,
-              selectionEnd: effect.selectionEnd,
-            }),
-          );
-          break;
-        case "compositionstart":
-          // A new composition supersedes any deferred compositionend
-          this.#deferredCompositionEnd = null;
-          this.dispatchEvent(new CompositionEvent("compositionstart", { data: effect.data }));
-          break;
-        case "compositionend":
-          // Real compositionend clears any deferred one
-          this.#deferredCompositionEnd = null;
-          this.dispatchEvent(new CompositionEvent("compositionend", { data: effect.data }));
-          break;
-      }
-    }
+  /** @internal */
+  set _onStateChange(handler: StateChangeHandler) {
+    this.#runtime.onStateChange = handler;
+  }
 
-    if (
-      prev.text !== state.text ||
-      prev.selectionStart !== state.selectionStart ||
-      prev.selectionEnd !== state.selectionEnd
-    ) {
-      this._onStateChange?.();
-    }
+  /** @internal — called when selection bounds change for IME positioning */
+  get _onSelectionBoundsChange(): SelectionBoundsChangeHandler {
+    return this.#browser.onSelectionBoundsChange;
+  }
+
+  /** @internal */
+  set _onSelectionBoundsChange(handler: SelectionBoundsChangeHandler) {
+    this.#browser.onSelectionBoundsChange = handler;
   }
 
   characterBounds(): DOMRect[] {
-    return this.#characterBounds.map((r) => new DOMRect(r.x, r.y, r.width, r.height));
+    return this.#browser.characterBounds();
   }
 
   attachedElements(): HTMLElement[] {
-    return this.#attachedElement ? [this.#attachedElement] : [];
+    return this.#browser.attachedElements();
   }
 
   updateText(rangeStart: number, rangeEnd: number, newText: string): void {
-    this.#apply(updateText(this.#state, rangeStart, rangeEnd, newText));
+    this.#runtime.updateText(rangeStart, rangeEnd, newText);
   }
 
   updateSelection(start: number, end: number): void {
-    this.#apply(updateSelection(this.#state, start, end));
+    this.#runtime.updateSelection(start, end);
   }
 
-  updateControlBounds(_controlBounds: DOMRect): void {
-    if (process.env.NODE_ENV !== "production" && !controlBoundsWarned) {
-      controlBoundsWarned = true;
-      console.warn("[editcontext-polyfill] updateControlBounds() has no effect in the polyfill.");
-    }
+  updateControlBounds(controlBounds: DOMRect): void {
+    this.#browser.updateControlBounds(controlBounds);
   }
 
   updateSelectionBounds(selectionBounds: DOMRect): void {
-    this._onSelectionBoundsChange?.(selectionBounds);
+    this.#browser.updateSelectionBounds(selectionBounds);
   }
 
   updateCharacterBounds(rangeStart: number, characterBounds: DOMRect[]): void {
-    this.#characterBoundsRangeStart = rangeStart;
-    this.#characterBounds = [...characterBounds];
+    this.#browser.updateCharacterBounds(rangeStart, characterBounds);
   }
 
   // --- Internal methods (called by input-translator and focus-manager) ---
 
   _setComposition(text: string, selectionStart: number, selectionEnd: number): void {
-    // If resuming a suspended composition, clear the deferred compositionend
-    // — the composition is active again and will end normally later.
-    if (text !== "" && this.#state.compositionSuspended) {
-      this.#deferredCompositionEnd = null;
-    }
-    this.#apply(setComposition(this.#state, text, selectionStart, selectionEnd));
-
-    // Dispatch textformatupdate and characterboundsupdate during active
-    // composition.  The polyfill cannot access OS-level IME format data, so
-    // it provides a default format (solid thin underline over the entire
-    // composition range) matching the default Chrome/CDP behavior.
-    if (this.#state.composing && !this.#state.compositionSuspended) {
-      const rangeStart = this.#state.compositionRangeStart;
-      const rangeEnd = this.#state.compositionRangeEnd;
-      if (rangeEnd > rangeStart) {
-        this.dispatchEvent(
-          new TextFormatUpdateEventPolyfill("textformatupdate", {
-            textFormats: [
-              new TextFormatPolyfill({
-                rangeStart,
-                rangeEnd,
-                underlineStyle: "solid",
-                underlineThickness: "thin",
-              }),
-            ],
-          }),
-        );
-        this.dispatchEvent(
-          new CharacterBoundsUpdateEventPolyfill("characterboundsupdate", {
-            rangeStart,
-            rangeEnd,
-          }),
-        );
-      }
-    }
+    this.#runtime.setComposition(text, selectionStart, selectionEnd);
   }
 
   _commitText(text: string): void {
-    this.#apply(commitText(this.#state, text));
+    this.#runtime.commitText(text);
   }
 
   _insertText(text: string): void {
-    this.#apply(insertText(this.#state, text));
+    this.#runtime.insertText(text);
   }
 
   _cancelComposition(): void {
-    this.#apply(cancelComposition(this.#state));
+    this.#runtime.cancelComposition();
   }
 
   _finishComposingText(keepSelection: boolean, explicitData?: string): void {
-    this.#apply(finishComposingText(this.#state, keepSelection, explicitData));
+    this.#runtime.finishComposingText(keepSelection, explicitData);
   }
 
   // Suspend composition without events — non-IME input during active composition.
   _suspendComposition(): void {
-    if (this.#state.composing && !this.#state.compositionSuspended) {
-      this.#state = suspendComposition(this.#state);
-      // Mark that we need a deferred compositionend on blur/detach.
-      // The actual data will be read at flush time from the composition range.
-      this.#deferredCompositionEnd = "pending";
-    }
+    this.#runtime.suspendComposition();
   }
 
   _deleteBackward(): void {
-    this.#apply(deleteBackward(this.#state));
+    this.#runtime.deleteBackward();
   }
   _deleteForward(): void {
-    this.#apply(deleteForward(this.#state));
+    this.#runtime.deleteForward();
   }
   _deleteWordBackward(): void {
-    this.#apply(deleteWordBackward(this.#state));
+    this.#runtime.deleteWordBackward();
   }
   _deleteWordForward(): void {
-    this.#apply(deleteWordForward(this.#state));
+    this.#runtime.deleteWordForward();
   }
 
   _blur(): void {
-    if (this.#state.compositionSuspended) {
-      // Suspended composition: flush the deferred compositionend (which reads
-      // the current text at the composition range). Don't call
-      // _finishComposingText — that would fire a duplicate compositionend.
-      this._flushDeferredCompositionEnd();
-    } else {
-      this._finishComposingText(true);
-      this._flushDeferredCompositionEnd();
-    }
+    this.#runtime.blur();
   }
 
   _flushDeferredCompositionEnd(): void {
-    if (this.#deferredCompositionEnd !== null) {
-      // Read the CURRENT text at the composition range — Chrome's compositionend
-      // data reflects whatever text is at the range now, not what was there
-      // when the composition was suspended.
-      const data = this.#state.text.substring(
-        this.#state.compositionRangeStart,
-        this.#state.compositionRangeEnd,
-      );
-      this.#deferredCompositionEnd = null;
-      // Clear the suspended composition range now that we've flushed
-      this.#state = {
-        ...this.#state,
-        composing: false,
-        compositionSuspended: false,
-        compositionRangeStart: 0,
-        compositionRangeEnd: 0,
-      };
-      this.dispatchEvent(new CompositionEvent("compositionend", { data }));
-    }
+    this.#runtime.flushDeferredCompositionEnd();
   }
 
   _attachToElement(element: HTMLElement | null): void {
-    this.#attachedElement = element;
+    this.#browser.attachToElement(element);
   }
   _getAttachedElement(): HTMLElement | null {
-    return this.#attachedElement;
+    return this.#browser.getAttachedElement();
   }
 
   get [Symbol.toStringTag](): string {

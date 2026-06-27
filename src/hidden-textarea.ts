@@ -3,38 +3,11 @@
 // element so that :focus CSS matches the host (shadow DOM retargets focus
 // to the shadow host from outside).
 
+import { ensureShadowRoot } from "./dom/shadow-host.js";
+
 export interface HiddenTextarea {
   element: HTMLTextAreaElement;
   destroy: () => void;
-}
-
-// Track elements where we've attached a shadow root (permanent).
-const shadowRoots = new WeakMap<HTMLElement, ShadowRoot>();
-
-/**
- * Ensure the host has a shadow root with a <slot> for light DOM children.
- * Returns the shadow root, or null if shadow DOM isn't available (e.g. canvas).
- */
-export function ensureShadowRoot(host: HTMLElement): ShadowRoot | null {
-  const existing = shadowRoots.get(host);
-  if (existing) return existing;
-
-  // Check for user-created shadow root
-  if (host.shadowRoot) {
-    shadowRoots.set(host, host.shadowRoot);
-    return host.shadowRoot;
-  }
-
-  try {
-    const shadow = host.attachShadow({ mode: "open" });
-    // Slot preserves light DOM children visibility
-    shadow.appendChild(host.ownerDocument.createElement("slot"));
-    shadowRoots.set(host, shadow);
-    return shadow;
-  } catch {
-    // Canvas and some other elements can't have shadow DOM
-    return null;
-  }
 }
 
 export function createHiddenTextarea(host: HTMLElement): HiddenTextarea {

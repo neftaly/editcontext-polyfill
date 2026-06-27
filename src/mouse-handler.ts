@@ -4,136 +4,16 @@
 // recreate them manually using caretRangeFromPoint/caretPositionFromPoint.
 // This triggers selectionchange events so apps work without modification.
 
+import {
+  caretRangeAtPoint,
+  createRangeBetween,
+  createTextContentRange,
+  expandRangeToWord,
+} from "./dom/caret-range.js";
+
 export interface MouseHandler {
   onMouseDown(event: MouseEvent): void;
   destroy(): void;
-}
-
-/** Get a collapsed Range at the character position under (x, y) viewport coords. */
-function caretRangeAt(doc: Document, x: number, y: number): Range | null {
-  // Chrome / Safari
-  if (doc.caretRangeFromPoint) {
-    return doc.caretRangeFromPoint(x, y);
-  }
-  // Firefox
-  const caretPos = (
-    doc as {
-      caretPositionFromPoint?: (
-        x: number,
-        y: number,
-      ) => { offsetNode: Node; offset: number } | null;
-    }
-  ).caretPositionFromPoint?.(x, y);
-  if (caretPos) {
-    const range = doc.createRange();
-    range.setStart(caretPos.offsetNode, caretPos.offset);
-    range.collapse(true);
-    return range;
-  }
-  return null;
-}
-
-/** True if position (node1, offset1) is after (node2, offset2) in document order. */
-function isAfter(node1: Node, offset1: number, node2: Node, offset2: number): boolean {
-  if (node1 === node2) return offset1 > offset2;
-  return !!(node1.compareDocumentPosition(node2) & Node.DOCUMENT_POSITION_PRECEDING);
-}
-
-/** Collect all text node positions within a host element. */
-function collectTextPositions(host: HTMLElement): Array<{ node: Text; offset: number }> {
-  const positions: Array<{ node: Text; offset: number }> = [];
-  const walker = host.ownerDocument.createTreeWalker(host, NodeFilter.SHOW_TEXT);
-  while (walker.nextNode()) {
-    const textNode = walker.currentNode as Text;
-    for (let i = 0; i <= textNode.length; i++) {
-      positions.push({ node: textNode, offset: i });
-    }
-  }
-  return positions;
-}
-
-/** Find the index in positions array matching a DOM position. */
-function findPositionIndex(
-  positions: Array<{ node: Text; offset: number }>,
-  node: Node,
-  offset: number,
-): number {
-  for (let i = 0; i < positions.length; i++) {
-    if (positions[i].node === node && positions[i].offset === offset) return i;
-  }
-  // Fallback: if node is an element, offset means "before the Nth child"
-  if (node.nodeType === Node.ELEMENT_NODE && node.childNodes[offset]) {
-    const child = node.childNodes[offset];
-    for (let i = 0; i < positions.length; i++) {
-      if (
-        (positions[i].node as Node) === child ||
-        (positions[i].node.parentNode as Node | null) === child
-      ) {
-        return i;
-      }
-    }
-  }
-  return 0;
-}
-
-/** Expand a collapsed range to the word (non-whitespace run) around the click.
- *  Works across text node boundaries (e.g. per-character <span> elements). */
-function expandToWord(range: Range, host: HTMLElement): void {
-  const positions = collectTextPositions(host);
-  if (positions.length === 0) return;
-
-  // Build full text from unique characters
-  let fullText = "";
-  const charPositions: Array<{ node: Text; offset: number }> = [];
-  for (const pos of positions) {
-    if (pos.offset < pos.node.length) {
-      fullText += pos.node.data[pos.offset];
-      charPositions.push(pos);
-    }
-  }
-  if (charPositions.length === 0) return;
-
-  // Find click position in the full text
-  const clickIdx = findPositionIndex(positions, range.startContainer, range.startOffset);
-  // Map position index to char index
-  let charIdx = 0;
-  for (let i = 0; i < positions.length && i < clickIdx; i++) {
-    if (positions[i].offset < positions[i].node.length) charIdx++;
-  }
-  if (charIdx >= fullText.length) charIdx = fullText.length - 1;
-  if (charIdx < 0) return;
-
-  // Expand to word boundaries
-  let wordStart = charIdx;
-  let wordEnd = charIdx;
-  while (wordStart > 0 && /\S/.test(fullText[wordStart - 1])) wordStart--;
-  while (wordEnd < fullText.length && /\S/.test(fullText[wordEnd])) wordEnd++;
-  if (wordStart === wordEnd) return;
-
-  // Map back to DOM positions
-  const startPos = charPositions[wordStart];
-  const endPos = charPositions[wordEnd - 1];
-  range.setStart(startPos.node, startPos.offset);
-  range.setEnd(endPos.node, endPos.offset + 1);
-}
-
-/** Create a Range spanning from (startNode, startOff) to (endNode, endOff). */
-function makeRange(
-  doc: Document,
-  startNode: Node,
-  startOff: number,
-  endNode: Node,
-  endOff: number,
-): Range {
-  const r = doc.createRange();
-  if (isAfter(startNode, startOff, endNode, endOff)) {
-    r.setStart(endNode, endOff);
-    r.setEnd(startNode, startOff);
-  } else {
-    r.setStart(startNode, startOff);
-    r.setEnd(endNode, endOff);
-  }
-  return r;
 }
 
 export function createMouseHandler(host: HTMLElement, onSync?: () => void): MouseHandler {
@@ -158,7 +38,7 @@ export function createMouseHandler(host: HTMLElement, onSync?: () => void): Mous
   function onMouseDown(event: MouseEvent): void {
     if (event.button !== 0) return;
 
-    const range = caretRangeAt(doc, event.clientX, event.clientY);
+    const range = caretRangeAtPoint(doc, event.clientX, event.clientY);
     if (!range || !host.contains(range.startContainer)) return;
 
     const sel = doc.getSelection();
@@ -166,14 +46,8 @@ export function createMouseHandler(host: HTMLElement, onSync?: () => void): Mous
 
     // Triple+ click: select all text in the host
     if (event.detail >= 3) {
-      const walker = doc.createTreeWalker(host, NodeFilter.SHOW_TEXT);
-      const firstText = walker.nextNode() as Text | null;
-      if (!firstText) return;
-      let lastText: Text = firstText;
-      while (walker.nextNode()) lastText = walker.currentNode as Text;
-      const fullRange = doc.createRange();
-      fullRange.setStart(firstText, 0);
-      fullRange.setEnd(lastText, lastText.length);
+      const fullRange = createTextContentRange(host);
+      if (!fullRange) return;
       sel.removeAllRanges();
       sel.addRange(fullRange);
       scheduleSync();
@@ -182,7 +56,7 @@ export function createMouseHandler(host: HTMLElement, onSync?: () => void): Mous
 
     // Double click: select word
     if (event.detail === 2) {
-      expandToWord(range, host);
+      expandRangeToWord(range, host);
       sel.removeAllRanges();
       sel.addRange(range);
       scheduleSync();
@@ -191,7 +65,7 @@ export function createMouseHandler(host: HTMLElement, onSync?: () => void): Mous
 
     // Shift+click: extend from current anchor to click point
     if (event.shiftKey && sel.anchorNode && host.contains(sel.anchorNode)) {
-      const extRange = makeRange(
+      const extRange = createRangeBetween(
         doc,
         sel.anchorNode,
         sel.anchorOffset,
@@ -219,13 +93,13 @@ export function createMouseHandler(host: HTMLElement, onSync?: () => void): Mous
   function onMouseMove(event: MouseEvent): void {
     if (!dragging || !anchorNode) return;
 
-    const range = caretRangeAt(doc, event.clientX, event.clientY);
+    const range = caretRangeAtPoint(doc, event.clientX, event.clientY);
     if (!range || !host.contains(range.startContainer)) return;
 
     const sel = doc.getSelection();
     if (!sel) return;
 
-    const dragRange = makeRange(
+    const dragRange = createRangeBetween(
       doc,
       anchorNode,
       anchorOffset,

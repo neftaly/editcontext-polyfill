@@ -352,34 +352,59 @@ test.describe("EditContext composition", () => {
     expect(result.updates[0]).toEqual({ rangeStart: 5, rangeEnd: 7 });
   });
 
-  test("textformatupdate does not fire after commitText or cancelComposition", async ({
+  test("textformatupdate clears formatting before commitText and cancelComposition end composition", async ({
     page,
     setContent,
   }) => {
     await setContent(HTML);
     const result = await page.evaluate(() => {
       const ec = new EditContext();
-      let formatCount = 0;
-      ec.addEventListener("textformatupdate", () => formatCount++);
+      const formatCounts: number[] = [];
+      ec.addEventListener("textformatupdate", ((e: any) => {
+        formatCounts.push(e.getTextFormats().length);
+      }) as EventListener);
 
       // Compose and commit
       ec._setComposition("k", 1, 1);
-      const afterCompose = formatCount;
+      const afterCompose = [...formatCounts];
       ec._commitText("か");
-      const afterCommit = formatCount;
+      const afterCommit = [...formatCounts];
 
       // Compose and cancel
       ec._setComposition("n", 1, 1);
-      const afterCompose2 = formatCount;
+      const afterCompose2 = [...formatCounts];
       ec._cancelComposition();
-      const afterCancel = formatCount;
+      const afterCancel = [...formatCounts];
 
       return { afterCompose, afterCommit, afterCompose2, afterCancel };
     });
-    expect(result.afterCompose).toBe(1);
-    expect(result.afterCommit).toBe(1); // no extra after commit
-    expect(result.afterCompose2).toBe(2);
-    expect(result.afterCancel).toBe(2); // no extra after cancel
+    expect(result.afterCompose).toEqual([1]);
+    expect(result.afterCommit).toEqual([1, 0]);
+    expect(result.afterCompose2).toEqual([1, 0, 1]);
+    expect(result.afterCancel).toEqual([1, 0, 1, 0]);
+  });
+
+  test("composition cleanup dispatches textformatupdate before compositionend", async ({
+    page,
+    setContent,
+  }) => {
+    await setContent(HTML);
+    const result = await page.evaluate(() => {
+      const ec = new EditContext();
+      const events: string[] = [];
+      ec.addEventListener("textupdate", () => events.push("textupdate"));
+      ec.addEventListener("textformatupdate", ((e: any) => {
+        events.push(`textformatupdate:${e.getTextFormats().length}`);
+      }) as EventListener);
+      ec.addEventListener("compositionend", () => events.push("compositionend"));
+
+      ec._setComposition("k", 1, 1);
+      events.length = 0;
+      ec._cancelComposition();
+
+      return events;
+    });
+    expect(result).toEqual(["textupdate", "textformatupdate:0", "compositionend"]);
   });
 
   test("compositionstart/end fire on EditContext, NOT on element", async ({ page, setContent }) => {

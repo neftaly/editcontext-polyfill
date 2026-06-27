@@ -3,7 +3,9 @@
 // EditContext's editable subtree and redirects to the hidden textarea.
 
 import { getEditContext, findEditContextHost, FORM_CONTROL_TAGS } from "./context-registry.js";
-import { createHiddenTextarea, ensureShadowRoot, type HiddenTextarea } from "./hidden-textarea.js";
+import { patchDocumentActiveElement, type ActiveElementPatch } from "./dom/active-element.js";
+import { ensureShadowRoot, hasShadowRoot } from "./dom/shadow-host.js";
+import { createHiddenTextarea, type HiddenTextarea } from "./hidden-textarea.js";
 import { createInputTranslator, type InputTranslator } from "./input-translator.js";
 import { createMouseHandler, type MouseHandler } from "./mouse-handler.js";
 import { clearRendering } from "./selection-renderer.js";
@@ -25,7 +27,7 @@ const mousedownHandlers = new WeakMap<HTMLElement, (e: MouseEvent) => void>();
 const mouseHandlers = new WeakMap<HTMLElement, MouseHandler>();
 let listening = false;
 let removalObserver: MutationObserver | null = null;
-let originalActiveElementDescriptor: PropertyDescriptor | undefined;
+let activeElementPatch: ActiveElementPatch | null = null;
 
 function handleGlobalKeydown(event: KeyboardEvent): void {
   if (event.key === "Tab" && activeBinding) {
@@ -91,25 +93,14 @@ function installListener(): void {
   window.addEventListener("blur", handleWindowBlur);
   window.addEventListener("focus", handleWindowFocus);
 
-  // Patch document.activeElement to return the EditContext host element
-  // instead of the hidden textarea, matching Chrome native behavior.
-  originalActiveElementDescriptor =
-    Object.getOwnPropertyDescriptor(Document.prototype, "activeElement") ??
-    Object.getOwnPropertyDescriptor(document, "activeElement");
-  if (originalActiveElementDescriptor?.get) {
-    const originalGet = originalActiveElementDescriptor.get;
-    Object.defineProperty(document, "activeElement", {
-      get() {
-        const real = originalGet.call(this);
-        if (activeBinding && real === activeBinding.hiddenTextarea.element) {
-          return activeBinding.element;
-        }
-        return real;
-      },
-      configurable: true,
-      enumerable: true,
-    });
-  }
+  // Match Chrome native behavior: document.activeElement reports the
+  // EditContext host, not the redirected hidden textarea.
+  activeElementPatch = patchDocumentActiveElement(document, (actual) => {
+    if (activeBinding && actual === activeBinding.hiddenTextarea.element) {
+      return activeBinding.element;
+    }
+    return null;
+  });
 
   listening = true;
 }
@@ -308,7 +299,7 @@ export function activateElement(element: HTMLElement): void {
   // With shadow DOM, focusin naturally retargets to the host element,
   // so app code already sees the correct events. Without shadow DOM
   // (canvas fallback), we dispatch synthetic events on the element.
-  if (!element.shadowRoot) {
+  if (!hasShadowRoot(element)) {
     refocusing = true;
     element.dispatchEvent(new FocusEvent("focus", { bubbles: false, relatedTarget: null }));
     element.dispatchEvent(new FocusEvent("focusin", { bubbles: true, relatedTarget: null }));
@@ -347,7 +338,7 @@ function deactivate(): void {
 
   // Without shadow DOM (canvas fallback), dispatch synthetic blur/focusout.
   // With shadow DOM, removing the textarea naturally fires focusout on the host.
-  if (!element.shadowRoot) {
+  if (!hasShadowRoot(element)) {
     refocusing = true;
     element.dispatchEvent(new FocusEvent("blur", { bubbles: false, relatedTarget: null }));
     element.dispatchEvent(new FocusEvent("focusout", { bubbles: true, relatedTarget: null }));
@@ -375,13 +366,8 @@ export function destroyAllBindings(): void {
     disconnectRemovalObserver();
     removalObserver = null;
 
-    // Restore original document.activeElement
-    if (originalActiveElementDescriptor) {
-      Object.defineProperty(document, "activeElement", originalActiveElementDescriptor);
-    } else {
-      delete (document as unknown as Record<string, unknown>).activeElement;
-    }
-    originalActiveElementDescriptor = undefined;
+    activeElementPatch?.uninstall();
+    activeElementPatch = null;
 
     listening = false;
   }
