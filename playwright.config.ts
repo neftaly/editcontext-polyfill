@@ -1,5 +1,10 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const includeCompatBrowsers = Boolean(process.env.ALL_BROWSERS || process.env.COMPAT_BROWSERS);
+const includeFrozenFocus = includeCompatBrowsers || Boolean(process.env.FROZEN_FOCUS_COMPAT);
+const includeFirefox = includeCompatBrowsers || Boolean(process.env.FIREFOX_COMPAT);
+const includeWebKit = includeCompatBrowsers || Boolean(process.env.WEBKIT_COMPAT);
+
 const projects = [
   {
     name: "chromium-native",
@@ -11,32 +16,39 @@ const projects = [
       ...devices["Desktop Chrome"],
     },
   },
-  {
-    name: "chromium-polyfill-frozen-focus",
-    use: {
-      ...devices["Desktop Chrome"],
-    },
-  },
-  {
-    name: "firefox-polyfill",
-    use: {
-      ...devices["Desktop Firefox"],
-      serviceWorkers: "block" as const,
-    },
-  },
+  ...(includeFrozenFocus
+    ? [
+        {
+          name: "chromium-polyfill-frozen-focus",
+          use: {
+            ...devices["Desktop Chrome"],
+          },
+        },
+      ]
+    : []),
+  ...(includeFirefox
+    ? [
+        {
+          name: "firefox-polyfill",
+          use: {
+            ...devices["Desktop Firefox"],
+            serviceWorkers: "block" as const,
+          },
+        },
+      ]
+    : []),
+  ...(includeWebKit
+    ? [
+        {
+          name: "webkit-polyfill",
+          use: {
+            ...devices["Desktop Safari"],
+            serviceWorkers: "block" as const,
+          },
+        },
+      ]
+    : []),
 ];
-
-// WebKit is a separate compat concern, not part of core testing.
-// Run with ALL_BROWSERS=1 (e.g. inside `docker run`) to include it.
-if (process.env.ALL_BROWSERS) {
-  projects.push({
-    name: "webkit-polyfill",
-    use: {
-      ...devices["Desktop Safari"],
-      serviceWorkers: "block" as const,
-    },
-  });
-}
 
 export default defineConfig({
   testDir: "tests",

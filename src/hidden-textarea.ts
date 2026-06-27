@@ -17,6 +17,7 @@ export function createHiddenTextarea(host: HTMLElement): HiddenTextarea {
   textarea.setAttribute("autocorrect", "off");
   textarea.setAttribute("autocapitalize", "off");
   textarea.setAttribute("spellcheck", "false");
+  // Authors expose semantics on the host; this textarea is input plumbing.
   textarea.setAttribute("aria-hidden", "true");
   // Prevent text wrapping — Firefox's word/line deletion boundaries depend on
   // visual line layout, so wrapping in a tiny textarea breaks them.

@@ -33,9 +33,10 @@
   "scripts": {
     "dev": "node dev.mjs",
     "build": "node build.mjs && tsc --emitDeclarationOnly",
-    "build:pages": "pnpm build && mkdir -p docs && cp dist/editcontext-polyfill.iife.js docs/ && cp example/*.html docs/",
-    "lint": "biome check src/ tests/ *.ts *.mjs",
-    "lint:fix": "biome check --write src/ tests/ *.ts *.mjs",
+    "size": "node scripts/size-report.mjs",
+    "build:pages": "pnpm build && mkdir -p docs && cp dist/editcontext-polyfill.iife.js dist/editcontext-polyfill.iife.js.map docs/ && cp example/*.html docs/ && cp -R example/ms-demo docs/",
+    "lint": "biome check src/ tests/ scripts/ *.ts *.mjs",
+    "lint:fix": "biome check --write src/ tests/ scripts/ *.ts *.mjs",
     "test": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test",
     "test:fuzz": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test pnpm exec playwright test tests/fuzz/fuzz.spec.ts tests/fuzz/fuzz-shadow.spec.ts tests/fuzz/fuzz-multi.spec.ts --project=chromium-native",
     "test:fuzz:ime": "docker build --load -t editcontext-test -f Containerfile . && docker run --rm editcontext-test pnpm exec playwright test tests/fuzz/fuzz-ime.spec.ts --project=chromium-native --workers=1",

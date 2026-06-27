@@ -118,6 +118,87 @@ test.describe("EditContext element binding", () => {
     expect(result).toBe(0);
   });
 
+  test("does not assign or overwrite host ARIA semantics", async ({ page, setContent }) => {
+    await setContent(HTML);
+    const result = await page.evaluate(() => {
+      const blank = document.getElementById("target")!;
+      const authored = document.getElementById("other")!;
+      authored.setAttribute("role", "searchbox");
+      authored.setAttribute("aria-label", "Search query");
+      authored.setAttribute("aria-multiline", "false");
+
+      blank.editContext = new EditContext();
+      authored.editContext = new EditContext();
+
+      return {
+        blankRole: blank.getAttribute("role"),
+        blankLabel: blank.getAttribute("aria-label"),
+        blankMultiline: blank.getAttribute("aria-multiline"),
+        authoredRole: authored.getAttribute("role"),
+        authoredLabel: authored.getAttribute("aria-label"),
+        authoredMultiline: authored.getAttribute("aria-multiline"),
+      };
+    });
+
+    expect(result).toEqual({
+      blankRole: null,
+      blankLabel: null,
+      blankMultiline: null,
+      authoredRole: "searchbox",
+      authoredLabel: "Search query",
+      authoredMultiline: "false",
+    });
+  });
+
+  test("uninstall restores document.activeElement after focused canvas fallback", async ({
+    page,
+    setContent,
+  }, testInfo) => {
+    test.skip(!testInfo.project.name.includes("polyfill"), "polyfill cleanup path");
+
+    await setContent(HTML);
+    const result = await page.evaluate(() => {
+      const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+      const descriptorBefore =
+        Object.getOwnPropertyDescriptor(document, "activeElement") ??
+        Object.getOwnPropertyDescriptor(Document.prototype, "activeElement");
+      const hadOwnBefore = Object.hasOwn(document, "activeElement");
+
+      canvas.editContext = new EditContext();
+      canvas.focus();
+
+      const descriptorWhile = Object.getOwnPropertyDescriptor(document, "activeElement");
+      const activeWhileInstalled = document.activeElement === canvas;
+      const hadOwnWhile = Object.hasOwn(document, "activeElement");
+
+      (window as any).EditContextPolyfill.uninstall();
+
+      const descriptorAfter =
+        Object.getOwnPropertyDescriptor(document, "activeElement") ??
+        Object.getOwnPropertyDescriptor(Document.prototype, "activeElement");
+
+      return {
+        activeWhileInstalled,
+        hadOwnBefore,
+        hadOwnWhile,
+        hadOwnAfter: Object.hasOwn(document, "activeElement"),
+        patchedGetterChanged: descriptorWhile?.get !== descriptorBefore?.get,
+        restoredGetter: descriptorAfter?.get === descriptorBefore?.get,
+        editContextGlobalAfter: "EditContext" in window,
+      };
+    });
+
+    expect(result).toEqual({
+      activeWhileInstalled: true,
+      hadOwnBefore: false,
+      hadOwnWhile: true,
+      hadOwnAfter: false,
+      patchedGetterChanged: true,
+      restoredGetter: true,
+      editContextGlobalAfter: false,
+    });
+  });
+
   test("detach from focused element during composition fires compositionend", async ({
     page,
     setContent,

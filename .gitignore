@@ -4,3 +4,4 @@ example/editcontext-polyfill.iife.js
 example/editcontext-polyfill.iife.js.map
 docs/
 test-results/
+tests/fuzz/results/

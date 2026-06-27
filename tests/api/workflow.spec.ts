@@ -574,4 +574,76 @@ test.describe("Navigation key forwarding", () => {
     const keydowns: string[] = await page.evaluate(() => (window as any).__keydowns);
     expect(keydowns).toContain("ArrowLeft");
   });
+
+  test("app keydown handler can implement navigation selection", async ({ page, setContent }) => {
+    await setContent(HTML);
+    await page.evaluate(setupEditor);
+
+    await page.evaluate(() => {
+      const ec = (window as any).__ec as EditContext;
+      const el = (window as any).__el as HTMLElement;
+      let anchor = ec.selectionEnd;
+      let focus = ec.selectionEnd;
+
+      ec.addEventListener("textupdate", ((e: TextUpdateEvent) => {
+        anchor = e.selectionStart;
+        focus = e.selectionEnd;
+      }) as EventListener);
+
+      el.addEventListener("keydown", (e: KeyboardEvent) => {
+        const start = Math.min(ec.selectionStart, ec.selectionEnd);
+        const end = Math.max(ec.selectionStart, ec.selectionEnd);
+        const hasSelection = start !== end;
+        let next: number | null = null;
+
+        switch (e.key) {
+          case "ArrowLeft":
+            if (e.shiftKey) {
+              next = Math.max(0, focus - 1);
+            } else {
+              next = hasSelection ? start : Math.max(0, start - 1);
+            }
+            break;
+          case "ArrowRight":
+            if (e.shiftKey) {
+              next = Math.min(ec.text.length, focus + 1);
+            } else {
+              next = hasSelection ? end : Math.min(ec.text.length, end + 1);
+            }
+            break;
+          case "Home":
+            next = 0;
+            break;
+          case "End":
+            next = ec.text.length;
+            break;
+        }
+
+        if (next === null) return;
+        e.preventDefault();
+
+        if (e.shiftKey) {
+          focus = next;
+          ec.updateSelection(Math.min(anchor, focus), Math.max(anchor, focus));
+        } else {
+          anchor = next;
+          focus = next;
+          ec.updateSelection(next, next);
+        }
+      });
+    });
+
+    await page.keyboard.type("abc");
+    await page.keyboard.press("ArrowLeft");
+    await page.keyboard.type("X");
+    await page.keyboard.press("Home");
+    await page.keyboard.type("^");
+    await page.keyboard.press("End");
+    await page.keyboard.type("$");
+    await page.keyboard.press("Shift+ArrowLeft");
+    await page.keyboard.type("!");
+
+    const result = await page.evaluate(getState);
+    expect(result).toEqual({ text: "^abXc!", selStart: 6, selEnd: 6 });
+  });
 });

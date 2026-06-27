@@ -1,0 +1,32 @@
+{
+  "bundles": {
+    "esm": {
+      "label": "ESM",
+      "path": "dist/index.mjs",
+      "max": {
+        "raw": 61500,
+        "gzip": 13000,
+        "brotli": 11300
+      }
+    },
+    "iife": {
+      "label": "IIFE",
+      "path": "dist/editcontext-polyfill.iife.js",
+      "max": {
+        "raw": 66500,
+        "gzip": 13400,
+        "brotli": 11800
+      }
+    }
+  },
+  "total": {
+    "max": {
+      "raw": 128000,
+      "gzip": 26200,
+      "brotli": 23100
+    }
+  },
+  "analysis": {
+    "topModules": 10
+  }
+}

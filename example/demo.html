@@ -39,7 +39,7 @@
     }
 
     #div-editor .space {
-      white-space: pre;
+      white-space: pre-wrap;
       background: radial-gradient(circle, #0004 2px, transparent 0);
     }
 
@@ -124,10 +124,19 @@
 </head>
 
 <body>
-  <p>Focus the editor below and start typing. Each word gets a unique visual effect.<br>
+  <h1>EditContext API Demo</h1>
+  <p id="editor-help">Focus the editor below and start typing. Each word gets a unique visual effect.<br>
   Based on <a href="https://microsoftedge.github.io/Demos/edit-context/html-demo.html">Microsoft's EditContext demo</a>.</p>
 
-  <div id="div-editor" spellcheck="false"></div>
+  <div
+    id="div-editor"
+    role="textbox"
+    aria-label="EditContext demo editor"
+    aria-describedby="editor-help"
+    aria-multiline="true"
+    tabindex="0"
+    spellcheck="false"
+  ></div>
 
   <script>
     // Conditionally load polyfill if ?polyfill is in query string
@@ -156,6 +165,8 @@
       ];
 
       const editor = document.querySelector("#div-editor");
+      let selectionAnchor = INIT_SELECTION_START;
+      let selectionFocus = INIT_SELECTION_END;
 
       if (!IS_EDIT_CONTEXT_SUPPORTED) {
         editor.textContent = "Sorry, your browser doesn't support the EditContext API. This demo will not work.";
@@ -168,37 +179,49 @@
       function render() {
         editor.innerHTML = "";
 
-        const words = editContext.text.split(" ").filter(w => !!w);
-        for (let i = 0; i < words.length; i++) {
-          const word = words[i];
+        let wordIndex = 0;
+        const tokens = editContext.text.match(/\S+|\s+/gu) || [];
+        for (const token of tokens) {
+          if (isWhitespace(token)) {
+            const sSpan = document.createElement("span");
+            sSpan.classList.add("space");
+            sSpan.textContent = token;
+            editor.appendChild(sSpan);
+            continue;
+          }
 
           const wSpan = document.createElement("span");
           wSpan.classList.add("word");
-          wSpan.classList.add(WORD_EFFECTS[i % WORD_EFFECTS.length]);
-          wSpan.textContent = word;
+          wSpan.classList.add(WORD_EFFECTS[wordIndex % WORD_EFFECTS.length]);
+          wSpan.textContent = token;
           editor.appendChild(wSpan);
-
-          const sSpan = document.createElement("span");
-          sSpan.classList.add("space");
-          sSpan.textContent = " ";
-          editor.appendChild(sSpan);
+          wordIndex++;
         }
 
-        document.getSelection().removeAllRanges();
-        if (editor.firstChild) {
-          const range = getRangeFromStartEnd(editContext.selectionStart, editContext.selectionEnd);
-          document.getSelection().addRange(range);
+        const selection = document.getSelection();
+        if (!selection) return;
+        selection.removeAllRanges();
+        const anchor = getPositionFromOffset(selectionAnchor);
+        const focus = getPositionFromOffset(selectionFocus);
+        const range = getRangeFromStartEnd(
+          Math.min(selectionAnchor, selectionFocus),
+          Math.max(selectionAnchor, selectionFocus),
+        );
+        selection.addRange(range);
+        if (selection.setBaseAndExtent) {
+          selection.setBaseAndExtent(anchor.node, anchor.offset, focus.node, focus.offset);
         }
+        updateSelectionBounds();
       }
 
       editContext.addEventListener("textupdate", e => {
+        selectionAnchor = e.selectionStart;
+        selectionFocus = e.selectionEnd;
         editContext.updateSelection(e.selectionStart, e.selectionEnd);
         render();
       });
 
       editContext.addEventListener("characterboundsupdate", e => {
-        const computedStyle = getComputedStyle(editor);
-        const padding = parseInt(computedStyle.paddingLeft);
         const charBounds = [];
         for (let offset = e.rangeStart; offset < e.rangeEnd; offset++) {
           const charRange = getRangeFromStartEnd(offset, offset + 1);
@@ -223,6 +246,9 @@
       }
 
       editContext.addEventListener("textformatupdate", e => {
+        for (const value of Object.values(imeHighlights)) {
+          value && value.clear();
+        }
         const formats = e.getTextFormats();
         for (const format of formats) {
           const range = getRangeFromStartEnd(format.rangeStart, format.rangeEnd);
@@ -239,6 +265,20 @@
         editor.classList.remove("is-composing");
         for (const [key, value] of Object.entries(imeHighlights)) {
           value && value.clear();
+        }
+      });
+
+      editor.addEventListener("keydown", e => {
+        if (e.isComposing) return;
+
+        const nextFocus = getKeyboardNavigationOffset(e);
+        if (nextFocus === null) return;
+
+        e.preventDefault();
+        if (e.shiftKey) {
+          updateTrackedSelection(selectionAnchor, nextFocus);
+        } else {
+          updateTrackedSelection(nextFocus, nextFocus);
         }
       });
 
@@ -266,37 +306,143 @@
           if (!foundEnd) end += span.textContent.length;
         }
 
-        editContext.updateSelection(...[start, end].sort());
+        selectionAnchor = clampOffset(start);
+        selectionFocus = clampOffset(end);
+        editContext.updateSelection(selectionAnchor, selectionFocus);
+        updateSelectionBounds();
       });
 
-      function getRangeFromStartEnd(start, end) {
-        let startSpan = null;
-        let startSpanOffset = 0;
-        let endSpan = null;
-        let endSpanOffset = 0;
+      function updateTrackedSelection(anchor, focus) {
+        selectionAnchor = clampOffset(anchor);
+        selectionFocus = clampOffset(focus);
+        editContext.updateSelection(selectionAnchor, selectionFocus);
+        render();
+      }
+
+      function updateSelectionBounds() {
+        const range = getRangeFromStartEnd(selectionFocus, selectionFocus);
+        editContext.updateSelectionBounds(range.getBoundingClientRect());
+      }
+
+      function getKeyboardNavigationOffset(event) {
+        const start = Math.min(editContext.selectionStart, editContext.selectionEnd);
+        const end = Math.max(editContext.selectionStart, editContext.selectionEnd);
+        const hasSelection = start !== end;
+        const wordMove = event.ctrlKey || event.altKey;
+
+        if (event.metaKey && event.key === "ArrowLeft") return 0;
+        if (event.metaKey && event.key === "ArrowRight") return editContext.text.length;
+
+        switch (event.key) {
+          case "ArrowLeft":
+            if (!event.shiftKey && hasSelection && !wordMove) return start;
+            return wordMove ? previousWordOffset(selectionFocus) : previousTextOffset(selectionFocus);
+          case "ArrowRight":
+            if (!event.shiftKey && hasSelection && !wordMove) return end;
+            return wordMove ? nextWordOffset(selectionFocus) : nextTextOffset(selectionFocus);
+          case "Home":
+            return 0;
+          case "End":
+            return editContext.text.length;
+          default:
+            return null;
+        }
+      }
+
+      function clampOffset(offset) {
+        return Math.max(0, Math.min(offset, editContext.text.length));
+      }
+
+      function previousTextOffset(offset) {
+        const clamped = clampOffset(offset);
+        if (clamped <= 0) return 0;
+
+        const previous = editContext.text.charCodeAt(clamped - 1);
+        if (previous >= 0xdc00 && previous <= 0xdfff && clamped > 1) {
+          const beforePrevious = editContext.text.charCodeAt(clamped - 2);
+          if (beforePrevious >= 0xd800 && beforePrevious <= 0xdbff) {
+            return clamped - 2;
+          }
+        }
+        return clamped - 1;
+      }
+
+      function nextTextOffset(offset) {
+        const clamped = clampOffset(offset);
+        if (clamped >= editContext.text.length) return editContext.text.length;
+
+        const current = editContext.text.charCodeAt(clamped);
+        if (current >= 0xd800 && current <= 0xdbff && clamped + 1 < editContext.text.length) {
+          const next = editContext.text.charCodeAt(clamped + 1);
+          if (next >= 0xdc00 && next <= 0xdfff) {
+            return clamped + 2;
+          }
+        }
+        return clamped + 1;
+      }
+
+      function previousWordOffset(offset) {
+        let current = clampOffset(offset);
+        while (current > 0 && isWhitespace(textBefore(current))) {
+          current = previousTextOffset(current);
+        }
+        while (current > 0 && !isWhitespace(textBefore(current))) {
+          current = previousTextOffset(current);
+        }
+        return current;
+      }
+
+      function nextWordOffset(offset) {
+        let current = clampOffset(offset);
+        while (current < editContext.text.length && isWhitespace(textAfter(current))) {
+          current = nextTextOffset(current);
+        }
+        while (current < editContext.text.length && !isWhitespace(textAfter(current))) {
+          current = nextTextOffset(current);
+        }
+        return current;
+      }
+
+      function textBefore(offset) {
+        return editContext.text.slice(previousTextOffset(offset), clampOffset(offset));
+      }
+
+      function textAfter(offset) {
+        return editContext.text.slice(clampOffset(offset), nextTextOffset(offset));
+      }
+
+      function isWhitespace(text) {
+        return /\s/u.test(text);
+      }
+
+      function getPositionFromOffset(offset) {
+        const clamped = clampOffset(offset);
         let currentPos = 0;
 
         for (const span of editor.childNodes) {
           const spanLength = span.textContent.length;
-          if (editContext.selectionStart >= currentPos && editContext.selectionStart <= currentPos + spanLength) {
-            startSpan = span;
-            startSpanOffset = editContext.selectionStart - currentPos;
-          }
-          if (editContext.selectionEnd >= currentPos && editContext.selectionEnd <= currentPos + spanLength) {
-            endSpan = span;
-            endSpanOffset = editContext.selectionEnd - currentPos;
+          if (clamped >= currentPos && clamped <= currentPos + spanLength) {
+            return {
+              node: span.firstChild || span,
+              offset: clamped - currentPos,
+            };
           }
           currentPos += spanLength;
         }
 
-        if (!startSpan || !endSpan) {
-          startSpan = editor.lastChild;
-          endSpan = startSpan;
-        }
+        const node = editor.lastChild ? editor.lastChild.firstChild || editor.lastChild : editor;
+        return {
+          node,
+          offset: node === editor ? editor.childNodes.length : node.textContent.length,
+        };
+      }
 
+      function getRangeFromStartEnd(start, end) {
+        const rangeStart = getPositionFromOffset(start);
+        const rangeEnd = getPositionFromOffset(end);
         const range = document.createRange();
-        range.setStart(startSpan.firstChild || startSpan, startSpanOffset);
-        range.setEnd(endSpan.firstChild || endSpan, endSpanOffset);
+        range.setStart(rangeStart.node, rangeStart.offset);
+        range.setEnd(rangeEnd.node, rangeEnd.offset);
         return range;
       }
 
