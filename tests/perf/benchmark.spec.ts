@@ -14,6 +14,8 @@ const HTML = `
 
 const BOUNDS_PER_UPDATE = 16;
 const BOUNDS_UPDATES = 1000;
+const GC_SETTLE_MAX_ROUNDS = 3;
+const GC_SETTLE_STABLE_BYTES = 16 * 1024;
 const KEYSTROKES = 200;
 const PROGRAMMATIC_UPDATES = 2000;
 const DIST_BUNDLE = path.resolve("dist/editcontext-polyfill.iife.js");
@@ -47,6 +49,12 @@ interface HeapUsage {
 interface MemorySnapshot {
   domCounters: DOMCounters;
   heap: HeapUsage;
+}
+
+interface GarbageCollectionSummary {
+  finalRoundHeapDeltaBytes: number;
+  rounds: number;
+  totalHeapDeltaBytes: number;
 }
 
 interface BrowserBenchState {
@@ -95,7 +103,7 @@ async function readCDPMetrics(cdp: CDPSession): Promise<PerfMetrics> {
 
 async function openCDPMetrics(page: Page): Promise<{
   detach: () => Promise<void>;
-  forceGC: () => Promise<void>;
+  forceGC: () => Promise<GarbageCollectionSummary>;
   readDOMCounters: () => Promise<DOMCounters>;
   readHeapUsage: () => Promise<HeapUsage>;
   read: () => Promise<PerfMetrics>;
@@ -124,9 +132,36 @@ async function openCDPMetrics(page: Page): Promise<{
     return { domCounters, heap };
   }
 
+  async function forceGC(): Promise<GarbageCollectionSummary> {
+    const startUsedSize = (await readHeapUsage()).usedSize;
+    let previousUsedSize = startUsedSize;
+    let finalRoundHeapDeltaBytes = 0;
+
+    for (let round = 1; round <= GC_SETTLE_MAX_ROUNDS; round += 1) {
+      await cdp.send("HeapProfiler.collectGarbage");
+      const usedSize = (await readHeapUsage()).usedSize;
+      finalRoundHeapDeltaBytes = usedSize - previousUsedSize;
+      previousUsedSize = usedSize;
+
+      if (Math.abs(finalRoundHeapDeltaBytes) <= GC_SETTLE_STABLE_BYTES) {
+        return {
+          finalRoundHeapDeltaBytes,
+          rounds: round,
+          totalHeapDeltaBytes: previousUsedSize - startUsedSize,
+        };
+      }
+    }
+
+    return {
+      finalRoundHeapDeltaBytes,
+      rounds: GC_SETTLE_MAX_ROUNDS,
+      totalHeapDeltaBytes: previousUsedSize - startUsedSize,
+    };
+  }
+
   return {
     detach: () => cdp.detach(),
-    forceGC: () => cdp.send("HeapProfiler.collectGarbage").then(() => undefined),
+    forceGC,
     readDOMCounters,
     readHeapUsage,
     read: () => readCDPMetrics(cdp),
@@ -332,6 +367,8 @@ function logMemoryPressure(
   before: MemorySnapshot,
   afterBeforeGC: MemorySnapshot,
   afterAfterGC: MemorySnapshot,
+  baselineGC: GarbageCollectionSummary,
+  retainedGC: GarbageCollectionSummary,
 ): void {
   const transientHeap = afterBeforeGC.heap.usedSize - before.heap.usedSize;
   const retainedHeap = afterAfterGC.heap.usedSize - before.heap.usedSize;
@@ -347,6 +384,13 @@ function logMemoryPressure(
   console.log(`  JS heap retained:       ${formatByteDelta(retainedHeap)}`);
   console.log(`  JS heap reclaimed by GC: ${formatByteDelta(reclaimedHeap)}`);
   console.log(`  JS heap total diff:     ${formatByteDelta(heapTotal)}`);
+  console.log(
+    `  Forced GC settle:      baseline=${baselineGC.rounds} rounds (${formatByteDelta(
+      baselineGC.totalHeapDeltaBytes,
+    )}); retained=${retainedGC.rounds} rounds (${formatByteDelta(
+      retainedGC.totalHeapDeltaBytes,
+    )}, final=${formatByteDelta(retainedGC.finalRoundHeapDeltaBytes)})`,
+  );
   if (backingStorage !== 0 || embedderHeap !== 0) {
     console.log(
       `  Backing/embedder diff:  backing=${formatByteDelta(
@@ -378,7 +422,7 @@ test.describe("EditContext performance benchmarks", () => {
 
     const cdpMetrics = await openCDPMetrics(page);
     try {
-      await cdpMetrics.forceGC();
+      const baselineGC = await cdpMetrics.forceGC();
       const memoryBefore = await cdpMetrics.snapshotMemory();
       const before = await cdpMetrics.read();
       const wallStart = performance.now();
@@ -389,7 +433,7 @@ test.describe("EditContext performance benchmarks", () => {
       const wallMs = performance.now() - wallStart;
       const after = await cdpMetrics.read();
       const memoryAfterBeforeGC = await cdpMetrics.snapshotMemory();
-      await cdpMetrics.forceGC();
+      const retainedGC = await cdpMetrics.forceGC();
       const memoryAfterAfterGC = await cdpMetrics.snapshotMemory();
       const diff = diffMetrics(before, after);
       const state = await readBrowserBenchState(page);
@@ -418,7 +462,13 @@ test.describe("EditContext performance benchmarks", () => {
         `  DOM churn: mutations=${state.mutationCount}, records=${state.mutationRecords}, lightNodes=${state.nodeCount}, deepNodes=${state.deepNodeCount}, lightTextareas=${state.hiddenTextareas}, deepTextareas=${state.deepTextareas}, shadowRoots=${state.deepShadowRootCount}`,
       );
       logCDPMetrics(diff);
-      logMemoryPressure(memoryBefore, memoryAfterBeforeGC, memoryAfterAfterGC);
+      logMemoryPressure(
+        memoryBefore,
+        memoryAfterBeforeGC,
+        memoryAfterAfterGC,
+        baselineGC,
+        retainedGC,
+      );
     } finally {
       await cdpMetrics.detach();
     }
@@ -432,7 +482,7 @@ test.describe("EditContext performance benchmarks", () => {
     const cdpMetrics = await openCDPMetrics(page);
 
     try {
-      await cdpMetrics.forceGC();
+      const baselineGC = await cdpMetrics.forceGC();
       const memoryBefore = await cdpMetrics.snapshotMemory();
       const metricsBefore = await cdpMetrics.read();
 
@@ -456,7 +506,7 @@ test.describe("EditContext performance benchmarks", () => {
 
       const metricsAfter = await cdpMetrics.read();
       const memoryAfterBeforeGC = await cdpMetrics.snapshotMemory();
-      await cdpMetrics.forceGC();
+      const retainedGC = await cdpMetrics.forceGC();
       const memoryAfterAfterGC = await cdpMetrics.snapshotMemory();
 
       expect(result.textLength).toBe(PROGRAMMATIC_UPDATES);
@@ -467,7 +517,13 @@ test.describe("EditContext performance benchmarks", () => {
       console.log(`  Wall time:        ${formatMs(result.durationMs)}`);
       console.log(`  Per operation:    ${formatMs(result.durationMs / PROGRAMMATIC_UPDATES)}`);
       logCDPMetrics(diffMetrics(metricsBefore, metricsAfter));
-      logMemoryPressure(memoryBefore, memoryAfterBeforeGC, memoryAfterAfterGC);
+      logMemoryPressure(
+        memoryBefore,
+        memoryAfterBeforeGC,
+        memoryAfterAfterGC,
+        baselineGC,
+        retainedGC,
+      );
     } finally {
       await cdpMetrics.detach();
     }
@@ -478,7 +534,7 @@ test.describe("EditContext performance benchmarks", () => {
     const cdpMetrics = await openCDPMetrics(page);
 
     try {
-      await cdpMetrics.forceGC();
+      const baselineGC = await cdpMetrics.forceGC();
       const memoryBefore = await cdpMetrics.snapshotMemory();
       const metricsBefore = await cdpMetrics.read();
 
@@ -515,7 +571,7 @@ test.describe("EditContext performance benchmarks", () => {
 
       const metricsAfter = await cdpMetrics.read();
       const memoryAfterBeforeGC = await cdpMetrics.snapshotMemory();
-      await cdpMetrics.forceGC();
+      const retainedGC = await cdpMetrics.forceGC();
       const memoryAfterAfterGC = await cdpMetrics.snapshotMemory();
 
       expect(result.length).toBe(BOUNDS_PER_UPDATE);
@@ -528,7 +584,13 @@ test.describe("EditContext performance benchmarks", () => {
       console.log(`  Wall time:       ${formatMs(result.durationMs)}`);
       console.log(`  Per update:      ${formatMs(result.durationMs / BOUNDS_UPDATES)}`);
       logCDPMetrics(diffMetrics(metricsBefore, metricsAfter));
-      logMemoryPressure(memoryBefore, memoryAfterBeforeGC, memoryAfterAfterGC);
+      logMemoryPressure(
+        memoryBefore,
+        memoryAfterBeforeGC,
+        memoryAfterAfterGC,
+        baselineGC,
+        retainedGC,
+      );
     } finally {
       await cdpMetrics.detach();
     }
