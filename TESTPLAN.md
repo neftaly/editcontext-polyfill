@@ -217,14 +217,17 @@ tests:
 pnpm test:perf
 ```
 
-Measure three dimensions:
+Measure four dimensions:
 
 - Latency: wall-clock time per keystroke or operation, browser task duration,
   script duration, and the in-page gap from `beforeinput` to `textupdate` where
   that event pair exists.
 - DOM/layout churn: `LayoutCount`, `RecalcStyleCount`, layout/style durations,
-  mutation counts during typing, live node count, and hidden editing-surface
-  count after setup.
+  mutation counts during typing, live light-DOM and shadow-including node
+  counts, hidden editing-surface count after setup, and CDP DOM counters.
+- Heap and allocation pressure: `Runtime.getHeapUsage()` before the measured
+  work, immediately after it, and again after `HeapProfiler.collectGarbage()`,
+  plus a character-bounds copy benchmark for DOMRect-heavy API usage.
 - Size context: raw, gzip, and brotli bundle size from the built IIFE, plus the
   authoritative size-script result owned outside this plan.
 
@@ -238,7 +241,7 @@ its input pipeline differs.
 Normal CI should fail benchmarks only for correctness sanity checks, for
 example wrong final text, missing expected `textupdate` events, or a benchmark
 harness error. Do not fail normal CI on per-keystroke timing, CDP task duration,
-layout count, or heap deltas.
+layout count, DOM-counter changes, or heap deltas.
 
 A dedicated benchmark job may fail on performance only when all of the following
 are true:

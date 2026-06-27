@@ -144,7 +144,7 @@ The hidden textarea is input plumbing and is kept out of the accessibility tree.
 
 ## Performance
 
-CDP profiling is available with `pnpm test:perf`. The benchmark reports typing latency, DOM/layout churn, bundle size context, and programmatic `updateText`/`updateSelection` throughput for Chromium native and polyfill projects. Treat the numbers as release context rather than CI thresholds.
+CDP profiling is available with `pnpm test:perf`. The benchmark reports typing latency, DOM/layout churn, forced-GC heap pressure, CDP DOM counters, bundle size context, programmatic `updateText`/`updateSelection` throughput, and `updateCharacterBounds()`/`characterBounds()` copy pressure for Chromium native and polyfill projects. Treat the numbers as release context rather than CI thresholds.
 
 Bundle size budgets are enforced by `pnpm size` from `scripts/size-budget.json`: ESM <= 11.3 KiB brotli, IIFE <= 11.8 KiB brotli, and combined JS bundles <= 23.1 KiB brotli.
 
